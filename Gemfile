@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'cocoapods', "~> 0.39"
+gem 'cocoapods', :git => "https://github.com/CocoaPods/CocoaPods.git", :branch => "mr-fix-scoping"
 gem 'cocoapods-keys'
 
 # 1.6.7 contains the OS X build fix.

@@ -85,8 +85,8 @@ target 'Artsy' do
   end
 
   # Facebook
-  pod 'FBSDKCoreKit', '4.9.0-beta2'
-  pod 'FBSDKLoginKit', '4.9.0-beta2'
+  pod 'FBSDKCoreKit', '4.9.1'
+  pod 'FBSDKLoginKit', '4.9.1'
 
   # Analytics
   pod 'Analytics', :git => "https://github.com/segmentio/analytics-ios.git"

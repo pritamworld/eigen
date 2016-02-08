@@ -58,12 +58,12 @@ PODS:
   - Artsy-UIButtons (1.4.0):
     - Artsy+UIColors
     - UIView+BooleanAnimations
-  - Bolts (1.5.1):
-    - Bolts/AppLinks (= 1.5.1)
-    - Bolts/Tasks (= 1.5.1)
-  - Bolts/AppLinks (1.5.1):
+  - Bolts (1.6.0):
+    - Bolts/AppLinks (= 1.6.0)
+    - Bolts/Tasks (= 1.6.0)
+  - Bolts/AppLinks (1.6.0):
     - Bolts/Tasks
-  - Bolts/Tasks (1.5.1)
+  - Bolts/Tasks (1.6.0)
   - CocoaLumberjack (2.0.1):
     - CocoaLumberjack/Default (= 2.0.1)
     - CocoaLumberjack/Extensions (= 2.0.1)
@@ -79,10 +79,10 @@ PODS:
   - Expecta+Snapshots (2.0.0):
     - Expecta (~> 1.0)
     - FBSnapshotTestCase/Core (~> 2.0.3)
-  - FBSDKCoreKit (4.9.0-beta2):
+  - FBSDKCoreKit (4.9.1):
     - Bolts (~> 1.5)
-  - FBSDKLoginKit (4.9.0-beta2):
-    - FBSDKCoreKit (~> 4.9.0-beta)
+  - FBSDKLoginKit (4.9.1):
+    - FBSDKCoreKit
   - FBSnapshotTestCase (2.0.7):
     - FBSnapshotTestCase/SwiftSupport (= 2.0.7)
   - FBSnapshotTestCase/Core (2.0.7)
@@ -150,13 +150,10 @@ DEPENDENCIES:
   - Analytics (from `https://github.com/segmentio/analytics-ios.git`)
   - ARAnalytics/Adjust (from `https://github.com/orta/ARAnalytics.git`, commit `6f31b5c7bcbd59d4dac7e92e215d3c2c22f3400e`)
   - ARAnalytics/DSL (from `https://github.com/orta/ARAnalytics.git`, commit `6f31b5c7bcbd59d4dac7e92e215d3c2c22f3400e`)
-  - ARAnalytics/HockeyApp (from `https://github.com/orta/ARAnalytics.git`, commit
-    `6f31b5c7bcbd59d4dac7e92e215d3c2c22f3400e`)
-  - ARAnalytics/Segmentio (from `https://github.com/orta/ARAnalytics.git`, commit
-    `6f31b5c7bcbd59d4dac7e92e215d3c2c22f3400e`)
+  - ARAnalytics/HockeyApp (from `https://github.com/orta/ARAnalytics.git`, commit `6f31b5c7bcbd59d4dac7e92e215d3c2c22f3400e`)
+  - ARAnalytics/Segmentio (from `https://github.com/orta/ARAnalytics.git`, commit `6f31b5c7bcbd59d4dac7e92e215d3c2c22f3400e`)
   - ARASCIISwizzle
-  - ARCollectionViewMasonryLayout (from `https://github.com/ashfurrow/ARCollectionViewMasonryLayout`,
-    branch `modern`)
+  - ARCollectionViewMasonryLayout (from `https://github.com/ashfurrow/ARCollectionViewMasonryLayout`, branch `modern`)
   - ARGenericTableViewController (from `https://github.com/orta/ARGenericTableViewController.git`)
   - ARTiledImageView (from `https://github.com/dblock/ARTiledImageView`)
   - Artsy+UIColors
@@ -168,8 +165,8 @@ DEPENDENCIES:
   - DRKonamiCode
   - Expecta
   - Expecta+Snapshots
-  - FBSDKCoreKit (= 4.9.0-beta2)
-  - FBSDKLoginKit (= 4.9.0-beta2)
+  - FBSDKCoreKit (= 4.9.1)
+  - FBSDKLoginKit (= 4.9.1)
   - FBSnapshotTestCase
   - FLKAutoLayout (from `https://github.com/alloy/FLKAutoLayout.git`, branch `add-support-for-layout-guides-take-2`)
   - FXBlurView
@@ -273,7 +270,7 @@ CHECKOUT OPTIONS:
     :commit: 39f47deebf947aa4c07727fdf2b69e2feff17428
     :git: https://github.com/artsy/Artsy-UIFonts.git
   Artsy+UILabels:
-    :commit: 706e6e85af5d9af18f2af024d31550ba9b1584be
+    :commit: dfeddfced6147dda7acedd2be401e4164ebabece
     :git: https://github.com/artsy/Artsy-UILabels.git
   Artsy-UIButtons:
     :commit: e5b75a8bbcc0ffbbb4029a7298f84a089937ea4d
@@ -305,7 +302,7 @@ SPEC CHECKSUMS:
   AFOAuth1Client: 07ccc935ba06ac8d023c16d39a5bdf04bc6f92e1
   ALPValidator: c74ea0d49bbbff0f8a4228f1eb6589b992255cfe
   Analytics: 7a5f10f6a2dd313d650f5db2642d9f967da3c693
-  ARAnalytics: ab25a3d8c6c950f69f25100de470614b6a7d6d9b
+  ARAnalytics: 96e23ba7f54298f4914de9e1ac999db7a15f3fdd
   ARASCIISwizzle: 4800c50a918bdc06f6304020e348ef8c15c554ee
   ARCollectionViewMasonryLayout: 776730bdedd0c7570a5e904c370e4e120f98ea62
   ARGenericTableViewController: 61a0897ba66c35111b5d1cc3b44884282bd3c1a5
@@ -314,15 +311,15 @@ SPEC CHECKSUMS:
   Artsy+UIFonts: 108bfe625c45008ebb15c4c62003882dd345c4b8
   Artsy+UILabels: 0eec510874d00412a2084b7c37aad942b4dcd7b6
   Artsy-UIButtons: da3cac9c6c31368751f4059ee31b8ae2702de3d5
-  Bolts: a12663244b1d3351c738882e71902fc74db54f64
+  Bolts: f52a250053bb517ca874523c3913776359ab3def
   CocoaLumberjack: 27ae9abcd376c3e4ee726ecd4adfd7b093ddef3f
   DHCShakeNotifier: 64048427ecaa763f2472d0032f58bf7a10074eee
   DRKonamiCode: 94439de24e8264b4f553c775f055e964675af4b6
   EDColor: 89d19a013279a5604d61650721c15f20fefaaf00
   Expecta: 32604574add2c46a36f8d2f716b6c5736eb75024
   Expecta+Snapshots: 29b38dd695bc72a0ed2bea833937d78df41943ba
-  FBSDKCoreKit: d49cbf69741e3c5732166ec9ff4cbd9b288dd53e
-  FBSDKLoginKit: d32e83c0d2d39ef74a942543cacae2dc4de7d088
+  FBSDKCoreKit: aee20b6d9855f15b618d4fddd1a5ad45f5a4a59d
+  FBSDKLoginKit: ec22dc49bd372b064e93d6773df4ffefb3a552a2
   FBSnapshotTestCase: 7e85180d0d141a0cf472352edda7e80d7eaeb547
   FLKAutoLayout: 9db6b30c2008d230da608e62c607b11c23b942e6
   FXBlurView: 5121730176fd52bcf7bffd0bd8c1485e8aabc3cb
@@ -333,7 +330,7 @@ SPEC CHECKSUMS:
   JLRoutes: 63d64c28b26bcdeb5f5b29e436f75b8358e8d6d1
   JSBadgeView: 3861ddee41094284d9468e6d0af5107f703aaac5
   JSDecoupledAppDelegate: 5905e144cbe6e0c889248eebbee6784510f315e1
-  Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
+  Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   KSDeferred: e72d005162986b2978e1e2eee17fbce1c6876cfe
   Mantle: a197db93e0f1e36194b1fdbc078219a8492eaef2
   MARKRangeSlider: dbf0878b03e921b52e4ef1e7766c1a8affb0c577
@@ -360,4 +357,6 @@ SPEC CHECKSUMS:
   VCRURLConnection: accd771ebd4be11183a3e4d5a4403f180a9a235e
   XCTest+OHHTTPStubSuiteCleanUp: 4469ec8863c6bc022c5089a9b94233eb3416c5ee
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 007e95c234294bbc71d54793829bd765adb13a6d
+
+COCOAPODS: 1.0.0.beta.3
