@@ -97,7 +97,7 @@
 - (void)removeShowAnnotations:(NSSet *)shows
 {
     [shows each:^(PartnerShow *show) {
-        for(MapPoint *mapPoint in show.fairLocation.mapPoints) {
+        for (MapPoint *mapPoint in show.fairLocation.mapPoints) {
             CGPoint pointOnMap = [mapPoint coordinateOnImage:self.map.image];
             NAAnnotation *existingAnnotation = [self annotationForRepresentedObject:show];
             if (existingAnnotation) {
@@ -114,7 +114,7 @@
 - (void)addShowAnnotations:(NSSet *)shows
 {
     [shows each:^(PartnerShow *show) {
-        for(MapPoint *mapPoint in show.fairLocation.mapPoints) {
+        for (MapPoint *mapPoint in show.fairLocation.mapPoints) {
             CGPoint pointOnMap = [mapPoint coordinateOnImage:self.map.image];
 
             // cache will cause old points to be plotted
@@ -259,10 +259,10 @@
 {
     __weak typeof(self) wself = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
 
         NSMapTable *result = [NSMapTable strongToStrongObjectsMapTable];
-        for(PartnerShow *show in sself.shows) {
+        for (PartnerShow *show in sself.shows) {
             if (show.partner) {
                 NSMutableArray *shows = [result objectForKey:show.partner];
                 if (!shows) {
@@ -275,7 +275,9 @@
         }
 
         dispatch_sync(dispatch_get_main_queue(), ^{
-            if (!self) { return; }
+            if (!self) {
+                return;
+            }
             self->_partnerToShowsMap = result;
         });
     });
@@ -291,7 +293,7 @@
         NSMutableSet *highlighted = [NSMutableSet set];
 
         NSMapTable *partnerToShowsMap = self.partnerToShowsMap;
-        for (Partner *partner in partners){
+        for (Partner *partner in partners) {
             NSArray *partnerShows = [partnerToShowsMap objectForKey:partner];
             if (partnerShows) {
                 [highlighted addObjectsFromArray:partnerShows];
@@ -391,9 +393,9 @@
 {
     NSMutableArray *featureViews = [NSMutableArray array];
     [shows each:^(PartnerShow *show) {
-        for(MapPoint *mapPoint in show.fairLocation.mapPoints) {
+        for (MapPoint *mapPoint in show.fairLocation.mapPoints) {
             CGPoint pointOnMap = [mapPoint coordinateOnImage:self.map.image];
-            ARFairMapAnnotationView *featureView = (ARFairMapAnnotationView *) [self viewForPoint:pointOnMap andRepresentedObject:show];
+            ARFairMapAnnotationView *featureView = (ARFairMapAnnotationView *)[self viewForPoint:pointOnMap andRepresentedObject:show];
             if (featureView) {
                 [featureViews addObject:featureView];
             }

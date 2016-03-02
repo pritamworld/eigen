@@ -14,11 +14,11 @@ __block ARBrowseViewController *viewController;
 
 before(^{
     ARStubbedBrowseNetworkModel *networkModel = [[ARStubbedBrowseNetworkModel alloc] init];
-    networkModel.links = @[[FeaturedLink modelWithJSON:@{@"title": @"Link 1"}],
-                           [FeaturedLink modelWithJSON:@{@"title": @"Link 2"}],
-                           [FeaturedLink modelWithJSON:@{@"title": @"Link 3"}],
-                           [FeaturedLink modelWithJSON:@{@"title": @"Link 4"}],
-                           [FeaturedLink modelWithJSON:@{@"title": @"Link 5"}]];
+    networkModel.links = @[ [FeaturedLink modelWithJSON:@{ @"title" : @"Link 1" }],
+                            [FeaturedLink modelWithJSON:@{ @"title" : @"Link 2" }],
+                            [FeaturedLink modelWithJSON:@{ @"title" : @"Link 3" }],
+                            [FeaturedLink modelWithJSON:@{ @"title" : @"Link 4" }],
+                            [FeaturedLink modelWithJSON:@{ @"title" : @"Link 5" }] ];
 
     viewController = [[ARBrowseViewController alloc] init];
     viewController.networkModel = networkModel;

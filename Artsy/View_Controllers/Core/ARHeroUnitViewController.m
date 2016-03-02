@@ -160,7 +160,7 @@ const static CGFloat ARCarouselDelay = 10;
     self.pageViewController.view.userInteractionEnabled = NO;
     __weak typeof(self) wself = self;
     [self.pageViewController setViewControllers:@[ vc ] direction:direction animated:YES completion:^(BOOL finished) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself.pageControl setCurrentPage:[sself currentViewController].index];
         sself.pageViewController.view.userInteractionEnabled = YES;
 

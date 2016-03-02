@@ -8,6 +8,7 @@
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
+
 @implementation User
 
 + (User *)currentUser

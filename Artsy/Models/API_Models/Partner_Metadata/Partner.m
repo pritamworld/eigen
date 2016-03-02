@@ -5,6 +5,7 @@
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
+
 @implementation Partner
 @synthesize imageURLs;
 

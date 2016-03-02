@@ -4,6 +4,7 @@ extern NSString *const ARUserSessionStartedNotification;
 
 @class User;
 
+
 @interface ARUserManager : NSObject
 
 + (ARUserManager *)sharedManager;

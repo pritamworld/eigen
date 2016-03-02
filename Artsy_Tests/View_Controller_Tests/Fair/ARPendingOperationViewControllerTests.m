@@ -26,7 +26,7 @@ it(@"has a default message", ^{
 
 it(@"binds message to the label's text", ^{
     NSString *message = @"Hail Cthulhu";
-    
+
     ARPendingOperationViewController *viewController = [[ARPendingOperationViewController alloc] init];
     viewController.message = message;
 

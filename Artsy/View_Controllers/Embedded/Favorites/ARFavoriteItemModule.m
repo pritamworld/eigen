@@ -3,6 +3,7 @@
 
 #import "UIDevice-Hardware.h"
 
+
 @implementation ARFavoriteItemModule
 
 - (instancetype)init

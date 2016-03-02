@@ -148,10 +148,10 @@
         }];
 
         [self highlightButton:button highlighted:YES];
-        
+
         [NSLayoutConstraint deactivateConstraints:self.selectionIndicatorConstraints];
-        [NSLayoutConstraint activateConstraints:@[self.selectionIndicatorConstraints[index]]];
-        
+        [NSLayoutConstraint activateConstraints:@[ self.selectionIndicatorConstraints[index] ]];
+
         [self layoutIfNeeded];
     }];
 

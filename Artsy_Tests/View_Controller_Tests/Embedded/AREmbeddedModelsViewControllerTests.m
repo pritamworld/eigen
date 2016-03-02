@@ -53,14 +53,14 @@ SpecBegin(AREmbeddedModelsViewController);
 it(@"registers artworks for peek pop", ^{
     AREmbeddedModelsViewController *vc = AREmbeddedModelsViewControllerWithLayout(ARArtworkMasonryLayout2Column);
     OCMockObject *mockVC = [OCMockObject partialMockForObject:vc];
- 
+
     [[mockVC expect] registerForPreviewingWithDelegate:OCMOCK_ANY sourceView:OCMOCK_ANY];
-    
+
     [vc appendItems:@[
         ArtworkWithImageAspectRatio(1),
         ArtworkWithImageAspectRatio(1)
     ]];
-    
+
     [mockVC verify];
 });
 
@@ -119,7 +119,7 @@ describe(@"masonry layout", ^{
                 [[[mockCollectionView stub] andReturnValue:OCMOCK_VALUE(bounds)] bounds];
 
                 expect([viewController currentContentFillsView]).to.beTruthy();
-                
+
             });
 
             it(@"indicates that content does not fill when it does not", ^{
@@ -195,7 +195,7 @@ describe(@"masonry layout", ^{
 
                 [[[mockCollectionView stub] andReturnValue:OCMOCK_VALUE(contentSize)] contentSize];
                 [[[mockCollectionView stub] andReturnValue:OCMOCK_VALUE(bounds)] bounds];
-                
+
                 expect([viewController currentContentFillsView]).to.beFalsy();
             });
         });
@@ -204,7 +204,7 @@ describe(@"masonry layout", ^{
 
 it(@"resets items", ^{
     AREmbeddedModelsViewController *subject = AREmbeddedModelsViewControllerWithLayout(ARArtworkMasonryLayout2Column);
-    [subject appendItems:@[ArtworkWithImageAspectRatio(1)]];
+    [subject appendItems:@[ ArtworkWithImageAspectRatio(1) ]];
 
     [subject resetItems];
 

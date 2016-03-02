@@ -2,6 +2,7 @@
 
 @class Fair, PartnerShow;
 
+
 @interface ARShowViewController : UIViewController
 
 - (id)initWithShow:(PartnerShow *)show fair:(Fair *)fair;

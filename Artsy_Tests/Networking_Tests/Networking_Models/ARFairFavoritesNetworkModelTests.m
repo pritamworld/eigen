@@ -28,19 +28,17 @@ it(@"ignores artworks without a partner", ^{
                                  withParams:@{ @"fair_id" : @"fair-id",
                                                @"user_id" : [ARUserManager sharedManager].currentUser.userID,
                                                @"private" : @YES }
-                               withResponse:@[ @{ @"id": @"one", @"partner" : @{ @"id" : @"partner-id" } },
-                                               @{ @"id": @"two" } ]
-        ];
+                               withResponse:@[ @{ @"id" : @"one",
+                                                  @"partner" : @{@"id" : @"partner-id"} },
+                                               @{ @"id" : @"two" } ]];
 
         [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/me/follow/profiles"
                                  withParams:@{ @"fair_id" : @"fair-id" }
-                               withResponse:@[]
-        ];
+                               withResponse:@[]];
 
         [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/me/follow/artists"
                                  withParams:@{ @"fair_id" : @"fair-id" }
-                               withResponse:@[]
-        ];
+                               withResponse:@[]];
 
         Fair *fair = [Fair modelWithJSON:@{ @"id" : @"fair-id" }];
 
@@ -55,15 +53,15 @@ it(@"ignores artworks without a partner", ^{
 describe(@"when downloading exhibitor data", ^{
     __block PartnerShow *partnerShow;
     __block id fairMock;
-    
+
     beforeEach(^{
         partnerShow = [PartnerShow modelWithJSON:@{
             @"id" : @"show-id",
-            @"fair_location" : @{ @"display" : @"Pier 1, Booth 2, Section 3, Floor 5" },
-            @"partner" : @{ @"id" : @"leila-heller", @"name" : @"Leila Heller Gallery in New York City" }
+            @"fair_location" : @{@"display" : @"Pier 1, Booth 2, Section 3, Floor 5"},
+            @"partner" : @{@"id" : @"leila-heller", @"name" : @"Leila Heller Gallery in New York City"}
         }];
     });
-    
+
     it(@"generates random exhibitors when no values are returned from API", ^{
         Fair *fair = [Fair modelWithJSON:@{ @"id" : @"fair-id-1" }];
 
@@ -78,7 +76,7 @@ describe(@"when downloading exhibitor data", ^{
 
         __block NSArray *testExhibitors;
 
-        [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/me/follow/profiles" withParams:@{@"fair_id" : @"fair-id-1"} withResponse:@[]];
+        [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/me/follow/profiles" withParams:@{ @"fair_id" : @"fair-id-1" } withResponse:@[]];
 
         ARFairFavoritesNetworkModel *favoritesNetworkModel = [[ARFairFavoritesNetworkModel alloc] init];
         [favoritesNetworkModel getFavoritesForNavigationsButtonsForFair:fairMock artworks:nil artworksByArtists:nil exhibitors:^(NSArray *exhibitors) {
@@ -103,18 +101,19 @@ describe(@"when downloading exhibitor data", ^{
 
         }] downloadShows];
 
-        [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/me/follow/profiles" withParams:@{@"fair_id": @"fair-id-2"} withResponse:@[
-@{
-            @"id" : @"follow-id",
-            @"profile" : @{
-                @"id" : @"profile-id",
-                @"owner_type" : @"PartnerGallery",
-                @"owner": @{
-                    @"id" : @"leila-heller",
-                    @"name" : @"Leila Heller Gallery in New York City"
+        [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/me/follow/profiles" withParams:@{ @"fair_id" : @"fair-id-2" } withResponse:@[
+            @{
+                @"id" : @"follow-id",
+                @"profile" : @{
+                    @"id" : @"profile-id",
+                    @"owner_type" : @"PartnerGallery",
+                    @"owner" : @{
+                        @"id" : @"leila-heller",
+                        @"name" : @"Leila Heller Gallery in New York City"
+                    }
                 }
             }
-        }]];
+        ]];
 
         __block NSArray *testExhibitors;
 

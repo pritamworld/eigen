@@ -30,8 +30,8 @@ describe(@"handleXappTokenError", ^{
 
         NSString *errorJSON = @"{\"error\":\"Unauthorized\",\"text\":\"The XAPP token is invalid or has expired.\"}";
         NSError *error = [[NSError alloc] initWithDomain:NSURLErrorDomain code:401 userInfo:@{
-            AFNetworkingOperationFailingURLResponseDataErrorKey: [errorJSON dataUsingEncoding:NSUnicodeStringEncoding],
-            AFNetworkingOperationFailingURLResponseErrorKey: [[MutableNSURLResponse alloc] initWithStatusCode:401]
+            AFNetworkingOperationFailingURLResponseDataErrorKey : [errorJSON dataUsingEncoding:NSUnicodeStringEncoding],
+            AFNetworkingOperationFailingURLResponseErrorKey : [[MutableNSURLResponse alloc] initWithStatusCode:401]
         }];
 
         [ArtsyAPI handleXappTokenError:error];

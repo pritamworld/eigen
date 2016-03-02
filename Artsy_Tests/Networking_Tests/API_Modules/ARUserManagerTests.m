@@ -57,7 +57,7 @@ describe(@"login", ^{
             expect(currentUser.email).to.equal(ARUserManager.stubUserEmail);
             expect(currentUser.name).to.equal(ARUserManager.stubUserName);
         });
-        
+
         it(@"sets router auth token", ^{
             NSURLRequest *request = [ARRouter requestForURL:[NSURL URLWithString:@"http://m.artsy.net"]];
             expect([request valueForHTTPHeaderField:ARAuthHeader]).toNot.beNil();
@@ -86,28 +86,34 @@ describe(@"login", ^{
     });
 
     it(@"fails with a missing client id", ^{
-        [OHHTTPStubs stubJSONResponseAtPath:@"/oauth2/access_token" withResponse:@{ @"error": @"invalid_client", @"error_description": @"missing client_id" } andStatusCode:401];
+        [OHHTTPStubs stubJSONResponseAtPath:@"/oauth2/access_token" withResponse:@{ @"error" : @"invalid_client",
+                                                                                    @"error_description" : @"missing client_id" }
+                              andStatusCode:401];
 
         [ARUserManager stubbedLoginWithUsername:[ARUserManager stubUserEmail] password:[ARUserManager stubUserPassword]
             successWithCredentials:^(NSString *accessToken, NSDate *tokenExpiryDate) {
                 XCTFail(@"Expected API failure.");
-            } gotUser:^(User *currentUser) {
+            }
+            gotUser:^(User *currentUser) {
                 XCTFail(@"Expected API failure.");
-            } authenticationFailure:^(NSError *error) {
+            }
+            authenticationFailure:^(NSError *error) {
 
-                NSHTTPURLResponse *response = (NSHTTPURLResponse *) error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey];
+                NSHTTPURLResponse *response = (NSHTTPURLResponse *)error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey];
                 expect(response.statusCode).to.equal(401);
 
                 NSData *data = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
                 NSDictionary *recoverySuggestion = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-                expect(recoverySuggestion).to.equal(@{ @"error_description" : @"missing client_id", @"error" : @"invalid_client" });
-            } networkFailure:^(NSError *error){
+                expect(recoverySuggestion).to.equal(@{ @"error_description" : @"missing client_id",
+                                                       @"error" : @"invalid_client" });
+            }
+            networkFailure:^(NSError *error) {
                 XCTFail(@"Expected API failure.");
             }];
     });
 
     it(@"fails with an expired token", ^{
-        NSDate *yesterday = [NSDate dateWithTimeIntervalSinceNow: -(60.0f*60.0f*24.0f)];
+        NSDate *yesterday = [NSDate dateWithTimeIntervalSinceNow:-(60.0f * 60.0f * 24.0f)];
         ISO8601DateFormatter *dateFormatter = [[ISO8601DateFormatter alloc] init];
         NSString *expiryDate = [dateFormatter stringFromDate:yesterday];
 
@@ -171,7 +177,7 @@ describe(@"clearUserData", ^{
             expect([[NSUserDefaults standardUserDefaults] valueForKey:ARUseStagingDefault]).to.beTruthy();
             expect([[NSUserDefaults standardUserDefaults] valueForKey:@"TestKey"]).to.beNil();
         });
-        
+
         it(@"explicitly sets staging default to no", ^{
             expect([[NSUserDefaults standardUserDefaults] valueForKey:ARUseStagingDefault]).to.beTruthy();
             expect([[NSUserDefaults standardUserDefaults] valueForKey:@"TestKey"]).to.equal(@"test value");
@@ -183,32 +189,32 @@ describe(@"clearUserData", ^{
     });
 
     describe(@"with email and password", ^{
-        __block NSString * _userDataPath;
-        
+        __block NSString *_userDataPath;
+
         beforeEach(^{
             [ARUserManager stubAndLoginWithUsername];
             _userDataPath = [ARUserManager userDataPath];
             [ARUserManager clearUserData];
         });
-        
+
         it(@"resets currentUser", ^{
             expect([[ARUserManager sharedManager] currentUser]).to.beNil();
         });
-        
+
         it(@"destroys stored user data", ^{
             expect([[NSFileManager defaultManager] fileExistsAtPath:_userDataPath]).to.beFalsy();
         });
-        
+
         it(@"unsets router auth token", ^{
             NSURLRequest *request = [ARRouter requestForURL:[NSURL URLWithString:@"http://m.artsy.net"]];
             expect([request valueForHTTPHeaderField:ARAuthHeader]).to.beNil();
         });
     });
-    
+
     it(@"clears artsy.net cookies", ^{
         NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
         [cookieStorage setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
-        for(NSHTTPCookie *cookie in [cookieStorage cookiesForURL:[NSURL URLWithString:@"http://artsy.net"]]) {
+        for (NSHTTPCookie *cookie in [cookieStorage cookiesForURL:[NSURL URLWithString:@"http://artsy.net"]]) {
             [cookieStorage deleteCookie:cookie];
         }
         NSInteger cookieCount = cookieStorage.cookies.count;
@@ -218,7 +224,7 @@ describe(@"clearUserData", ^{
         [cookieProperties setObject:@"/" forKey:NSHTTPCookiePath];
         [cookieProperties setObject:@"0" forKey:NSHTTPCookieVersion];
         // will delete a cookie in any of the artsy.net domains
-        for(NSString *artsyHost in ARRouter.artsyHosts) {
+        for (NSString *artsyHost in ARRouter.artsyHosts) {
             [cookieProperties setObject:artsyHost forKey:NSHTTPCookieDomain];
             [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:[NSHTTPCookie cookieWithProperties:cookieProperties]];
         }
@@ -236,7 +242,10 @@ describe(@"clearUserData", ^{
 describe(@"createUserWithName", ^{
     beforeEach(^{
         [ARUserManager stubXappToken:[ARUserManager stubXappToken] expiresIn:[ARUserManager stubXappTokenExpiresIn]];
-        [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/user" withResponse:@{ @"id": [ARUserManager stubUserID], @"email": [ARUserManager stubUserEmail], @"name": [ARUserManager stubUserName] } andStatusCode:201];
+        [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/user" withResponse:@{ @"id" : [ARUserManager stubUserID],
+                                                                            @"email" : [ARUserManager stubUserEmail],
+                                                                            @"name" : [ARUserManager stubUserName] }
+                              andStatusCode:201];
 
         __block BOOL done = NO;
         [[ARUserManager sharedManager] createUserWithName:[ARUserManager stubUserName] email:[ARUserManager stubUserEmail] password:[ARUserManager stubUserPassword] success:^(User *user) {
@@ -246,7 +255,7 @@ describe(@"createUserWithName", ^{
             done = YES;
         }];
 
-        while(!done) {
+        while (!done) {
             [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
         }
     });
@@ -265,7 +274,10 @@ describe(@"createUserWithName", ^{
 describe(@"createUserViaFacebookWithToken", ^{
     beforeEach(^{
         [ARUserManager stubXappToken:[ARUserManager stubXappToken] expiresIn:[ARUserManager stubXappTokenExpiresIn]];
-        [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/user" withResponse:@{ @"id": [ARUserManager stubUserID], @"email": [ARUserManager stubUserEmail], @"name": [ARUserManager stubUserName] } andStatusCode:201];
+        [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/user" withResponse:@{ @"id" : [ARUserManager stubUserID],
+                                                                            @"email" : [ARUserManager stubUserEmail],
+                                                                            @"name" : [ARUserManager stubUserName] }
+                              andStatusCode:201];
 
         __block BOOL done = NO;
         [[ARUserManager sharedManager] createUserViaFacebookWithToken:@"facebook token" email:[ARUserManager stubUserEmail] name:[ARUserManager stubUserName] success:^(User *user) {
@@ -275,7 +287,7 @@ describe(@"createUserViaFacebookWithToken", ^{
             done = YES;
         }];
 
-        while(!done) {
+        while (!done) {
             [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
         }
     });
@@ -294,7 +306,10 @@ describe(@"createUserViaFacebookWithToken", ^{
 describe(@"createUserViaTwitterWithToken", ^{
     beforeEach(^{
         [ARUserManager stubXappToken:[ARUserManager stubXappToken] expiresIn:[ARUserManager stubXappTokenExpiresIn]];
-        [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/user" withResponse:@{ @"id": [ARUserManager stubUserID], @"email": [ARUserManager stubUserEmail], @"name": [ARUserManager stubUserName] } andStatusCode:201];
+        [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/user" withResponse:@{ @"id" : [ARUserManager stubUserID],
+                                                                            @"email" : [ARUserManager stubUserEmail],
+                                                                            @"name" : [ARUserManager stubUserName] }
+                              andStatusCode:201];
 
         __block BOOL done = NO;
         [[ARUserManager sharedManager] createUserViaTwitterWithToken:@"twitter token" secret:@"twitter secret" email:[ARUserManager stubUserEmail] name:[ARUserManager stubUserName] success:^(User *user) {
@@ -304,7 +319,7 @@ describe(@"createUserViaTwitterWithToken", ^{
             done = YES;
         }];
 
-        while(!done) {
+        while (!done) {
             [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
         }
     });
@@ -370,7 +385,7 @@ describe(@"trialUserUUID", ^{
     it(@"is not", ^{
         expect([ARUserManager sharedManager].trialUserUUID).notTo.beNil();
     });
-    
+
     it(@"is persisted", ^{
         NSString *uuid = [ARUserManager sharedManager].trialUserUUID;
         expect([ARUserManager sharedManager].trialUserUUID).to.equal(uuid);

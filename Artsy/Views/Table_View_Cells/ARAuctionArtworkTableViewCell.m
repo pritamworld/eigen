@@ -9,6 +9,7 @@
 #import "UIImageView+AsyncImageLoading.h"
 #import "NSString+StringSize.h"
 
+
 @interface ARAuctionArtworkTableViewCell ()
 @property (nonatomic, weak) UIView *separator;
 @end

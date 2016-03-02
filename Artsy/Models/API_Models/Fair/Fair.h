@@ -8,7 +8,9 @@
 
 @class PartnerShow;
 
-@interface Fair : MTLModel <MTLJSONSerializing> {
+
+@interface Fair : MTLModel <MTLJSONSerializing>
+{
     ARFairNetworkModel *_networkModel;
 }
 

@@ -1,5 +1,6 @@
 #import "ARFavoritesNetworkModel.h"
 
+
 @interface ARStubbedFavoritesNetworkModel : ARFavoritesNetworkModel
 
 @property (readonly, nonatomic, copy) NSArray *favoritesStack;

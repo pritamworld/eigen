@@ -1,13 +1,16 @@
 #import "ARStubbedFavoritesNetworkModel.h"
 
+
 @interface ARFavoritesNetworkModel (Private)
 @property (readwrite, nonatomic, assign) BOOL allDownloaded;
 @property (readwrite, nonatomic, assign) NSInteger currentPage;
 @end
 
+
 @interface ARStubbedFavoritesNetworkModel ()
 @property (readwrite, nonatomic, copy) NSArray *favoritesStack;
 @end
+
 
 @implementation ARStubbedFavoritesNetworkModel
 

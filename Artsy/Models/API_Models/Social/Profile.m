@@ -12,7 +12,8 @@
 @import ObjectiveSugar;
 
 
-@interface Profile () {
+@interface Profile ()
+{
     BOOL _followed;
 }
 
@@ -73,7 +74,7 @@
 
     if (self.profileID) {
         [ArtsyAPI getProfileForProfileID:self.profileID success:^(Profile *profile) {
-            __strong typeof (wself) sself = wself;
+            __strong typeof(wself) sself = wself;
 
             [sself mergeValuesForKeysFromModel:profile];
             success();

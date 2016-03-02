@@ -24,7 +24,7 @@ describe(@"when adding a page title", ^{
 
         UIView *titleLabel = [stackView.viewStack.firstObject view];
         expect(titleLabel).to.beKindOf([UILabel class]);
-        expect([((UILabel *) titleLabel) text]).to.equal(title.uppercaseString);
+        expect([((UILabel *)titleLabel)text]).to.equal(title.uppercaseString);
     });
 
     it(@"returns the title label", ^{
@@ -33,7 +33,7 @@ describe(@"when adding a page title", ^{
         UIView *titleLabel = [stackView addPageTitleWithString:title];
 
         expect(titleLabel).to.beKindOf([UILabel class]);
-        expect([((UILabel *) titleLabel) text]).to.equal(title.uppercaseString);
+        expect([((UILabel *)titleLabel)text]).to.equal(title.uppercaseString);
     });
 
 });
@@ -54,7 +54,7 @@ describe(@"when adding a page subtitle", ^{
 
         UIView *titleLabel = [stackView.viewStack.firstObject view];
         expect(titleLabel).to.beKindOf([UILabel class]);
-        expect([((UILabel *) titleLabel) text]).to.equal(title.uppercaseString);
+        expect([((UILabel *)titleLabel)text]).to.equal(title.uppercaseString);
     });
 });
 

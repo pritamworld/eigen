@@ -126,7 +126,7 @@ describe(@"ARSwitchboard", ^{
 
             NSURL *internalURL = [[NSURL alloc] initWithString:@"http://mysitethatmustbeopenedinsafari.com?eigen_escape_sandbox=true"];
             [switchboard loadURL:internalURL];
-            
+
             [sharedAppMock verify];
         });
 
@@ -172,7 +172,7 @@ describe(@"ARSwitchboard", ^{
             // Yeah, so, we have this awkward catch-all profile class for any route
             // thus if the route isn't registered, it'll go to that
             expect(subject).to.beAKindOf(ARProfileViewController.class);
-            [switchboard registerPathCallbackAtPath:@"/thingy" callback:^id _Nullable(NSDictionary * _Nullable parameters) {
+            [switchboard registerPathCallbackAtPath:@"/thingy" callback:^id _Nullable(NSDictionary *_Nullable parameters) {
                 return newVC;
             }];
             expect([switchboard loadPath:@"thingy"]).to.equal(newVC);
@@ -182,7 +182,7 @@ describe(@"ARSwitchboard", ^{
     describe(@"adding a new domain", ^{
         it(@"supports adding via the register method", ^{
             UIViewController *newVC = [[UIViewController alloc] init];
-            [switchboard registerPathCallbackForDomain:@"orta.artsy.net" callback:^id _Nullable(NSURL * _Nonnull url) {
+            [switchboard registerPathCallbackForDomain:@"orta.artsy.net" callback:^id _Nullable(NSURL *_Nonnull url) {
                 return newVC;
             }];
 
@@ -192,7 +192,7 @@ describe(@"ARSwitchboard", ^{
         it(@"sends the URL in to the callback for the URL routing", ^{
             UIViewController *newVC = [[UIViewController alloc] init];
             __block NSString *path = nil;
-            [switchboard registerPathCallbackForDomain:@"orta.artsy.net" callback:^id _Nullable(NSURL * _Nonnull url) {
+            [switchboard registerPathCallbackForDomain:@"orta.artsy.net" callback:^id _Nullable(NSURL *_Nonnull url) {
                 path = url.path;
                 return newVC;
             }];
@@ -218,7 +218,7 @@ describe(@"ARSwitchboard", ^{
         });
 
         it(@"routes artists in a gallery context on iPad", ^{
-            [ARTestContext useDevice:ARDeviceTypePad :^{
+            [ARTestContext useDevice:ARDeviceTypePad:^{
                 // Now we're in a different context, need to recreate switchboard
                 switchboard = [[ARSwitchBoard alloc] init];
                 [switchboard updateRoutes];
@@ -229,7 +229,7 @@ describe(@"ARSwitchboard", ^{
         });
 
         it(@"does not route artists in a gallery context on iPhone", ^{
-            [ARTestContext useDevice:ARDeviceTypePhone5 :^{
+            [ARTestContext useDevice:ARDeviceTypePhone5:^{
                 switchboard = [[ARSwitchBoard alloc] init];
                 id viewController = [switchboard routeInternalURL:[[NSURL alloc] initWithString:@"http://artsy.net/some-gallery/artist/artistname"] fair:nil];
                 expect(viewController).to.beKindOf([ARInternalMobileWebViewController class]);
@@ -334,14 +334,15 @@ describe(@"ARSwitchboard", ^{
         });
 
         describe(@"with a non-fair profile", ^{
-        });
+                 });
 
         describe(@"with a fair profile", ^{
             beforeEach(^{
                 [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/profile/myfairprofile" withResponse:@{
-                                                                                                    @"id" : @"myfairprofile",
-                                                                                                    @"owner": @{ @"default_fair_id" : @"armory-show-2013" },
-                                                                                                    @"owner_type" : @"FairOrganizer" }];
+                    @"id" : @"myfairprofile",
+                    @"owner" : @{@"default_fair_id" : @"armory-show-2013"},
+                    @"owner_type" : @"FairOrganizer"
+                }];
             });
 
             it(@"internally does not load martsy", ^{

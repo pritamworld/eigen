@@ -2,6 +2,7 @@
 
 @protocol ARShareableObject;
 
+
 @interface ARSharingController : NSObject
 
 + (instancetype)sharingControllerWithObject:(id)object thumbnailImageURL:(NSURL *)thumbnailImageURL;

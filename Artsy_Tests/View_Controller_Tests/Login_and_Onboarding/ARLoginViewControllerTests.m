@@ -36,7 +36,7 @@ describe(@"login view controller", ^{
             controller = [[ARLoginViewController alloc] init];
             controller.hideDefaultValues = YES;
         });
-                   
+
         itHasSnapshotsForDevicesWithName(@"blank form", ^{
             [controller ar_presentWithFrame:[UIScreen mainScreen].bounds];
             return controller;
@@ -51,7 +51,7 @@ describe(@"login view controller", ^{
             return controller;
         });
     });
-    
+
     describe(@"initWithEmail", ^{
         beforeEach(^{
             controller = [[ARLoginViewController alloc] initWithEmail:[ARUserManager stubUserEmail]];
@@ -90,7 +90,9 @@ describe(@"login view controller", ^{
             });
 
             it(@"fails and displays error", ^{
-                [OHHTTPStubs stubJSONResponseAtPath:@"/oauth2/access_token" withResponse:@{ @"error": @"invalid_client", @"error_description": @"missing client_id" } andStatusCode:401];
+                [OHHTTPStubs stubJSONResponseAtPath:@"/oauth2/access_token" withResponse:@{ @"error" : @"invalid_client",
+                                                                                            @"error_description" : @"missing client_id" }
+                                      andStatusCode:401];
 
                 controller.emailTextField.text = [ARUserManager stubUserEmail];
                 controller.passwordTextField.secureTextEntry = YES;
@@ -102,11 +104,11 @@ describe(@"login view controller", ^{
                 [[[mockAlertView stub] andReturn:mockAlertView] alloc];
 
                 (void)[[[mockAlertView expect] andReturn:mockAlertView]
-                       initWithTitle:@"Couldn’t Log In"
-                       message:@"Please check your email and password"
-                       delegate:OCMOCK_ANY
-                       cancelButtonTitle:OCMOCK_ANY
-                       otherButtonTitles:OCMOCK_ANY, nil];
+                        initWithTitle:@"Couldn’t Log In"
+                              message:@"Please check your email and password"
+                             delegate:OCMOCK_ANY
+                    cancelButtonTitle:OCMOCK_ANY
+                    otherButtonTitles:OCMOCK_ANY, nil];
                 [[mockAlertView expect] show];
                 [controller login:nil];
                 [mockAlertView verifyWithDelay:1];
@@ -122,10 +124,11 @@ describe(@"login view controller", ^{
 
                 id authProviders = [OCMockObject mockForClass:[ARAuthProviders class]];
                 [[[authProviders stub] andDo:^(NSInvocation *invocation) {
-                    void(^successBlock)(NSString *token, NSString *email, NSString *name);
+                    void (^successBlock)(NSString *token, NSString *email, NSString *name);
                     [invocation getArgument:&successBlock atIndex:2];
                     successBlock(@"facebook token", [ARUserManager stubUserEmail], [ARUserManager stubUserName]);
-                }] getTokenForFacebook:OCMOCK_ANY failure:OCMOCK_ANY];
+                }] getTokenForFacebook:OCMOCK_ANY
+                                failure:OCMOCK_ANY];
 
                 [controller fb:nil];
 
@@ -140,20 +143,21 @@ describe(@"login view controller", ^{
             it(@"fails and displays an error", ^{
                 id authProviders = [OCMockObject mockForClass:[ARAuthProviders class]];
                 [[[authProviders stub] andDo:^(NSInvocation *invocation) {
-                    void(^failureBlock)(NSError *);
+                    void (^failureBlock)(NSError *);
                     [invocation getArgument:&failureBlock atIndex:3];
                     failureBlock([NSError errorWithDomain:@"error" code:500 userInfo:nil]);
-                }] getTokenForFacebook:OCMOCK_ANY failure:OCMOCK_ANY];
+                }] getTokenForFacebook:OCMOCK_ANY
+                                failure:OCMOCK_ANY];
 
                 id mockAlertView = [OCMockObject mockForClass:[UIAlertView class]];
                 [[mockAlertView expect] setAlertViewStyle:UIAlertViewStyleDefault];
                 [[[mockAlertView stub] andReturn:mockAlertView] alloc];
                 (void)[[[mockAlertView expect] andReturn:mockAlertView]
-                       initWithTitle:@"Couldn’t get Facebook credentials"
-                       message:OCMOCK_ANY
-                       delegate:OCMOCK_ANY
-                       cancelButtonTitle:OCMOCK_ANY
-                       otherButtonTitles:OCMOCK_ANY, nil];
+                        initWithTitle:@"Couldn’t get Facebook credentials"
+                              message:OCMOCK_ANY
+                             delegate:OCMOCK_ANY
+                    cancelButtonTitle:OCMOCK_ANY
+                    otherButtonTitles:OCMOCK_ANY, nil];
                 [[mockAlertView expect] show];
                 [controller fb:nil];
                 [mockAlertView verifyWithDelay:1];
@@ -169,10 +173,11 @@ describe(@"login view controller", ^{
                 expect([ARUserManager sharedManager].currentUser).to.beNil();
                 id authProviders = [OCMockObject mockForClass:[ARAuthProviders class]];
                 [[[authProviders stub] andDo:^(NSInvocation *invocation) {
-                    void(^successBlock)(NSString *token, NSString *secret);
+                    void (^successBlock)(NSString *token, NSString *secret);
                     [invocation getArgument:&successBlock atIndex:2];
                     successBlock(@"twitter token", @"secret");
-                }] getReverseAuthTokenForTwitter:OCMOCK_ANY failure:OCMOCK_ANY];
+                }] getReverseAuthTokenForTwitter:OCMOCK_ANY
+                                          failure:OCMOCK_ANY];
 
                 [controller twitter:nil];
                 expect([ARUserManager sharedManager].currentUser).willNot.beNil();
@@ -186,20 +191,21 @@ describe(@"login view controller", ^{
             it(@"fails and displays an error", ^{
                 id authProviders = [OCMockObject mockForClass:[ARAuthProviders class]];
                 [[[authProviders stub] andDo:^(NSInvocation *invocation) {
-                    void(^failureBlock)(NSError *);
+                    void (^failureBlock)(NSError *);
                     [invocation getArgument:&failureBlock atIndex:3];
                     failureBlock([NSError errorWithDomain:@"error" code:500 userInfo:nil]);
-                }] getReverseAuthTokenForTwitter:OCMOCK_ANY failure:OCMOCK_ANY];
+                }] getReverseAuthTokenForTwitter:OCMOCK_ANY
+                                          failure:OCMOCK_ANY];
 
                 id mockAlertView = [OCMockObject mockForClass:[UIAlertView class]];
                 [[mockAlertView expect] setAlertViewStyle:UIAlertViewStyleDefault];
                 [[[mockAlertView stub] andReturn:mockAlertView] alloc];
                 (void)[[[mockAlertView expect] andReturn:mockAlertView]
-                       initWithTitle:@"Couldn’t get Twitter credentials"
-                       message:OCMOCK_ANY
-                       delegate:OCMOCK_ANY
-                       cancelButtonTitle:OCMOCK_ANY
-                       otherButtonTitles:OCMOCK_ANY, nil];
+                        initWithTitle:@"Couldn’t get Twitter credentials"
+                              message:OCMOCK_ANY
+                             delegate:OCMOCK_ANY
+                    cancelButtonTitle:OCMOCK_ANY
+                    otherButtonTitles:OCMOCK_ANY, nil];
 
                 [[mockAlertView expect] show];
                 [controller twitter:nil];
@@ -219,11 +225,11 @@ describe(@"login view controller", ^{
             id mockResetPasswordView = [OCMockObject mockForClass:[UIAlertView class]];
             [[[mockResetPasswordView stub] andReturn:mockResetPasswordView] alloc];
             (void)[[[mockResetPasswordView expect] andReturn:mockResetPasswordView]
-                   initWithTitle:@"Forgot Password"
-                   message:@"Please enter your email address and we’ll send you a reset link."
-                   delegate:OCMOCK_ANY
-                   cancelButtonTitle:@"Cancel"
-                   otherButtonTitles:@"Send Link", nil];
+                    initWithTitle:@"Forgot Password"
+                          message:@"Please enter your email address and we’ll send you a reset link."
+                         delegate:OCMOCK_ANY
+                cancelButtonTitle:@"Cancel"
+                otherButtonTitles:@"Send Link", nil];
             [[[mockResetPasswordView expect] ignoringNonObjectArgs] textFieldAtIndex:0];
             [[mockResetPasswordView expect] setAlertViewStyle:UIAlertViewStylePlainTextInput];
             [[mockResetPasswordView expect] setTapBlock:OCMOCK_ANY];
@@ -236,17 +242,17 @@ describe(@"login view controller", ^{
 
         it(@"displays a confirmation after sending a password reset email", ^{
             [ARUserManager stubXappToken:[ARUserManager stubXappToken] expiresIn:[ARUserManager stubXappTokenExpiresIn]];
-            [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/users/send_reset_password_instructions" withResponse:@{ @"status": @"success" } andStatusCode:201];
+            [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/users/send_reset_password_instructions" withResponse:@{ @"status" : @"success" } andStatusCode:201];
 
             id mockAlertView = [OCMockObject mockForClass:[UIAlertView class]];
             [[mockAlertView expect] setAlertViewStyle:UIAlertViewStyleDefault];
             [[[mockAlertView stub] andReturn:mockAlertView] alloc];
             (void)[[[mockAlertView expect] andReturn:mockAlertView]
-                   initWithTitle:@"Please Check Your Email"
-                   message:OCMOCK_ANY
-                   delegate:OCMOCK_ANY
-                   cancelButtonTitle:OCMOCK_ANY
-                   otherButtonTitles:OCMOCK_ANY, nil];
+                    initWithTitle:@"Please Check Your Email"
+                          message:OCMOCK_ANY
+                         delegate:OCMOCK_ANY
+                cancelButtonTitle:OCMOCK_ANY
+                otherButtonTitles:OCMOCK_ANY, nil];
             [[mockAlertView expect] show];
 
             [controller sendPasswordResetEmail:@"foo@example.com"];
@@ -257,17 +263,17 @@ describe(@"login view controller", ^{
 
         it(@"displays an error on failure to send a reset password email", ^{
             [ARUserManager stubXappToken:[ARUserManager stubXappToken] expiresIn:[ARUserManager stubXappTokenExpiresIn]];
-            [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/users/send_reset_password_instructions" withResponse:@{ @"error": @"foobar" } andStatusCode:400];
+            [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/users/send_reset_password_instructions" withResponse:@{ @"error" : @"foobar" } andStatusCode:400];
 
             id mockAlertView = [OCMockObject mockForClass:[UIAlertView class]];
             [[mockAlertView expect] setAlertViewStyle:UIAlertViewStyleDefault];
             [[[mockAlertView stub] andReturn:mockAlertView] alloc];
             (void)[[[mockAlertView expect] andReturn:mockAlertView]
-                   initWithTitle:@"Couldn’t Reset Password"
-                   message:OCMOCK_ANY
-                   delegate:OCMOCK_ANY
-                   cancelButtonTitle:OCMOCK_ANY
-                   otherButtonTitles:OCMOCK_ANY, nil];
+                    initWithTitle:@"Couldn’t Reset Password"
+                          message:OCMOCK_ANY
+                         delegate:OCMOCK_ANY
+                cancelButtonTitle:OCMOCK_ANY
+                otherButtonTitles:OCMOCK_ANY, nil];
             [[mockAlertView expect] show];
 
             [controller sendPasswordResetEmail:@"foo@example.com"];

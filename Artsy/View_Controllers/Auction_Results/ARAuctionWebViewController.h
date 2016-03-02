@@ -2,6 +2,7 @@
 
 #import "ARMacros.h"
 
+
 @interface ARAuctionWebViewController : ARInternalMobileWebViewController
 
 @property (nonatomic, strong, readonly) NSString *auctionID;

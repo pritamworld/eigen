@@ -67,7 +67,7 @@
 
 - (void)setHearted:(BOOL)hearted animated:(BOOL)animated
 {
-    [self setStatus:(hearted ? ARHeartStatusYes : ARHeartStatusNo)animated:animated];
+    [self setStatus:(hearted ? ARHeartStatusYes : ARHeartStatusNo) animated:animated];
 }
 
 - (void)setStatus:(ARHeartStatus)status
@@ -91,9 +91,9 @@
 
     _status = status;
 
-   __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     void (^animation)() = ^() {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         if (status == ARHeartStatusYes) {
             [sself.backView removeFromSuperview];
             [sself addSubview:self.frontView];

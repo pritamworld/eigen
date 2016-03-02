@@ -106,14 +106,14 @@ describe(@"artworks", ^{
             sharedBefore();
             artworks = [NSMutableArray array];
 
-            for(int i = 0; i < 9; i++) {
-                Artwork *artwork  = [[Artwork alloc] initWithDictionary:@{
+            for (int i = 0; i < 9; i++) {
+                Artwork *artwork = [[Artwork alloc] initWithDictionary:@{
                     @"artworkID" : @"stubbed",
                     @"title" : NSStringWithFormat(@"Artwork %d", i)
                 } error:nil];
 
                 artwork.artist = [[Artist alloc] initWithDictionary:@{
-                    @"artistID" :@"stubbed",
+                    @"artistID" : @"stubbed",
                     @"name" : NSStringWithFormat(@"Artist %d", i)
                 } error:nil];
 
@@ -179,8 +179,8 @@ describe(@"artists", ^{
             switchView = favoritesVC.embeddedItemsVC.headerView.subviews[2];
             artists = [NSMutableArray array];
 
-            for(int i = 0; i< 9; i++) {
-                Artist *artist  = [[Artist alloc] initWithDictionary:@{
+            for (int i = 0; i < 9; i++) {
+                Artist *artist = [[Artist alloc] initWithDictionary:@{
                     @"artistID" : NSStringWithFormat(@"stubbed_%d", i),
                     @"name" : NSStringWithFormat(@"Artist %d", i)
                 } error:nil];
@@ -245,8 +245,8 @@ describe(@"genes", ^{
             [favoritesVC endAppearanceTransition];
             switchView = favoritesVC.embeddedItemsVC.headerView.subviews[2];
             genes = [NSMutableArray array];
-            for(int i = 0; i< 9; i++) {
-                Gene *gene  = [[Gene alloc] initWithDictionary:@{
+            for (int i = 0; i < 9; i++) {
+                Gene *gene = [[Gene alloc] initWithDictionary:@{
                     @"geneID" : @"stubbed",
                     @"name" : NSStringWithFormat(@"Gene %d", i)
                 } error:nil];

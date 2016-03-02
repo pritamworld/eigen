@@ -55,40 +55,42 @@ dispatch_block_t sharedBefore = ^{
 
 describe(@"with three hero units", ^{
     before(^{
-        heroUnits = @[[SiteHeroUnit modelWithJSON:@{
-            @"id": @"art-basel1",
-            @"name": @"Art Basel1",
-            @"heading": @"Exclusive Preview",
-            @"mobile_description": @"Discover some artworks.",
-            @"mobile_title": @"Art Basel",
-            @"display_on_mobile": @true,
-            @"position": @1,
-            @"link":@"/art-basel1",
-            @"link_text":@"Explore",
-            @"credit_line":@"Artsy artsy artsy"
-        }], [SiteHeroUnit modelWithJSON:@{
-            @"id": @"art-basel2",
-            @"name": @"Art Basel2",
-            @"heading": @"Exclusive Preview",
-            @"mobile_description": @"Discover some artworks.",
-            @"mobile_title": @"Art Basel",
-            @"display_on_mobile": @true,
-            @"position": @2,
-            @"link":@"/art-basel2",
-            @"link_text":@"Explore",
-            @"credit_line":@"Artsy artsy artsy"
-        }], [SiteHeroUnit modelWithJSON:@{
-            @"id": @"art-basel3",
-            @"name": @"Art Basel3",
-            @"heading": @"Exclusive Preview",
-            @"mobile_description": @"Discover some artworks.",
-            @"mobile_title": @"Art Basel",
-            @"display_on_mobile": @true,
-            @"position": @3,
-            @"link":@"/art-basel3",
-            @"link_text":@"Explore",
-            @"credit_line":@"Artsy artsy artsy"
-        }]];
+        heroUnits = @[ [SiteHeroUnit modelWithJSON:@{
+                          @"id" : @"art-basel1",
+                          @"name" : @"Art Basel1",
+                          @"heading" : @"Exclusive Preview",
+                          @"mobile_description" : @"Discover some artworks.",
+                          @"mobile_title" : @"Art Basel",
+                          @"display_on_mobile" : @true,
+                          @"position" : @1,
+                          @"link" : @"/art-basel1",
+                          @"link_text" : @"Explore",
+                          @"credit_line" : @"Artsy artsy artsy"
+                      }],
+                       [SiteHeroUnit modelWithJSON:@{
+                           @"id" : @"art-basel2",
+                           @"name" : @"Art Basel2",
+                           @"heading" : @"Exclusive Preview",
+                           @"mobile_description" : @"Discover some artworks.",
+                           @"mobile_title" : @"Art Basel",
+                           @"display_on_mobile" : @true,
+                           @"position" : @2,
+                           @"link" : @"/art-basel2",
+                           @"link_text" : @"Explore",
+                           @"credit_line" : @"Artsy artsy artsy"
+                       }],
+                       [SiteHeroUnit modelWithJSON:@{
+                           @"id" : @"art-basel3",
+                           @"name" : @"Art Basel3",
+                           @"heading" : @"Exclusive Preview",
+                           @"mobile_description" : @"Discover some artworks.",
+                           @"mobile_title" : @"Art Basel",
+                           @"display_on_mobile" : @true,
+                           @"position" : @3,
+                           @"link" : @"/art-basel3",
+                           @"link_text" : @"Explore",
+                           @"credit_line" : @"Artsy artsy artsy"
+                       }] ];
     });
 
     describe(@"handleHeroUnits", ^{
@@ -158,18 +160,18 @@ describe(@"with three hero units", ^{
 
 describe(@"with one hero unit", ^{
     before(^{
-        heroUnits = @[[SiteHeroUnit modelWithJSON:@{
-            @"id": @"art-basel1",
-            @"name": @"Art Basel1",
-            @"heading": @"Exclusive Preview",
-            @"mobile_description": @"Discover some artworks.",
-            @"mobile_title": @"Art Basel",
-            @"display_on_mobile": @true,
-            @"position": @1,
-            @"link":@"/art-basel1",
-            @"link_text":@"Explore",
-            @"credit_line":@"Artsy artsy artsy"
-        }]];
+        heroUnits = @[ [SiteHeroUnit modelWithJSON:@{
+            @"id" : @"art-basel1",
+            @"name" : @"Art Basel1",
+            @"heading" : @"Exclusive Preview",
+            @"mobile_description" : @"Discover some artworks.",
+            @"mobile_title" : @"Art Basel",
+            @"display_on_mobile" : @true,
+            @"position" : @1,
+            @"link" : @"/art-basel1",
+            @"link_text" : @"Explore",
+            @"credit_line" : @"Artsy artsy artsy"
+        }] ];
     });
 
     describe(@"handleHeroUnits", ^{
@@ -270,19 +272,19 @@ describe(@"alignment on iPad", ^{
     describe(@"align left", ^{
         before(^{
             [ARTestContext stubDevice:ARDeviceTypePad];
-            heroUnits = @[[SiteHeroUnit modelWithJSON:@{
-                @"id": @"art-basel1",
-                @"name": @"Art Basel1",
-                @"heading": @"Exclusive Preview",
-                @"mobile_description": @"Discover some artworks.",
-                @"mobile_title": @"Art Basel Art Basel Art Basel Art Basel Art Basel Art Basel Art Basel Art Basel",
-                @"display_on_mobile": @true,
-                @"type":@"left",
-                @"position": @1,
-                @"link":@"/art-basel1",
-                @"link_text":@"Explore",
-                @"credit_line":@"Artsy artsy artsy"
-            }]];
+            heroUnits = @[ [SiteHeroUnit modelWithJSON:@{
+                @"id" : @"art-basel1",
+                @"name" : @"Art Basel1",
+                @"heading" : @"Exclusive Preview",
+                @"mobile_description" : @"Discover some artworks.",
+                @"mobile_title" : @"Art Basel Art Basel Art Basel Art Basel Art Basel Art Basel Art Basel Art Basel",
+                @"display_on_mobile" : @true,
+                @"type" : @"left",
+                @"position" : @1,
+                @"link" : @"/art-basel1",
+                @"link_text" : @"Explore",
+                @"credit_line" : @"Artsy artsy artsy"
+            }] ];
         });
 
         after(^{
@@ -299,19 +301,19 @@ describe(@"alignment on iPad", ^{
     describe(@"align right", ^{
         before(^{
             [ARTestContext stubDevice:ARDeviceTypePad];
-            heroUnits = @[[SiteHeroUnit modelWithJSON:@{
-                @"id": @"art-basel1",
-                @"name": @"Art Basel1",
-                @"heading": @"Exclusive Preview",
-                @"mobile_description": @"Discover some artworks.",
-                @"mobile_title": @"Art Basel Art Basel Art Basel Art Basel Art Basel Art Basel Art Basel Art Basel",
-                @"display_on_mobile": @true,
-                @"type":@"right",
-                @"position": @1,
-                @"link":@"/art-basel1",
-                @"link_text":@"Explore",
-                @"credit_line":@"Artsy artsy artsy"
-            }]];
+            heroUnits = @[ [SiteHeroUnit modelWithJSON:@{
+                @"id" : @"art-basel1",
+                @"name" : @"Art Basel1",
+                @"heading" : @"Exclusive Preview",
+                @"mobile_description" : @"Discover some artworks.",
+                @"mobile_title" : @"Art Basel Art Basel Art Basel Art Basel Art Basel Art Basel Art Basel Art Basel",
+                @"display_on_mobile" : @true,
+                @"type" : @"right",
+                @"position" : @1,
+                @"link" : @"/art-basel1",
+                @"link_text" : @"Explore",
+                @"credit_line" : @"Artsy artsy artsy"
+            }] ];
         });
 
         after(^{

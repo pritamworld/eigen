@@ -140,7 +140,7 @@ static int ARLoadingIndicatorView = 1;
     [items each:^(ARWorksForYouNotificationItem *item) {
         UIView *viewItem = [self viewBasedOnNotificationItem:item];
         [self.view.stackView addSubview:viewItem withTopMargin:@"0" sideMargin:@"20"];
-        
+
         // TODO: allDownloaded not set to YES yet at this stage, need to figure out where to do this
         if (!(item == items.lastObject && self.worksForYouNetworkModel.allDownloaded)) {
             [self addSeparatorLine];
@@ -159,7 +159,7 @@ static int ARLoadingIndicatorView = 1;
 
     __weak typeof(self) wself = self;
     [self.worksForYouNetworkModel getWorksForYou:^(NSArray<ARWorksForYouNotificationItem *> *notificationItems) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself removeLoadingIndicator];
         [sself addNotificationItems:notificationItems];
     } failure:nil];

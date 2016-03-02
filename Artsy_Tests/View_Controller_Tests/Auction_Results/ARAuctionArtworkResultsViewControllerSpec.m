@@ -43,14 +43,14 @@ itHasSnapshotsForDevicesWithName(@"default", ^{
 
     StubbedAuctionNetworkModel *network = [[StubbedAuctionNetworkModel alloc] init];
     AuctionLot *lot1 = [AuctionLot modelWithJSON:@{
-       @"id": @"id",
-       @"title": @"Lot 1",
-       @"dimensions": @{ @"cm": @"1 cm", @"in": @"2 inches"},
-       @"organization" : @"Organization",
-       @"auction_date_text" : @"Auctioned at some time",
-       @"price": @"Price"
+        @"id" : @"id",
+        @"title" : @"Lot 1",
+        @"dimensions" : @{@"cm" : @"1 cm", @"in" : @"2 inches"},
+        @"organization" : @"Organization",
+        @"auction_date_text" : @"Auctioned at some time",
+        @"price" : @"Price"
     }];
-    network.results = @[lot1];
+    network.results = @[ lot1 ];
     sut.network = network;
     return sut;
 });

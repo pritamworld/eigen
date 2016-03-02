@@ -2,6 +2,7 @@
 
 #import "ArtsyAPI+Artists.h"
 
+
 @implementation ARFairArtistNetworkModel
 
 - (AFHTTPRequestOperation *)getShowsForArtistID:(NSString *)artistID inFairID:(NSString *)fairID success:(void (^)(NSArray *shows))success failure:(void (^)(NSError *error))failure

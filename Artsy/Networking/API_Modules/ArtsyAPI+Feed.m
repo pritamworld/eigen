@@ -6,6 +6,7 @@
 
 #import "AFHTTPRequestOperation+JSON.h"
 
+
 @implementation ArtsyAPI (Feed)
 
 + (void)getFeedResultsForMainFeedWithCursor:(NSString *)cursor success:(void (^)(id JSON))success failure:(void (^)(NSError *error))failure
@@ -58,7 +59,7 @@
             if (success) {
                 success(JSON);
             }
-            if(isFirstPageOfMainFeed) {
+            if (isFirstPageOfMainFeed) {
                 ar_dispatch_async(^{
                     NSString *path = [ARFileUtils userDocumentsPathWithFile:request.URL.absoluteString];
                     [feedOperation.responseData writeToFile:path options:NSDataWritingAtomic error:nil];

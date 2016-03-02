@@ -18,7 +18,7 @@ describe(@"at a fair", ^{
     __block Fair *fair = [Fair modelWithJSON:@{
         @"id" : @"fair-id",
         @"name" : @"The Armory Show",
-        @"organizer" : @{ @"profile_id" : @"fair-profile-id" },
+        @"organizer" : @{@"profile_id" : @"fair-profile-id"},
     }];
 
     // show, fair, networkModel
@@ -50,7 +50,8 @@ describe(@"at a fair", ^{
 
                 NSString *stubbedImagePath = OHPathForFileInBundle(@"stub.jpg", nil);
                 networkModel.imagesForBoothHeader = [Image arrayOfModelsWithJSON:@[
-                    @{ @"image_url" : stubbedImagePath, @"image_versions" : @[@"large"] }
+                    @{ @"image_url" : stubbedImagePath,
+                       @"image_versions" : @[ @"large" ] }
                 ]];
 
                 [showVC ar_presentWithFrame:[[UIScreen mainScreen] bounds]];
@@ -65,14 +66,16 @@ describe(@"at a fair", ^{
 
                 NSString *stubbedImagePath = OHPathForFileInBundle(@"stub.jpg", nil);
 
-                networkModel.imagesForBoothHeader = [Image arrayOfModelsWithJSON: @[
-                    @{ @"image_url" : stubbedImagePath,  @"image_versions" : @[@"large"] },
-                    @{ @"image_url" : stubbedImagePath,  @"image_versions" : @[@"large"] }
+                networkModel.imagesForBoothHeader = [Image arrayOfModelsWithJSON:@[
+                    @{ @"image_url" : stubbedImagePath,
+                       @"image_versions" : @[ @"large" ] },
+                    @{ @"image_url" : stubbedImagePath,
+                       @"image_versions" : @[ @"large" ] }
                 ]];
 
                 [showVC ar_presentWithFrame:[[UIScreen mainScreen] bounds]];
                 [showVC.view snapshotViewAfterScreenUpdates:YES];
-                
+
                 return showVC;
             });
         });
@@ -80,24 +83,24 @@ describe(@"at a fair", ^{
 
     describe(@"with map", ^{
         PartnerShow *show = [PartnerShow modelWithJSON:@{
-            @"id": @"some-show",
-            @"name": @"Some Show",
-            @"partner": @{
-                    @"id" : @"some-partner",
-                    @"name" : @"Some Gallery",
-                    @"default_profile_id" : @"some-gallery",
-                    @"default_profile_public" : @YES
+            @"id" : @"some-show",
+            @"name" : @"Some Show",
+            @"partner" : @{
+                @"id" : @"some-partner",
+                @"name" : @"Some Gallery",
+                @"default_profile_id" : @"some-gallery",
+                @"default_profile_public" : @YES
             },
             @"fair" : @{
                 @"name" : @"The Armory Show",
                 @"id" : @"fair-id",
             },
-            @"fair_location": @{
+            @"fair_location" : @{
                 @"display" : @"Armory Presents, Booth 666",
-                @"map_points": @[
+                @"map_points" : @[
                     @{
-                        @"x": @(0.15),
-                        @"y": @(0.75)
+                       @"x" : @(0.15),
+                       @"y" : @(0.75)
                     }
                 ]
             },
@@ -109,25 +112,27 @@ describe(@"at a fair", ^{
         // Required since Fair doesn't parse maps dictionary in Mantle
         Map *map = [Map modelWithJSON:@{
             @"id" : @"map-id",
-            @"tile_size": @(512),
-            @"map_features": @[],
-            @"max_tiled_width": @(1000),
-            @"max_tiled_height": @(2000)
+            @"tile_size" : @(512),
+            @"map_features" : @[],
+            @"max_tiled_width" : @(1000),
+            @"max_tiled_height" : @(2000)
         }];
 
-        ARStubbedShowNetworkModel *networkModel = [[ARStubbedShowNetworkModel alloc] initWithFair:fair show:show maps:@[map]];
-        itBehavesLike(@"looks correct", @{@"fair":fair, @"show":show, @"networkModel":networkModel});
+        ARStubbedShowNetworkModel *networkModel = [[ARStubbedShowNetworkModel alloc] initWithFair:fair show:show maps:@[ map ]];
+        itBehavesLike(@"looks correct", @{ @"fair" : fair,
+                                           @"show" : show,
+                                           @"networkModel" : networkModel });
     });
 
     describe(@"without map", ^{
         PartnerShow *show = [PartnerShow modelWithJSON:@{
-            @"id": @"some-show",
-            @"name": @"Some Gallery at the Armory Show",
+            @"id" : @"some-show",
+            @"name" : @"Some Gallery at the Armory Show",
             @"fair" : @{
                 @"id" : @"the-armory-show-2015",
                 @"name" : @"The Armory Show 2015",
             },
-            @"partner": @{
+            @"partner" : @{
                 @"id" : @"some-partner",
                 @"name" : @"Some Gallery",
                 @"default_profile_id" : @"some-gallery",
@@ -143,7 +148,9 @@ describe(@"at a fair", ^{
 
         ARStubbedShowNetworkModel *networkModel = [[ARStubbedShowNetworkModel alloc] initWithFair:fair show:show maps:nil];
 
-        itBehavesLike(@"looks correct", @{@"fair":fair, @"show":show, @"networkModel":networkModel});
+        itBehavesLike(@"looks correct", @{ @"fair" : fair,
+                                           @"show" : show,
+                                           @"networkModel" : networkModel });
     });
 });
 
@@ -169,17 +176,17 @@ describe(@"not at a fair", ^{
     });
 
     __block NSDictionary *showJSON = @{
-        @"id": @"some-show",
-        @"name": @"Some Show",
-        @"partner": [NSMutableDictionary dictionaryWithDictionary:@{
-             @"id" : @"some-partner",
-             @"default_profile_id" : @"some-gallery"
+        @"id" : @"some-show",
+        @"name" : @"Some Show",
+        @"partner" : [NSMutableDictionary dictionaryWithDictionary:@{
+            @"id" : @"some-partner",
+            @"default_profile_id" : @"some-gallery"
         }],
-        @"location": [NSMutableDictionary dictionaryWithDictionary:@{
-             @"address" : @"123 Some Street",
-             @"city" : @"New York",
-             @"state" : @"NY",
-             }],
+        @"location" : [NSMutableDictionary dictionaryWithDictionary:@{
+            @"address" : @"123 Some Street",
+            @"city" : @"New York",
+            @"state" : @"NY",
+        }],
 
         @"start_at" : @"1976-01-30T15:00:00+00:00",
         @"end_at" : @"1976-02-02T15:00:00+00:00"
@@ -193,7 +200,7 @@ describe(@"not at a fair", ^{
             [showJSON[@"location"] setValue:@YES forKey:@"publicly_viewable"];
         });
 
-       itBehavesLike(@"looks correct", @{@"json":showJSON});
+        itBehavesLike(@"looks correct", @{ @"json" : showJSON });
 
     });
 
@@ -205,7 +212,7 @@ describe(@"not at a fair", ^{
             [showJSON[@"location"] setValue:@NO forKey:@"publicly_viewable"];
         });
 
-        itBehavesLike(@"looks correct", @{@"json":showJSON});
+        itBehavesLike(@"looks correct", @{ @"json" : showJSON });
 
     });
 
@@ -217,8 +224,8 @@ describe(@"not at a fair", ^{
             [showJSON[@"location"] setValue:@YES forKey:@"publicly_viewable"];
         });
 
-        itBehavesLike(@"looks correct", @{@"json":showJSON});
-        
+        itBehavesLike(@"looks correct", @{ @"json" : showJSON });
+
     });
 
     describe(@"gallery with private profile with private location", ^{
@@ -229,7 +236,7 @@ describe(@"not at a fair", ^{
             [showJSON[@"location"] setValue:@NO forKey:@"publicly_viewable"];
         });
 
-        itBehavesLike(@"looks correct", @{@"json":showJSON});
+        itBehavesLike(@"looks correct", @{ @"json" : showJSON });
 
     });
 
@@ -241,7 +248,7 @@ describe(@"not at a fair", ^{
             [showJSON[@"location"] setValue:@YES forKey:@"publicly_viewable"];
         });
 
-        itBehavesLike(@"looks correct", @{@"json":showJSON});
+        itBehavesLike(@"looks correct", @{ @"json" : showJSON });
 
     });
 
@@ -253,7 +260,7 @@ describe(@"not at a fair", ^{
             [showJSON[@"location"] setValue:@NO forKey:@"publicly_viewable"];
         });
 
-        itBehavesLike(@"looks correct", @{@"json":showJSON});
+        itBehavesLike(@"looks correct", @{ @"json" : showJSON });
 
     });
 
@@ -265,7 +272,7 @@ describe(@"not at a fair", ^{
             [showJSON[@"location"] setValue:@YES forKey:@"publicly_viewable"];
         });
 
-        itBehavesLike(@"looks correct", @{@"json":showJSON});
+        itBehavesLike(@"looks correct", @{ @"json" : showJSON });
 
     });
 
@@ -277,36 +284,36 @@ describe(@"not at a fair", ^{
             [showJSON[@"location"] setValue:@NO forKey:@"publicly_viewable"];
         });
 
-        itBehavesLike(@"looks correct", @{@"json":showJSON});
-        
+        itBehavesLike(@"looks correct", @{ @"json" : showJSON });
+
     });
 });
 
 it(@"creates an NSUserActivity", ^{
-    
+
     PartnerShow *show = [PartnerShow modelWithJSON:@{
-        @"id": @"some-show",
-        @"name": @"Some Gallery at the Armory Show",
+        @"id" : @"some-show",
+        @"name" : @"Some Gallery at the Armory Show",
         @"fair" : @{
-             @"id" : @"the-armory-show-2015",
-             @"name" : @"The Armory Show 2015",
-             },
-        @"partner": @{
-             @"id" : @"some-partner",
-             @"name" : @"Some Gallery",
-             @"default_profile_id" : @"some-gallery",
-             @"default_profile_public" : @YES
-             },
+            @"id" : @"the-armory-show-2015",
+            @"name" : @"The Armory Show 2015",
+        },
+        @"partner" : @{
+            @"id" : @"some-partner",
+            @"name" : @"Some Gallery",
+            @"default_profile_id" : @"some-gallery",
+            @"default_profile_public" : @YES
+        },
         @"fair_location" : @{
-             @"display" : @"Armory Presents, Booth 666"
-             },
+            @"display" : @"Armory Presents, Booth 666"
+        },
         @"location" : [NSNull null],
         @"start_at" : @"1976-01-30T15:00:00+00:00",
         @"end_at" : @"1976-02-02T15:00:00+00:00"
     }];
-    
+
     ARStubbedShowNetworkModel *networkModel = [[ARStubbedShowNetworkModel alloc] initWithFair:nil show:show];
-    
+
     ARShowViewController *showVC = [[ARShowViewController alloc] initWithShow:show fair:nil];
     showVC.showNetworkModel = networkModel;
     [showVC ar_presentWithFrame:[[UIScreen mainScreen] bounds]];

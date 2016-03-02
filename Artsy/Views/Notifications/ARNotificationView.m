@@ -8,6 +8,7 @@
 
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 
+
 @interface ARNotificationView ()
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, copy) void (^responseBlock)(void);
@@ -96,15 +97,15 @@ static NSMutableArray *notificationQueue = nil; // Global notification queue
         delay:0
         options:UIViewAnimationOptionCurveEaseInOut
         animations:^{
-                         self.hidden = NO;
-                         self.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), panelHeight);
+            self.hidden = NO;
+            self.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), panelHeight);
         }
         completion:^(BOOL finished) {
-                         if (finished){
-                             if (self.hideInterval > 0) {
-                                 [self performSelector:@selector(hide) withObject:self.parentView afterDelay:self.hideInterval];
-                             }
-                         }
+            if (finished) {
+                if (self.hideInterval > 0) {
+                    [self performSelector:@selector(hide) withObject:self.parentView afterDelay:self.hideInterval];
+                }
+            }
         }];
 }
 
@@ -116,21 +117,20 @@ static NSMutableArray *notificationQueue = nil; // Global notification queue
         delay:0.0
         options:UIViewAnimationOptionCurveEaseInOut
         animations:^{
-                         self.frame = CGRectMake(0, -panelHeight, self.frame.size.width, 1);
+            self.frame = CGRectMake(0, -panelHeight, self.frame.size.width, 1);
         }
         completion:^(BOOL finished) {
-                         if (finished){
-                             [self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.1f];
+            if (finished) {
+                [self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.1f];
 
-                             [notificationQueue removeObjectIdenticalTo:self];
+                [notificationQueue removeObjectIdenticalTo:self];
 
-                             // show the next notification in the queue
-                             if([notificationQueue count] > 0) {
-
-                                 ARNotificationView *nextNotification = [notificationQueue objectAtIndex:0];
-                                 [nextNotification show];
-                             }
-                         }
+                // show the next notification in the queue
+                if ([notificationQueue count] > 0) {
+                    ARNotificationView *nextNotification = [notificationQueue objectAtIndex:0];
+                    [nextNotification show];
+                }
+            }
         }];
 }
 

@@ -2,6 +2,7 @@
 
 #import "ARFonts.h"
 
+
 @implementation ARSearchTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

@@ -27,7 +27,7 @@ SpecBegin(ARBrowseFeaturedLinksCollectionViewController);
 __block ARBrowseFeaturedLinksCollectionViewController *vc;
 
 describe(@"appearance", ^{
-    sharedExamplesFor(@"general view setup", ^(NSDictionary *data){
+    sharedExamplesFor(@"general view setup", ^(NSDictionary *data) {
 
         __block ARBrowseFeaturedLinksCollectionViewController *testVC = data[@"vc"];
 
@@ -37,7 +37,7 @@ describe(@"appearance", ^{
             expect(layout.scrollDirection).to.equal(UICollectionViewScrollDirectionHorizontal);
         });
 
-        it (@"sets ui options", ^{
+        it(@"sets ui options", ^{
             expect(testVC.collectionView.showsHorizontalScrollIndicator).to.beFalsy();
             expect(testVC.collectionView.backgroundColor).to.equal([UIColor whiteColor]);
         });
@@ -56,9 +56,10 @@ describe(@"appearance", ^{
             expect(vc.style).to.equal(style);
         });
 
-        itBehavesLike(@"general view setup", @{@"vc":[[ARBrowseFeaturedLinksCollectionViewController alloc] initWithStyle:style]});
+        itBehavesLike(@"general view setup", @{ @"vc" : [[ARBrowseFeaturedLinksCollectionViewController alloc] initWithStyle:style] });
 
-        UIViewController*(^block)() = ^UIViewController *(){
+        UIViewController * (^block)() = ^UIViewController *()
+        {
             vc = [[ARBrowseFeaturedLinksCollectionViewController alloc] initWithStyle:style];
             UIViewController *parentVC = [[UIViewController alloc] init];
             [parentVC ar_addChildViewController:vc atFrame:CGRectZero];
@@ -67,10 +68,10 @@ describe(@"appearance", ^{
             [parentVC ar_presentWithFrame:[UIScreen mainScreen].bounds];
             [parentVC.view layoutIfNeeded];
             vc.featuredLinks = @[
-                                 [[FeaturedLink alloc] initWithDictionary:@{@"title" : @"Title"} error:nil],
-                                 [[FeaturedLink alloc] initWithDictionary:@{@"title" : @"Title"} error:nil],
-                                 [[FeaturedLink alloc] initWithDictionary:@{@"title" : @"Title"} error:nil],
-                                 ];
+                [[FeaturedLink alloc] initWithDictionary:@{ @"title" : @"Title" } error:nil],
+                [[FeaturedLink alloc] initWithDictionary:@{ @"title" : @"Title" } error:nil],
+                [[FeaturedLink alloc] initWithDictionary:@{ @"title" : @"Title" } error:nil],
+            ];
             return vc;
         };
 
@@ -94,21 +95,21 @@ describe(@"appearance", ^{
             [parentVC ar_presentWithFrame:[UIScreen mainScreen].bounds];
             [parentVC.view layoutIfNeeded];
             vc.featuredLinks = @[
-                [[FeaturedLink alloc] initWithDictionary:@{@"title" : @"Title"} error:nil],
-                [[FeaturedLink alloc] initWithDictionary:@{@"title" : @"Title"} error:nil],
-                [[FeaturedLink alloc] initWithDictionary:@{@"title" : @"Title"} error:nil],
-                [[FeaturedLink alloc] initWithDictionary:@{@"title" : @"Title"} error:nil],
-                [[FeaturedLink alloc] initWithDictionary:@{@"title" : @"Title"} error:nil],
-                [[FeaturedLink alloc] initWithDictionary:@{@"title" : @"Title"} error:nil],
-                [[FeaturedLink alloc] initWithDictionary:@{@"title" : @"Title"} error:nil],
-                [[FeaturedLink alloc] initWithDictionary:@{@"title" : @"Title"} error:nil],
-                [[FeaturedLink alloc] initWithDictionary:@{@"title" : @"Title"} error:nil],
-                [[FeaturedLink alloc] initWithDictionary:@{@"title" : @"Title"} error:nil]
+                [[FeaturedLink alloc] initWithDictionary:@{ @"title" : @"Title" } error:nil],
+                [[FeaturedLink alloc] initWithDictionary:@{ @"title" : @"Title" } error:nil],
+                [[FeaturedLink alloc] initWithDictionary:@{ @"title" : @"Title" } error:nil],
+                [[FeaturedLink alloc] initWithDictionary:@{ @"title" : @"Title" } error:nil],
+                [[FeaturedLink alloc] initWithDictionary:@{ @"title" : @"Title" } error:nil],
+                [[FeaturedLink alloc] initWithDictionary:@{ @"title" : @"Title" } error:nil],
+                [[FeaturedLink alloc] initWithDictionary:@{ @"title" : @"Title" } error:nil],
+                [[FeaturedLink alloc] initWithDictionary:@{ @"title" : @"Title" } error:nil],
+                [[FeaturedLink alloc] initWithDictionary:@{ @"title" : @"Title" } error:nil],
+                [[FeaturedLink alloc] initWithDictionary:@{ @"title" : @"Title" } error:nil]
             ];
             return vc;
         });
 
-        itBehavesLike(@"general view setup", @{@"vc":[[ARBrowseFeaturedLinksCollectionViewController alloc] initWithStyle:style]});
+        itBehavesLike(@"general view setup", @{ @"vc" : [[ARBrowseFeaturedLinksCollectionViewController alloc] initWithStyle:style] });
     });
 });
 
@@ -116,7 +117,7 @@ describe(@"appearance", ^{
 describe(@"numberOfItemsInSection", ^{
     it(@"returns the number of featuredLinks", ^{
         vc = [[ARBrowseFeaturedLinksCollectionViewController alloc] initWithStyle:ARFeaturedLinkLayoutSingleRow];
-        vc.featuredLinks = @[@1, @2, @3, @4, @5];
+        vc.featuredLinks = @[ @1, @2, @3, @4, @5 ];
         expect([vc collectionView:vc.collectionView numberOfItemsInSection:0]).to.equal(5);
     });
 });
@@ -129,13 +130,15 @@ describe(@"cellForItemAtIndexPath", ^{
     before(^{
         vc = [[ARBrowseFeaturedLinksCollectionViewController alloc] initWithStyle:ARFeaturedLinkLayoutSingleRow];
         index = [NSIndexPath indexPathForItem:0 inSection:0];
-        link = [FeaturedLink modelWithJSON:@{ @"title" : @"one", @"href" : @"/post/one" } error:nil];
-        vc.featuredLinks = @[link];
+        link = [FeaturedLink modelWithJSON:@{ @"title" : @"one",
+                                              @"href" : @"/post/one" }
+                                     error:nil];
+        vc.featuredLinks = @[ link ];
         cell = [vc collectionView:vc.collectionView cellForItemAtIndexPath:index];
     });
 
     it(@"updates cell with link", ^{
-        expect([(ARBrowseFeaturedLinksCollectionViewCell*)cell titleLabel].text).to.equal(@"ONE");
+        expect([(ARBrowseFeaturedLinksCollectionViewCell *)cell titleLabel].text).to.equal(@"ONE");
     });
 
     it(@"assigns reuse identifier", ^{
@@ -144,7 +147,7 @@ describe(@"cellForItemAtIndexPath", ^{
 });
 
 describe(@"setFeaturedLinks", ^{
-    __block NSArray *links = @[@1, @2, @3];
+    __block NSArray *links = @[ @1, @2, @3 ];
     it(@"sets featured links", ^{
         vc = [[ARBrowseFeaturedLinksCollectionViewController alloc] initWithStyle:ARFeaturedLinkLayoutSingleRow];
         vc.featuredLinks = links;
@@ -156,8 +159,10 @@ describe(@"didSelectItemAtIndexPath", ^{
     it(@"loads item's link", ^{
         id mockDelegate = [OCMockObject mockForClass:[ARBrowseFeaturedLinksCollectionViewDelegateObject class]];
         vc = [[ARBrowseFeaturedLinksCollectionViewController alloc] initWithStyle:ARFeaturedLinkLayoutSingleRow];
-        FeaturedLink *link = [FeaturedLink modelWithJSON:@{ @"title" : @"one", @"href" : @"/post/one" } error:nil];
-        vc.featuredLinks = @[link];
+        FeaturedLink *link = [FeaturedLink modelWithJSON:@{ @"title" : @"one",
+                                                            @"href" : @"/post/one" }
+                                                   error:nil];
+        vc.featuredLinks = @[ link ];
         vc.selectionDelegate = mockDelegate;
 
         [[mockDelegate expect] didSelectFeaturedLink:link];

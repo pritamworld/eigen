@@ -26,6 +26,7 @@
 #import <Artsy_UILabels/ARLabelSubclasses.h>
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 
+
 @interface ARFavoritesViewController () <AREmbeddedModelsViewControllerDelegate, UIScrollViewDelegate, ARSwitchViewDelegate, ARArtworkMasonryLayoutProvider>
 
 @property (nonatomic, strong, readonly) AREmbeddedModelsViewController *embeddedItemsVC;
@@ -308,8 +309,8 @@
     };
     __weak typeof(self) wself = self;
     ar_dispatch_on_queue(self.artworkPageQueue, ^{
-        [self.activeNetworkModel getFavorites:^(NSArray *items){
-            __strong typeof (wself) sself = wself;
+        [self.activeNetworkModel getFavorites:^(NSArray *items) {
+            __strong typeof(wself) sself = wself;
             [sself addItems:items toModule:module];
         } failure:nil];
     });

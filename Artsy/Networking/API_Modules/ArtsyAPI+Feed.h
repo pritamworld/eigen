@@ -2,6 +2,7 @@
 
 @class Fair, FairOrganizer, Profile;
 
+
 @interface ArtsyAPI (Feed)
 
 + (void)getFeedResultsForMainFeedWithCursor:(NSString *)cursor success:(void (^)(id JSON))success failure:(void (^)(NSError *error))failure;

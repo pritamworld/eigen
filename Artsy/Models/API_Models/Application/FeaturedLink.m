@@ -4,6 +4,7 @@
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
+
 @interface FeaturedLink ()
 @property (nonatomic, copy, readonly) NSString *urlFormatString;
 @end

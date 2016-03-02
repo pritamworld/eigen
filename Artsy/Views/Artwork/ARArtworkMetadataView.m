@@ -7,6 +7,7 @@
 
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 
+
 @interface ARArtworkMetadataView ()
 @property (nonatomic, strong) ARArtworkPreviewActionsView *artworkPreviewActions;
 @property (nonatomic, strong) ARArtworkPreviewImageView *artworkPreview;

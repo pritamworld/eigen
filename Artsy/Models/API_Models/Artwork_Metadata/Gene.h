@@ -7,6 +7,7 @@
 
 @class AFHTTPRequestOperation;
 
+
 @interface Gene : MTLModel <MTLJSONSerializing, ARFollowable, ARShareableObject, ARHasImageBaseURL, ARSpotlightMetadataProvider>
 
 @property (readonly, nonatomic, copy) NSString *name;

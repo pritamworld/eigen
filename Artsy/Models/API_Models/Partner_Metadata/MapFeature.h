@@ -28,6 +28,7 @@ FOUNDATION_EXPORT NSString *NSStringFromARMapFeatureType(enum ARMapFeatureType f
 
 @class Image;
 
+
 @interface MapFeature : MTLModel <MTLJSONSerializing>
 
 @property (readonly, nonatomic, assign) enum ARMapFeatureType featureType;

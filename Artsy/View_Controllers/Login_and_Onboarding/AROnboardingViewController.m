@@ -91,11 +91,11 @@ typedef NS_ENUM(NSInteger, AROnboardingStage) {
     self.screenSwipeGesture.edges = UIRectEdgeLeft;
     [self.view addGestureRecognizer:self.screenSwipeGesture];
 
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
 
     [ArtsyAPI getXappTokenWithCompletion:^(NSString *xappToken, NSDate *expirationDate) {
         [ArtsyAPI getPersonalizeGenesWithSuccess:^(NSArray *genes) {
-            __strong typeof (wself) sself = wself;
+            __strong typeof(wself) sself = wself;
             sself.genesForPersonalize = genes;
         } failure:^(NSError *error) {
             ARErrorLog(@"Couldn't get personalize genes. Error: %@", error.localizedDescription);
@@ -149,8 +149,8 @@ typedef NS_ENUM(NSInteger, AROnboardingStage) {
 //      make sure it never shows. This way it is shown for a very short period, but that’s better than nothing.
 - (void)viewDidAppear:(BOOL)animated;
 {
-   [[UIApplication sharedApplication] setStatusBarHidden:YES];
-   [super viewDidAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    [super viewDidAppear:animated];
 }
 
 #pragma mark -
@@ -345,15 +345,17 @@ typedef NS_ENUM(NSInteger, AROnboardingStage) {
 {
     self.backgroundWidthConstraint.constant = 0;
     self.backgroundHeightConstraint.constant = 0;
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     [UIView animateIf:animated duration:ARAnimationQuickDuration:^{
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself.backgroundView layoutIfNeeded];
         sself.backgroundView.alpha = 1;
         sself.backgroundView.backgroundColor = [UIColor clearColor];
     } completion:^(BOOL finished) {
         self.backgroundView.image = self.backgroundImage;
-        if (completion != nil) { completion(); };
+        if (completion != nil) {
+            completion();
+        };
     }];
 }
 
@@ -391,10 +393,10 @@ typedef NS_ENUM(NSInteger, AROnboardingStage) {
 
 - (void)signUpWithFacebook
 {
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     [self ar_presentIndeterminateLoadingIndicatorAnimated:YES];
     [ARAuthProviders getTokenForFacebook:^(NSString *token, NSString *email, NSString *name) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
 
         AROnboardingMoreInfoViewController *more = [[AROnboardingMoreInfoViewController alloc] initForFacebookWithToken:token email:email name:name];
         more.delegate = self;
@@ -402,11 +404,11 @@ typedef NS_ENUM(NSInteger, AROnboardingStage) {
         [sself pushViewController:more animated:YES];
 
     } failure:^(NSError *error) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
 
         [sself ar_removeIndeterminateLoadingIndicatorAnimated:YES];
 
-        NSString * reason = error.userInfo[@"com.facebook.sdk:ErrorLoginFailedReason"];
+        NSString *reason = error.userInfo[@"com.facebook.sdk:ErrorLoginFailedReason"];
         if (![reason isEqualToString:@"com.facebook.sdk:UserLoginCancelled"]) {
             [sself fbError];
         }
@@ -417,18 +419,19 @@ typedef NS_ENUM(NSInteger, AROnboardingStage) {
 {
     [self ar_presentIndeterminateLoadingIndicatorAnimated:YES];
 
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     [ARAuthProviders getReverseAuthTokenForTwitter:^(NSString *token, NSString *secret) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
 
         AROnboardingMoreInfoViewController *more = [[AROnboardingMoreInfoViewController alloc]
-                                                    initForTwitterWithToken:token andSecret:secret];
+            initForTwitterWithToken:token
+                          andSecret:secret];
         more.delegate = self;
         [sself ar_removeIndeterminateLoadingIndicatorAnimated:YES];
         [sself pushViewController:more animated:YES];
 
     } failure:^(NSError *error) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
 
         [sself ar_removeIndeterminateLoadingIndicatorAnimated:YES];
         [sself twitterError];
@@ -568,9 +571,9 @@ typedef NS_ENUM(NSInteger, AROnboardingStage) {
 
     self.backgroundWidthConstraint.constant = offset * 2;
     self.backgroundHeightConstraint.constant = offset * 2;
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     [UIView animateIf:animated duration:ARAnimationQuickDuration:^{
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself.backgroundView layoutIfNeeded];
         sself.backgroundView.image = blurImage;
         sself.backgroundView.alpha = 0.3;

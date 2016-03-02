@@ -4,6 +4,7 @@
 
 @class Fair;
 
+
 @interface ARFairGuideContainerViewController : UIViewController
 
 - (instancetype)initWithFair:(Fair *)fair AR_VC_DESIGNATED_INITIALIZER;

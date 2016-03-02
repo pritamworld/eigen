@@ -10,6 +10,7 @@
 
 #import <EDColor/EDColor.h>
 
+
 @implementation ARLogger
 
 + (BOOL)shouldLogNetworkRequests;

@@ -92,7 +92,7 @@ NSString *const ARNavigationButtonPropertiesKey = @"ARNavigationButtonProperties
 {
     for (NSDictionary *newButtonDescription in buttonDescriptions) {
         if (unique && [_buttonDescriptions detect:^BOOL(id buttonDescription) {
-            return [buttonDescription[ARNavigationButtonPropertiesKey] isEqualToDictionary:newButtonDescription[ARNavigationButtonPropertiesKey]];
+                return [buttonDescription[ARNavigationButtonPropertiesKey] isEqualToDictionary:newButtonDescription[ARNavigationButtonPropertiesKey]];
             }]) {
             continue;
         }

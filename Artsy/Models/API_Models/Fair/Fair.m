@@ -17,7 +17,9 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <ObjectiveSugar/ObjectiveSugar.h>
 
-@interface Fair () {
+
+@interface Fair ()
+{
     NSMutableSet *_showsLoadedFromArchive;
 }
 
@@ -133,8 +135,10 @@
         NSMutableSet *shows = [[NSKeyedUnarchiver unarchiveObjectWithFile:path] mutableCopy];
 
         ar_dispatch_main_queue(^{
-            __strong typeof (wself) sself = wself;
-            if (!sself) { return; }
+            __strong typeof(wself) sself = wself;
+            if (!sself) {
+                return;
+            }
 
             [sself willChangeValueForKey:ar_keypath(Fair.new, shows)];
             sself->_showsLoadedFromArchive = shows ? [NSMutableSet setWithSet:shows] : nil;
@@ -173,8 +177,8 @@
 
     [self.networkModel getShowFeedItems:self.showsFeed success:^(NSOrderedSet *items) {
 
-        __strong typeof (wself) sself = wself;
-        if(items.count > 0) {
+        __strong typeof(wself) sself = wself;
+        if (items.count > 0) {
             [sself addFeedItemsToShows:items];
             [sself downloadPastShowSet];
         } else {
@@ -183,7 +187,7 @@
 
     } failure:^(NSError *error) {
 
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         ARErrorLog(@"failed to get shows %@", error.localizedDescription);
         [sself performSelector:@selector(downloadPastShowSet) withObject:nil afterDelay:0.5];
     }];
@@ -205,7 +209,7 @@
 
     if (!ARIsRunningInDemoMode) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            if(![NSKeyedArchiver archiveRootObject:self.shows toFile:self.pathForLocalShowStorage]){
+            if (![NSKeyedArchiver archiveRootObject:self.shows toFile:self.pathForLocalShowStorage]) {
                 ARErrorLog(@"Issue saving show data for fair %@", self.fairID);
             }
         });
@@ -218,8 +222,10 @@
 
     __weak typeof(self) wself = self;
     [feedItems enumerateObjectsUsingBlock:^(ARPartnerShowFeedItem *feedItem, NSUInteger idx, BOOL *stop) {
-        __strong typeof (wself) sself = wself;
-        if (!sself) { return; }
+        __strong typeof(wself) sself = wself;
+        if (!sself) {
+            return;
+        }
 
         // So, you're asking, why is there C++ in my Obj-C?
         // Well we want to be able to _update_ objects in a mutable set, which is a lower level API

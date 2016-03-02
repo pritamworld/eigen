@@ -165,7 +165,7 @@
             if (callback) {
                 callback(token, expiryDate);
             }
-            return ;
+            return;
         }
 
         [ARRouter setXappToken:token];
@@ -180,13 +180,15 @@
     }
         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
 
-        //TODO: handle this less stupid
-        ARErrorLog(@"Couldn't get an Xapp token.");
+            //TODO: handle this less stupid
+            ARErrorLog(@"Couldn't get an Xapp token.");
 
-        NSError *cleanError = [NSError errorWithDomain:@"Auth" code:404 userInfo:@{ NSLocalizedDescriptionKey: @"Can’t reach Artsy." }];
-        [ARNetworkErrorManager presentActiveError:cleanError];
+            NSError *cleanError = [NSError errorWithDomain:@"Auth" code:404 userInfo:@{ NSLocalizedDescriptionKey : @"Can’t reach Artsy." }];
+            [ARNetworkErrorManager presentActiveError:cleanError];
 
-        if (failure) { failure(error); }
+            if (failure) {
+                failure(error);
+            }
         }];
 
     [op start];
@@ -247,12 +249,12 @@
         }
     }
         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        [ArtsyAPI handleXappTokenError:error];
-        ar_dispatch_main_queue(^{
-            if (failure) {
-                failure(error);
-            }
-        });
+            [ArtsyAPI handleXappTokenError:error];
+            ar_dispatch_main_queue(^{
+                if (failure) {
+                    failure(error);
+                }
+            });
         }];
     getOperation.completionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     [getOperation start];
@@ -285,7 +287,7 @@
                 [returnArray addObject:object];
             }
         }
-        
+
         ar_dispatch_main_queue(^{
             success(returnArray);
         });

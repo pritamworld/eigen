@@ -35,7 +35,7 @@ describe(@"nextZoomScale", ^{
         expect(mapView.nextZoomScale).to.equal(mapView.annotationZoomScaleThreshold);
     });
 
-    it (@"doesn't let you exceed the maxZoomScale", ^{
+    it(@"doesn't let you exceed the maxZoomScale", ^{
         [[[mock stub] andReturnValue:OCMOCK_VALUE(3.9)] zoomScale];
         expect(mapView.nextZoomScale).to.equal(mapView.maximumZoomScale);
     });

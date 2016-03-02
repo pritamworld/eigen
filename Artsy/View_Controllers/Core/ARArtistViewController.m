@@ -123,8 +123,10 @@ typedef NS_ENUM(NSInteger, ARArtistArtworksDisplayMode) {
     __weak typeof(self) wself = self;
     [self.networkModel getArtistInfoWithSuccess:^(Artist *artist) {
 
-        __strong typeof (wself) sself = wself;
-        if (!sself) { return; }
+        __strong typeof(wself) sself = wself;
+        if (!sself) {
+            return;
+        }
 
         if (!artist) {
             ARErrorLog(@"Failed to update artist information: missing artist");
@@ -136,7 +138,7 @@ typedef NS_ENUM(NSInteger, ARArtistArtworksDisplayMode) {
         [sself artistIsReady];
 
     } failure:^(NSError *error) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         ARErrorLog(@"Could not update artist information: %@", error.localizedDescription);
         [sself setIsGettingArtworks:NO displayMode:self.displayMode];
     }];
@@ -349,11 +351,11 @@ typedef NS_ENUM(NSInteger, ARArtistArtworksDisplayMode) {
     Artist *artist = self.artist;
     [self.networkModel setFavoriteStatus:hearted
         success:^(id _) {
-        [ARSpotlight addToSpotlightIndex:hearted entity:artist];
+            [ARSpotlight addToSpotlightIndex:hearted entity:artist];
         }
         failure:^(NSError *error) {
-        [ARNetworkErrorManager presentActiveError:error withMessage:@"Failed to follow artist."];
-        [sender setHearted:!hearted animated:ARPerformWorkAsynchronously];
+            [ARNetworkErrorManager presentActiveError:error withMessage:@"Failed to follow artist."];
+            [sender setHearted:!hearted animated:ARPerformWorkAsynchronously];
         }];
 }
 
@@ -430,12 +432,12 @@ typedef NS_ENUM(NSInteger, ARArtistArtworksDisplayMode) {
 
     __weak typeof(self) wself = self;
     [self.networkModel getArtistArtworksAtPage:lastPage + 1 params:params success:^(NSArray *artworks) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself.artworkVC ar_removeIndeterminateLoadingIndicatorAnimated:ARPerformWorkAsynchronously];
         [sself handleFetchedArtworks:artworks displayMode:self.displayMode];
         [sself checkForAdditionalArtworksToFillView];
     } failure:^(NSError *error) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         ARErrorLog(@"Could not get Artist Artworks: %@", error.localizedDescription);
         [sself.artworkVC ar_removeIndeterminateLoadingIndicatorAnimated:ARPerformWorkAsynchronously];
         [sself setIsGettingArtworks:NO displayMode:displayMode];
@@ -593,9 +595,9 @@ typedef NS_ENUM(NSInteger, ARArtistArtworksDisplayMode) {
 {
     __weak typeof(self) wself = self;
     [self.networkModel getRelatedArtists:^(NSArray *artists) {
-        __strong typeof (wself) sself = wself;
-        if (artists.count > 0 ) {
-            [UIView animateIf:ARPerformWorkAsynchronously duration:ARAnimationDuration :^{
+        __strong typeof(wself) sself = wself;
+        if (artists.count > 0) {
+            [UIView animateIf:ARPerformWorkAsynchronously duration:ARAnimationDuration:^{
                 sself.relatedTitle.alpha = 1;
             }];
             artists = [artists filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"publishedArtworksCount != 0"]];
@@ -608,7 +610,7 @@ typedef NS_ENUM(NSInteger, ARArtistArtworksDisplayMode) {
 {
     __weak typeof(self) wself = self;
     [self.networkModel getRelatedPosts:^(NSArray *posts) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         if (posts.count > 0) {
             sself.postsVC.posts = posts;
             [sself.view.stackView addSubview:sself.postsVC.view withTopMargin:@"20" sideMargin:@"40"];

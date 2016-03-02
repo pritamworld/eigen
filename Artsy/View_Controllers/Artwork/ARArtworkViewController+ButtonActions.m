@@ -208,9 +208,9 @@
 
     }
         failure:^(NSError *error) {
-        __strong typeof (wself) sself = wself;
-        ARErrorLog(@"Creating a new order failed. Error: %@,\n", error.localizedDescription);
-        [sself tappedContactGallery];
+            __strong typeof(wself) sself = wself;
+            ARErrorLog(@"Creating a new order failed. Error: %@,\n", error.localizedDescription);
+            [sself tappedContactGallery];
         }];
 }
 

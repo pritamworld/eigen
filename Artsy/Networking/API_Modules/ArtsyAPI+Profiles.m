@@ -27,7 +27,8 @@
             if (success) {
                 success(NO);
             }
-        } else failure(error);
+        } else
+            failure(error);
     }];
 }
 
@@ -43,7 +44,9 @@
     } failure:^(NSError *error) {
 
         ARErrorLog(@"Could not Follow Profile: %@", error.localizedDescription);
-        if (failure) { failure(error); }
+        if (failure) {
+            failure(error);
+        }
     }];
 }
 

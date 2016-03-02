@@ -3,6 +3,7 @@
 #import "Artist.h"
 #import "Artwork.h"
 
+
 @implementation WatchArtwork (FromArtwork)
 
 - (instancetype)initWithArtsyArtwork:(Artwork *)artwork

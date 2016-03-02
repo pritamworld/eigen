@@ -204,18 +204,15 @@
 
     __weak typeof(self) wself = self;
     [[ARUserManager sharedManager] createUserWithName:self.name.text email:username password:password success:^(User *user) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself loginWithUserCredentialsWithSuccess:^{
             [sself.delegate didSignUpAndLogin];
         }];
     } failure:^(NSError *error, id JSON) {
-        __strong typeof (wself) sself = wself;
-        if (JSON
-            && [JSON isKindOfClass:[NSDictionary class]]
-            && ([JSON[@"error"] isEqualToString:@"User Already Exists"]
-                || [JSON[@"error"] isEqualToString:@"User Already Invited"])) {
-                NSString *source = [sself existingAccountSource:JSON];
-                [sself accountExists:source];
+        __strong typeof(wself) sself = wself;
+        if (JSON && [JSON isKindOfClass:[NSDictionary class]] && ([JSON[@"error"] isEqualToString:@"User Already Exists"] || [JSON[@"error"] isEqualToString:@"User Already Invited"])) {
+            NSString *source = [sself existingAccountSource:JSON];
+            [sself accountExists:source];
 
         } else {
             [sself setFormEnabled:YES];
@@ -237,19 +234,20 @@
     [[ARUserManager sharedManager] loginWithUsername:username
         password:password
         successWithCredentials:nil
-        gotUser:^(User *currentUser) { success();
+        gotUser:^(User *currentUser) {
+            success();
         }
         authenticationFailure:^(NSError *error) {
-        __strong typeof (wself) sself = wself;
-        [sself setFormEnabled:YES];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Couldn’t Log In" message:@"Please check your email and password." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-        [alert show];
+            __strong typeof(wself) sself = wself;
+            [sself setFormEnabled:YES];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Couldn’t Log In" message:@"Please check your email and password." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+            [alert show];
         }
         networkFailure:^(NSError *error) {
-        __strong typeof (wself) sself = wself;
-        [sself setFormEnabled:YES];
-        [sself performSelector:_cmd withObject:self afterDelay:3];
-        [ARNetworkErrorManager presentActiveError:error withMessage:@"Sign up failed."];
+            __strong typeof(wself) sself = wself;
+            [sself setFormEnabled:YES];
+            [sself performSelector:_cmd withObject:self afterDelay:3];
+            [ARNetworkErrorManager presentActiveError:error withMessage:@"Sign up failed."];
         }];
 }
 

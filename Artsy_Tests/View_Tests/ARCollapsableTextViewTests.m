@@ -46,7 +46,7 @@ describe(@"when text is shorter than collapsed height", ^{
         subject.attributedText = AttributedStringForString(@"Short String Short String Short    ");
     });
 
-    it(@"looks correct" , ^{
+    it(@"looks correct", ^{
         expect(hostVC).to.haveValidSnapshot();
     });
 });
@@ -59,7 +59,7 @@ describe(@"text is taller than collapsed height", ^{
     });
 
     describe(@"before expansion", ^{
-        it(@"looks correct" , ^{
+        it(@"looks correct", ^{
             expect(hostVC).to.haveValidSnapshot();
         });
     });
@@ -73,7 +73,7 @@ describe(@"text is taller than collapsed height", ^{
             [subject openToFullHeightAnimated:NO];
         });
 
-        it(@"looks correct" , ^{
+        it(@"looks correct", ^{
             expect(hostVC).to.haveValidSnapshot();
         });
     });

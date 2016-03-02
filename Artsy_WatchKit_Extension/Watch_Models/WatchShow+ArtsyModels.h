@@ -2,6 +2,7 @@
 
 @class PartnerShow;
 
+
 @interface WatchShow (FromShow)
 
 - (instancetype)initWithArtsyPartnerShow:(PartnerShow *)show;

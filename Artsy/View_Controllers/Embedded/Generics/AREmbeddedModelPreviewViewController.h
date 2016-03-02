@@ -6,6 +6,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// given that we don't know the items, it tries to be as generic as possible
 /// around what it is presenting
 
+
 @interface AREmbeddedModelPreviewViewController : UIViewController
 
 /// Init function with a represented object
@@ -15,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) id object;
 
 /// Try to take out the image from the cell.
-- (void)updateWithCell:( UICollectionViewCell *)cell;
+- (void)updateWithCell:(UICollectionViewCell *)cell;
 
 
 @end

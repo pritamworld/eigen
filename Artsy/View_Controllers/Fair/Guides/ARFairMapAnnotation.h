@@ -1,6 +1,7 @@
 #import <NAMapKit/NAAnnotation.h>
 #import "MapFeature.h"
 
+
 @interface ARFairMapAnnotation : NAAnnotation <NSCopying>
 
 - (id)initWithPoint:(CGPoint)point representedObject:(id)representedObject;

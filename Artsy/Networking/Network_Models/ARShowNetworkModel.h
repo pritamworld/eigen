@@ -2,6 +2,7 @@
 
 @class Fair, PartnerShow;
 
+
 @interface ARShowNetworkModel : NSObject
 
 - (instancetype)initWithFair:(Fair *)fair show:(PartnerShow *)show;

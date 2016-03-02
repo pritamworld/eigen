@@ -39,7 +39,7 @@ describe(@"receiveRemoteNotification", ^{
             id classMock = [OCMockObject mockForClass:[ARTopMenuViewController class]];
             // Just to silence runtime assertion failure.
             [[[classMock stub] andReturn:nil] sharedController];
-            
+
             id JSON = @{ @"url" : @"http://artsy.net/feature" };
             NSData *data = [NSJSONSerialization dataWithJSONObject:JSON options:0 error:nil];
             NSDictionary *notification = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
@@ -62,8 +62,8 @@ describe(@"receiveRemoteNotification", ^{
             [[controllerMock expect] setNotificationCount:42 forControllerAtIndex:ARTopTabControllerIndexNotifications];
 
             NSDictionary *notification = @{
-                @"url": @"http://artsy.net/works-for-you",
-                @"aps": @{ @"badge": @(42) }
+                @"url" : @"http://artsy.net/works-for-you",
+                @"aps" : @{@"badge" : @(42)}
             };
 
             [delegate application:app didReceiveRemoteNotification:notification];
@@ -94,7 +94,7 @@ describe(@"receiveRemoteNotification", ^{
         });
 
         it(@"triggers an analytics event for a notification without a url received and tapped", ^{
-            id JSON = @{ @"aps" : @{ @"alert" : @"hello world" } };
+            id JSON = @{ @"aps" : @{@"alert" : @"hello world"} };
             NSData *data = [NSJSONSerialization dataWithJSONObject:JSON options:0 error:nil];
             NSDictionary *notification = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             NSMutableDictionary *notificationWithAppState = [[NSMutableDictionary alloc] initWithDictionary:notification];
@@ -110,15 +110,15 @@ describe(@"receiveRemoteNotification", ^{
         });
 
         it(@"does not display the message in aps/alert", ^{
-            id JSON = @{ @"aps" : @{ @"alert" : @"hello world" } };
+            id JSON = @{ @"aps" : @{@"alert" : @"hello world"} };
             NSData *data = [NSJSONSerialization dataWithJSONObject:JSON options:0 error:nil];
             NSDictionary *notification = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             id mock = [OCMockObject mockForClass:[ARNotificationView class]];
 
             [[mock reject]
-             showNoticeInView:OCMOCK_ANY
-             title:OCMOCK_ANY
-             response:OCMOCK_ANY];
+                showNoticeInView:OCMOCK_ANY
+                           title:OCMOCK_ANY
+                        response:OCMOCK_ANY];
             [delegate application:app didReceiveRemoteNotification:notification];
 
             [mock verify];
@@ -149,15 +149,16 @@ describe(@"receiveRemoteNotification", ^{
         });
 
         it(@"displays message in aps/alert", ^{
-            id JSON = @{ @"url" : @"http://artsy.net/feature", @"aps" : @{ @"alert" : @"hello world" } };
+            id JSON = @{ @"url" : @"http://artsy.net/feature",
+                         @"aps" : @{@"alert" : @"hello world"} };
             NSData *data = [NSJSONSerialization dataWithJSONObject:JSON options:0 error:nil];
             NSDictionary *notification = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             id mock = [OCMockObject mockForClass:[ARNotificationView class]];
 
             [[mock expect]
-             showNoticeInView:OCMOCK_ANY
-             title:@"hello world"
-             response:OCMOCK_ANY];
+                showNoticeInView:OCMOCK_ANY
+                           title:@"hello world"
+                        response:OCMOCK_ANY];
             [delegate application:app didReceiveRemoteNotification:notification];
 
             [mock verify];
@@ -171,9 +172,9 @@ describe(@"receiveRemoteNotification", ^{
             id mock = [OCMockObject mockForClass:[ARNotificationView class]];
 
             [[mock expect]
-             showNoticeInView:OCMOCK_ANY
-             title:@"http://artsy.net/feature"
-             response:OCMOCK_ANY];
+                showNoticeInView:OCMOCK_ANY
+                           title:@"http://artsy.net/feature"
+                        response:OCMOCK_ANY];
             [delegate application:app didReceiveRemoteNotification:notification];
 
             [mock verify];

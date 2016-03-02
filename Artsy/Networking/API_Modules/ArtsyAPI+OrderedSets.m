@@ -13,7 +13,7 @@
     NSURLRequest *request = [ARRouter orderedSetsWithOwnerType:ownerType andID:ownerID];
     return [self getRequest:request parseIntoAnArrayOfClass:[OrderedSet class] success:^(NSArray *orderedSets) {
         NSMutableDictionary *orderedSetsByKey = [[NSMutableDictionary alloc] init];
-        for (OrderedSet * orderedSet in orderedSets) {
+        for (OrderedSet *orderedSet in orderedSets) {
             NSArray *sets = orderedSetsByKey[orderedSet.key] ?: @[];
             orderedSetsByKey[orderedSet.key] = [sets arrayByAddingObject:orderedSet];
         }

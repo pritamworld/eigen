@@ -44,7 +44,7 @@
 
     } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
         NSData *data = [NSJSONSerialization dataWithJSONObject:response options:0 error:nil];
-        return [OHHTTPStubsResponse responseWithData:data statusCode:(int)code headers:@{ @"Content-Type": @"application/json" }];
+        return [OHHTTPStubsResponse responseWithData:data statusCode:(int)code headers:@{ @"Content-Type" : @"application/json" }];
     }];
 }
 
@@ -64,7 +64,7 @@
         NSString *path = [bundle pathForResource:imageName ofType:nil];
         NSAssert(path, @"Could not find image in test bundle");
 
-        return [OHHTTPStubsResponse responseWithFileAtPath:path statusCode:200 headers:@{ @"Content-Type": @"image/xyz" }];
+        return [OHHTTPStubsResponse responseWithFileAtPath:path statusCode:200 headers:@{ @"Content-Type" : @"image/xyz" }];
     }];
 }
 

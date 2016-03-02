@@ -17,10 +17,10 @@ __block ARParallaxHeaderViewController *viewController;
 __block Fair *fair;
 
 beforeEach(^{
-    
+
     [[SDImageCache sharedImageCache] clearDisk];
     [[SDImageCache sharedImageCache] clearMemory];
-    
+
     fair = [Fair modelWithJSON:@{
         @"id" : @"fair-id",
         @"image_urls" : @{
@@ -56,8 +56,7 @@ describe(@"without an icon", ^{
         Profile *profile = [Profile modelWithJSON:@{
             @"id" : @"profile-id",
             @"icon" : @{
-                @"image_urls" : @{
-                }
+                @"image_urls" : @{}
             }
         }];
 
@@ -87,7 +86,7 @@ describe(@"with an icon", ^{
         viewController = [[ARParallaxHeaderViewController alloc] initWithContainingScrollView:nil fair:fair profile:profile];
         [viewController.view constrainWidth:@"375"];
     });
-    
+
     it(@"has a valid snapshot", ^{
         expect(viewController.view).toNot.beNil();
         expect(viewController.view).to.haveValidSnapshot();
@@ -98,17 +97,17 @@ describe(@"with an icon", ^{
 describe(@"with new banner urls", ^{
     before(^{
         fair = [Fair modelWithJSON:@{
-        @"id" : @"fair-id",
-        @"banner_image_urls" : @{
-             @"wide" : @"http://static1.artsy.net/fairs/52617c6c8b3b81f094000013/9/wide.jpg"
-         },
-        @"name" : @"The Orta Show",
-        @"start_at" : @"2014-03-06T17:00:00.000+00:00",
-        @"end_at" : @"2014-03-09T22:00:00.000+00:00",
-        @"location" : @{
-             @"city" : @"Huddersfield",
-             @"state" : @"Yorkshire"
-         }
+            @"id" : @"fair-id",
+            @"banner_image_urls" : @{
+                @"wide" : @"http://static1.artsy.net/fairs/52617c6c8b3b81f094000013/9/wide.jpg"
+            },
+            @"name" : @"The Orta Show",
+            @"start_at" : @"2014-03-06T17:00:00.000+00:00",
+            @"end_at" : @"2014-03-09T22:00:00.000+00:00",
+            @"location" : @{
+                @"city" : @"Huddersfield",
+                @"state" : @"Yorkshire"
+            }
         }];
 
         Profile *profile = [Profile modelWithJSON:@{
@@ -118,14 +117,14 @@ describe(@"with new banner urls", ^{
                 @"image_urls" : @{
                     @"square" : @"http://static1.artsy.net/profile_icons/530cc50c9c18dbab9a00005b/square.png",
                     @"square2" : @"http://static1.artsy.net/profile_icons/530cc50c9c18dbab9a00005b/square2.png"
-                    }
                 }
-            }];
+            }
+        }];
 
         viewController = [[ARParallaxHeaderViewController alloc] initWithContainingScrollView:nil fair:fair profile:profile];
         [viewController.view constrainWidth:@"375"];
     });
-    
+
     it(@"has a valid snapshot", ^{
         expect(viewController.view).toNot.beNil();
         expect(viewController.view).to.haveValidSnapshot();

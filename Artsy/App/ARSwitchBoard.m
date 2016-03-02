@@ -85,7 +85,7 @@ NSString *const AREscapeSandboxQueryString = @"eigen_escape_sandbox";
     return sharedInstance;
 }
 
-#define JLRouteParams ^id _Nullable(NSDictionary *_Nullable parameters)
+#define JLRouteParams ^id _Nullable(NSDictionary * _Nullable parameters)
 
 - (id)init
 {
@@ -137,7 +137,7 @@ NSString *const AREscapeSandboxQueryString = @"eigen_escape_sandbox";
     __weak typeof(self) wself = self;
 
     [self registerEchoRouteForKey:@"ARArtistRoute" handler:JLRouteParams {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         return [sself loadArtistWithID:parameters[@"id"]];
     }];
 
@@ -146,7 +146,7 @@ NSString *const AREscapeSandboxQueryString = @"eigen_escape_sandbox";
 
     if ([UIDevice isPad]) {
         [self registerEchoRouteForKey:@"ARProfileArtistRoute" handler:JLRouteParams {
-            __strong typeof (wself) sself = wself;
+            __strong typeof(wself) sself = wself;
 
             Fair *fair = [parameters[@"fair"] isKindOfClass:Fair.class] ? parameters[@"fair"] : nil;
             return [sself loadArtistWithID:parameters[@"id"] inFair:fair];
@@ -154,46 +154,46 @@ NSString *const AREscapeSandboxQueryString = @"eigen_escape_sandbox";
     }
 
     [self registerEchoRouteForKey:@"ARArtworkRoute" handler:JLRouteParams {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         Fair *fair = [parameters[@"fair"] isKindOfClass:Fair.class] ? parameters[@"fair"] : nil;
         return [sself loadArtworkWithID:parameters[@"id"] inFair:fair];
     }];
 
     [self registerEchoRouteForKey:@"ARAuctionRegistrationRoute" handler:JLRouteParams {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         return [sself loadAuctionRegistrationWithID:parameters[@"id"]];
     }];
 
     [self registerEchoRouteForKey:@"ARAuctionRoute" handler:JLRouteParams {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         return [sself loadAuctionWithID:parameters[@"id"]];
     }];
 
     [self registerEchoRouteForKey:@"ARAuctionBidArtworkRoute" handler:JLRouteParams {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         return [sself loadBidUIForArtwork:parameters[@"artwork_id"] inSale:parameters[@"id"]];
     }];
 
     [self registerEchoRouteForKey:@"ARGeneRoute" handler:JLRouteParams {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         return [sself loadGeneWithID:parameters[@"id"]];
     }];
 
     [self registerEchoRouteForKey:@"ARShowRoute" handler:JLRouteParams {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         return [sself loadShowWithID:parameters[@"id"]];
     }];
 
     // We don't show a native fairs UI for iPad
     if (![UIDevice isPad]) {
         [self registerEchoRouteForKey:@"ARFairProfileForYouRoute" handler:JLRouteParams {
-            __strong typeof (wself) sself = wself;
+            __strong typeof(wself) sself = wself;
             Fair *fair = [parameters[@"fair"] isKindOfClass:Fair.class] ? parameters[@"fair"] : nil;
             return [sself loadFairGuideWithFair:fair];
         }];
 
         [self registerEchoRouteForKey:@"ARFairBrowseArtistRoute" handler:JLRouteParams {
-            __strong typeof (wself) sself = wself;
+            __strong typeof(wself) sself = wself;
             Fair *fair = parameters[@"fair"] ?: [[Fair alloc] initWithFairID:parameters[@"profile_id"]];
             return [sself loadArtistWithID:parameters[@"id"] inFair:fair];
         }];
@@ -213,8 +213,8 @@ NSString *const AREscapeSandboxQueryString = @"eigen_escape_sandbox";
     // This route will match any single path component and thus should be added last.
     // It doesn't need to run through echo, as it's pretty much here to stay forever.
     [self.routes addRoute:@"/:profile_id" priority:0 handler:JLRouteParams {
-        __strong typeof (wself) sself = wself;
-        return [sself routeProfileWithID: parameters[@"profile_id"]];
+        __strong typeof(wself) sself = wself;
+        return [sself routeProfileWithID:parameters[@"profile_id"]];
     }];
 
     // The menu items' paths are added in ARTopMenuViewController

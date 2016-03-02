@@ -49,7 +49,7 @@
 {
     return [MTLValueTransformer transformerWithBlock:^id(id str) {
         return [[str stringByReplacingOccurrencesOfString:@"\n" withString:@" "]
-                stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     }];
 }
 

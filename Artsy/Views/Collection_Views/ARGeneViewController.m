@@ -120,7 +120,7 @@
 {
     __weak typeof(self) wself = self;
     [self.gene updateGene:^{
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself ar_removeIndeterminateLoadingIndicatorAnimated:ARPerformWorkAsynchronously];
         [sself updateBody];
         [sself ar_setDataLoaded];

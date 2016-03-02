@@ -2,6 +2,7 @@
 
 #import "ARFonts.h"
 
+
 @interface ARDemoSplashViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *infoLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;

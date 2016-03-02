@@ -7,6 +7,7 @@
 
 @class ARFeedTimeline;
 
+
 @interface ARFairPostsViewController : ARFairSectionViewController
 
 @property (nonatomic, strong, readonly) ARFeedTimeline *feedTimeline;

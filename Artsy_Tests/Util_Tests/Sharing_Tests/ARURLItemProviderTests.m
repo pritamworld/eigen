@@ -21,11 +21,11 @@ describe(@"url and image thumbnail", ^{
 
     describe(@"with valid imageURL", ^{
         __block NSURL *imageURL = [NSURL URLWithString:@"http://image.com/image.jpg"];
-        
+
         beforeEach(^{
             provider = [[ARURLItemProvider alloc] initWithMessage:@"Message" path:path thumbnailImageURL:imageURL];
         });
-        
+
         it(@"sets the imageURL", ^{
             expect(provider.thumbnailImage).to.beNil();
             expect(provider.thumbnailImageURL).to.equal(imageURL);
@@ -53,17 +53,17 @@ describe(@"url and image thumbnail", ^{
                     return [request.URL.path isEqualToString:@"/image.jpg"];
                 } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
                     return [[OHHTTPStubsResponse
-                             responseWithFileAtPath:OHPathForFileInBundle(@"stub.jpg", nil)
-                             statusCode:200
-                             headers:@{@"Content-Type":@"image/jpeg"}]
-                            responseTime:OHHTTPStubsDownloadSpeed3G];
+                        responseWithFileAtPath:OHPathForFileInBundle(@"stub.jpg", nil)
+                                    statusCode:200
+                                       headers:@{ @"Content-Type" : @"image/jpeg" }]
+                        responseTime:OHHTTPStubsDownloadSpeed3G];
                 }];
 
                 UIImage *thumbnailImage = [provider activityViewController:activityVC thumbnailImageForActivityType:@"any activity" suggestedSize:CGSizeMake(100, 100)];
                 expect(thumbnailImage.class).to.equal([UIImage class]);
                 expect(provider.thumbnailImage).to.equal(thumbnailImage);
             });
-            
+
             it(@"returns nil for AirDrop sharing", ^{
                 UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[] applicationActivities:@[]];
                 UIImage *thumbnailImage = [provider activityViewController:activityVC thumbnailImageForActivityType:UIActivityTypeAirDrop suggestedSize:CGSizeMake(100, 100)];
@@ -87,7 +87,7 @@ describe(@"url and image thumbnail", ^{
                 });
             });
 
-            
+
             describe(@"AirDrop sharing", ^{
                 __block id file;
                 __block NSURL *fileURL;
@@ -98,7 +98,7 @@ describe(@"url and image thumbnail", ^{
                     providerMock = [OCMockObject partialMockForObject:provider];
                     [(ARURLItemProvider *)[[providerMock stub] andReturn:UIActivityTypeAirDrop] activityType];
                     file = provider.item;
-                    fileURL = (id) file;
+                    fileURL = (id)file;
                     NSData *fileData = [NSData dataWithContentsOfURL:fileURL];
                     data = [NSJSONSerialization JSONObjectWithData:fileData options:0 error:nil];
 
@@ -140,11 +140,11 @@ describe(@"url and image thumbnail", ^{
 
     describe(@"with invalid imageURL", ^{
         __block NSURL *imageURL = [NSURL URLWithString:@"http://image.com/invalid.jpg"];
-        
+
         beforeEach(^{
             provider = [[ARURLItemProvider alloc] initWithMessage:@"Message" path:path thumbnailImageURL:imageURL];
         });
-        
+
         it(@"sets the imageURL", ^{
             expect(provider.thumbnailImage).to.beNil();
             expect(provider.thumbnailImageURL).to.equal(imageURL);

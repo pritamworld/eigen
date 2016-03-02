@@ -5,6 +5,7 @@
 
 @class Artwork, AuctionLot;
 
+
 @interface ARAuctionArtworkTableViewCell : UITableViewCell
 
 /// provides the cell with updated information from a lot

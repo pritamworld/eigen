@@ -38,7 +38,7 @@ __block ARTopMenuNavigationDataSource *dataSource;
 
 dispatch_block_t sharedBefore = ^{
     [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/xapp_token" withResponse:@{}];
-    [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/site_hero_units" withResponse:@[@{ @"heading": @"something" }]];
+    [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/site_hero_units" withResponse:@[ @{@"heading" : @"something"} ]];
     [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/sets" withResponse:@{}];
 
     sut = [[ARTopMenuViewController alloc] init];
@@ -52,16 +52,16 @@ dispatch_block_t sharedBefore = ^{
 };
 
 itHasSnapshotsForDevicesWithName(@"selects 'home' by default", ^{
-   dataSource = [[ARTestTopMenuNavigationDataSource alloc] init];
-   sharedBefore();
-   return sut;
+    dataSource = [[ARTestTopMenuNavigationDataSource alloc] init];
+    sharedBefore();
+    return sut;
 });
 
 itHasSnapshotsForDevicesWithName(@"should be able to hide", ^{
-   dataSource = [[ARTestTopMenuNavigationDataSource alloc] init];
-   sharedBefore();
-   [sut hideToolbar:YES animated:NO];
-   return sut;
+    dataSource = [[ARTestTopMenuNavigationDataSource alloc] init];
+    sharedBefore();
+    [sut hideToolbar:YES animated:NO];
+    return sut;
 });
 
 sharedExamplesFor(@"tab behavior", ^(NSDictionary *data) {
@@ -70,7 +70,7 @@ sharedExamplesFor(@"tab behavior", ^(NSDictionary *data) {
         tab = [data[@"tab"] integerValue];
 
         [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/xapp_token" withResponse:@{}];
-        [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/site_hero_units" withResponse:@[@{ @"heading": @"something" }]];
+        [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/site_hero_units" withResponse:@[ @{ @"heading" : @"something" } ]];
         [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/sets" withResponse:@{}];
     });
 
@@ -156,13 +156,13 @@ sharedExamplesFor(@"tab behavior", ^(NSDictionary *data) {
         __block JSBadgeView *badgeView = nil;
 
         before(^{
-            sut.navigationDataSource.badgeCounts[tab] = tab+1;
+            sut.navigationDataSource.badgeCounts[tab] = tab + 1;
             [sut updateBadges];
             badgeView = [sut badgeForButtonAtIndex:tab createIfNecessary:NO];
         });
 
         it(@"shows a notification badge", ^{
-            expect(badgeView.badgeText).to.equal(@(tab+1).stringValue);
+            expect(badgeView.badgeText).to.equal(@(tab + 1).stringValue);
         });
 
         it(@"updates the badge count in the data source", ^{
@@ -178,59 +178,59 @@ sharedExamplesFor(@"tab behavior", ^(NSDictionary *data) {
 });
 
 describe(@"navigation", ^{
-   __block NSInteger tabIndex;
-   before(^{
-       dataSource = [[ARTopMenuNavigationDataSource alloc] init];
-       sharedBefore();
-   });
+    __block NSInteger tabIndex;
+    before(^{
+        dataSource = [[ARTopMenuNavigationDataSource alloc] init];
+        sharedBefore();
+    });
 
-   describe(@"feed", ^{
-       before(^{
-           [sut.tabContentView setCurrentViewIndex:ARTopTabControllerIndexBrowse animated:NO];
-       });
-       itShouldBehaveLike(@"tab behavior", @{@"tab" : [NSNumber numberWithInt:ARTopTabControllerIndexFeed]});
-   });
+    describe(@"feed", ^{
+        before(^{
+            [sut.tabContentView setCurrentViewIndex:ARTopTabControllerIndexBrowse animated:NO];
+        });
+        itShouldBehaveLike(@"tab behavior", @{ @"tab" : [NSNumber numberWithInt:ARTopTabControllerIndexFeed] });
+    });
 
-   describe(@"browse", ^{
-       itShouldBehaveLike(@"tab behavior", @{@"tab" : [NSNumber numberWithInt:ARTopTabControllerIndexBrowse]});
-   });
+    describe(@"browse", ^{
+        itShouldBehaveLike(@"tab behavior", @{ @"tab" : [NSNumber numberWithInt:ARTopTabControllerIndexBrowse] });
+    });
 
-   describe(@"favorites", ^{
-       before(^{
-           tabIndex = ARTopTabControllerIndexFavorites;
-       });
+    describe(@"favorites", ^{
+        before(^{
+            tabIndex = ARTopTabControllerIndexFavorites;
+        });
 
-       describe(@"logged out", ^{
-           __block id userMock;
-           before(^{
-               userMock = [OCMockObject niceMockForClass:[User class]];
-               [[[userMock stub] andReturnValue:@(YES)] isTrialUser];
-           });
+        describe(@"logged out", ^{
+            __block id userMock;
+            before(^{
+                userMock = [OCMockObject niceMockForClass:[User class]];
+                [[[userMock stub] andReturnValue:@(YES)] isTrialUser];
+            });
 
-           after(^{
-               [userMock stopMocking];
-           });
+            after(^{
+                [userMock stopMocking];
+            });
 
-           it(@"is not selectable", ^{
-               expect([sut tabContentView:sut.tabContentView shouldChangeToIndex:tabIndex]).to.beFalsy();
-           });
+            it(@"is not selectable", ^{
+                expect([sut tabContentView:sut.tabContentView shouldChangeToIndex:tabIndex]).to.beFalsy();
+            });
 
-           it(@"invokes signup popover", ^{
-               id mock = [OCMockObject niceMockForClass:[ARTrialController class]];
-               [[mock expect] presentTrialWithContext:0 success:[OCMArg any]];
-           });
-       });
+            it(@"invokes signup popover", ^{
+                id mock = [OCMockObject niceMockForClass:[ARTrialController class]];
+                [[mock expect] presentTrialWithContext:0 success:[OCMArg any]];
+            });
+        });
 
-       describe(@"logged in", ^{
-           before(^{
-               [ARUserManager stubAndLoginWithUsername];
-           });
-           after(^{
-               [ARUserManager clearUserData];
-           });
-           itShouldBehaveLike(@"tab behavior", @{@"tab" : [NSNumber numberWithInt:ARTopTabControllerIndexFavorites]});
-       });
-   });
+        describe(@"logged in", ^{
+            before(^{
+                [ARUserManager stubAndLoginWithUsername];
+            });
+            after(^{
+                [ARUserManager clearUserData];
+            });
+            itShouldBehaveLike(@"tab behavior", @{ @"tab" : [NSNumber numberWithInt:ARTopTabControllerIndexFavorites] });
+        });
+    });
 
     describe(@"routing", ^{
         before(^{
@@ -242,12 +242,12 @@ describe(@"navigation", ^{
 
         it(@"supports routing to paths", ^{
             NSDictionary *menuToPaths = @{
-                @(ARTopTabControllerIndexFeed): @"/",
-                @(ARTopTabControllerIndexBrowse): @"/browse",
-                @(ARTopTabControllerIndexMagazine): @"/articles",
-                @(ARTopTabControllerIndexFavorites): @"/favorites",
-                @(ARTopTabControllerIndexShows): @"/shows",
-                @(ARTopTabControllerIndexNotifications): @"/works-for-you",
+                @(ARTopTabControllerIndexFeed) : @"/",
+                @(ARTopTabControllerIndexBrowse) : @"/browse",
+                @(ARTopTabControllerIndexMagazine) : @"/articles",
+                @(ARTopTabControllerIndexFavorites) : @"/favorites",
+                @(ARTopTabControllerIndexShows) : @"/shows",
+                @(ARTopTabControllerIndexNotifications) : @"/works-for-you",
             };
 
             ARSwitchBoard *switchboard = [ARSwitchBoard sharedInstance];

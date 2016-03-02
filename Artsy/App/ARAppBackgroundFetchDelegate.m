@@ -8,6 +8,7 @@
 #import "ARFileUtils.h"
 #import "ARLogger.h"
 
+
 @implementation ARAppBackgroundFetchDelegate
 
 + (void)load
@@ -43,7 +44,6 @@
 
             id JSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
             if ([JSON isKindOfClass:NSDictionary.class]) {
-
                 // Save the downloaded JSON to a known place for ARShowFeed to grab
                 // when the app is opened
 
@@ -67,7 +67,7 @@
 
                     completionHandler(UIBackgroundFetchResultNewData);
 
-                } else if (completionHandler && sameCursor){
+                } else if (completionHandler && sameCursor) {
                     completionHandler(UIBackgroundFetchResultNoData);
                 }
                 return;

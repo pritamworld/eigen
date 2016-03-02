@@ -18,6 +18,7 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 
+
 @interface ARArtworkActionsView () <ARCountdownViewDelegate>
 
 @property (nonatomic, strong) ARCountdownView *countdownView;
@@ -62,12 +63,12 @@
 
     KSPromise *artworkPromise = [self.artwork onArtworkUpdate:nil failure:nil];
     KSPromise *saleArtworkPromise = [self.artwork onSaleArtworkUpdate:^(SaleArtwork *saleArtwork) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         sself.saleArtwork = saleArtwork;
     } failure:nil];
 
     [[KSPromise when:@[ artworkPromise, saleArtworkPromise ]] then:^id(id value) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         id returnable = nil;
         [sself updateUI];
         return returnable;
@@ -97,7 +98,7 @@
         // Then fetch the up-to-date data.
         __weak typeof(self) wself = self;
         [self.artwork onSaleArtworkUpdate:^(SaleArtwork *saleArtwork) {
-            __strong typeof (wself) sself = wself;
+            __strong typeof(wself) sself = wself;
             sself.saleArtwork = saleArtwork;
             [sself updateUI];
             sself.spinner = nil;

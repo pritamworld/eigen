@@ -56,7 +56,7 @@ NSString *const ARUserActivityTypeSale = @"net.artsy.artsy.sale";
         activity.contentAttributeSet = [ARSpotlight searchAttributesForEntity:entity
                                                             includeIdentifier:NO
                                                                    completion:^(CSSearchableItemAttributeSet *attributeSet) {
-            [activity updateContentAttributeSet:attributeSet];
+                                                                       [activity updateContentAttributeSet:attributeSet];
                                                                    }];
     }
 

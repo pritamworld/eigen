@@ -7,6 +7,7 @@
 
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 
+
 @interface ARBrowseViewCell : ARBrowseFeaturedLinksCollectionViewCell
 @end
 
@@ -49,9 +50,9 @@
     [super viewDidAppear:animated];
 
     if (self.menuLinks.count < 1) {
-        __weak typeof (self) wself = self;
+        __weak typeof(self) wself = self;
         [self.networkModel getBrowseFeaturedLinks:^(NSArray *links) {
-            __strong typeof (wself) sself = wself;
+            __strong typeof(wself) sself = wself;
             [sself.collectionView reloadData];
         } failure:nil];
     }
@@ -83,7 +84,7 @@
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-         [self.collectionView.collectionViewLayout invalidateLayout];
+        [self.collectionView.collectionViewLayout invalidateLayout];
     } completion:nil];
 
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];

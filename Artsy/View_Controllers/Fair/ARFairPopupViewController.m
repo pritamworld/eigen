@@ -8,6 +8,7 @@
 
 #import <UIView_BooleanAnimations/UIView+BooleanAnimations.h>
 
+
 @interface ARFairPopupViewController ()
 
 @property (nonatomic, copy, readonly) NSString *titleString;
@@ -77,7 +78,7 @@ AR_VC_OVERRIDE_SUPER_DESIGNATED_INITIALIZERS;
     }];
 }
 
-- (void)animateOut:(BOOL)animated :(void (^)())completion
+- (void)animateOut:(BOOL)animated:(void (^)())completion
 {
     NSParameterAssert(completion);
 
@@ -92,7 +93,7 @@ AR_VC_OVERRIDE_SUPER_DESIGNATED_INITIALIZERS;
 
 - (void)dismissPopover
 {
-    [self animateOut:YES :^{
+    [self animateOut:YES:^{
         [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
     }];
 }

@@ -2,6 +2,7 @@
 
 @class Artwork;
 
+
 @interface ARArtworkInfoViewController : UIViewController
 
 - (instancetype)initWithArtwork:(Artwork *)artwork;

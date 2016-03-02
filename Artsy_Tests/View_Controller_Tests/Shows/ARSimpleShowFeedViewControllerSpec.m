@@ -20,7 +20,7 @@ describe(@"intial setup", ^{
         [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/sets" withResponse:@{}];
         [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/shows/feed" withResponse:@{
             @"next" : @"some cursor",
-            @"results" : @[ @{ @"id": @"show-id", @"name": @"Show Title", @"_type" : @"PartnerShow" } ]
+            @"results" : @[ @{@"id" : @"show-id", @"name" : @"Show Title", @"_type" : @"PartnerShow"} ]
         }];
 
         ARFeedTimeline *timeline = [[ARFeedTimeline alloc] initWithFeed:[[ARShowFeed alloc] init]];

@@ -15,7 +15,7 @@ beforeEach(^{
     Fair *fair = [Fair modelWithJSON:@{
         @"id" : @"fair-id",
         @"name" : @"The Armory Show",
-        @"organizer" : @{ @"profile_id" : @"fair-profile-id" }
+        @"organizer" : @{@"profile_id" : @"fair-profile-id"}
     }];
     view = [[ARFairMapAnnotationCallOutView alloc] initOnMapView:mapView fair:fair];
 });
@@ -28,7 +28,7 @@ it(@"blank", ^{
 it(@"title", ^{
     PartnerShow *partnerShow = [PartnerShow modelWithJSON:@{
         @"id" : @"show-id",
-        @"partner" : @{ @"id" : @"leila-heller", @"name" : @"Leila Heller" }
+        @"partner" : @{@"id" : @"leila-heller", @"name" : @"Leila Heller"}
     }];
     ARFairMapAnnotation *annotation = [[ARFairMapAnnotation alloc] initWithPoint:CGPointZero representedObject:partnerShow];
     [view setAnnotation:annotation];
@@ -39,8 +39,8 @@ it(@"title", ^{
 it(@"titleWithSubtitle", ^{
     PartnerShow *partnerShow = [PartnerShow modelWithJSON:@{
         @"id" : @"show-id",
-        @"fair_location" : @{ @"display" : @"Pier 1, Booth 2, Section 3, Floor 5" },
-        @"partner" : @{ @"id" : @"leila-heller", @"name" : @"Leila Heller Gallery in New York City" }
+        @"fair_location" : @{@"display" : @"Pier 1, Booth 2, Section 3, Floor 5"},
+        @"partner" : @{@"id" : @"leila-heller", @"name" : @"Leila Heller Gallery in New York City"}
     }];
     ARFairMapAnnotation *annotation = [[ARFairMapAnnotation alloc] initWithPoint:CGPointZero representedObject:partnerShow];
     [view setAnnotation:annotation];

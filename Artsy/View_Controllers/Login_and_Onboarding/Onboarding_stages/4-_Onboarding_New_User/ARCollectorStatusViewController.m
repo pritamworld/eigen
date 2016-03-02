@@ -7,6 +7,7 @@
 
 #import <Artsy_UILabels/ARLabelSubclasses.h>
 
+
 @interface ARCollectorStatusViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic) ARSerifLineHeightLabel *label;
 @property (nonatomic) UITableView *tableView;

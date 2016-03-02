@@ -109,14 +109,14 @@
             if (positionsOperation.error == nil) {
                 saleArtwork.positions = [positionsOperation.responseObject map:^id(NSDictionary *dictionary) {
                     NSError *error = nil;
-                    BidderPosition *position = [BidderPosition  modelWithJSON:dictionary error:&error];
+                    BidderPosition *position = [BidderPosition modelWithJSON:dictionary error:&error];
                     if (error) {
                         ARErrorLog(@"Couldn't parse bidder position. Error: %@", error.localizedDescription);
                     }
                     return position;
                 }];
             }
-            
+
             if (success) {
                 ar_dispatch_main_queue(^{
                     success(saleArtwork);
@@ -137,11 +137,9 @@
     return [self getRequest:request
         parseIntoAnArrayOfClass:[Fair class]
                         success:^(NSArray *fairs) {
-            success([fairs select:^BOOL(Fair *fair) {
-                return fair.defaultProfileID != nil
-                       || fair.organizer.fairOrganizerID != nil
-                       || fair.organizer.profileID != nil;
-            }]);
+                            success([fairs select:^BOOL(Fair *fair) {
+                                return fair.defaultProfileID != nil || fair.organizer.fairOrganizerID != nil || fair.organizer.profileID != nil;
+                            }]);
                         }
                         failure:failure];
 }

@@ -60,7 +60,7 @@ describe(@"buy button", ^{
             @"availability" : @"for sale",
             @"acquireable" : @YES,
             @"edition_sets" : @[
-                @{ @"id": @"set-1"}
+                @{@"id" : @"set-1"}
             ]
         }];
 
@@ -82,8 +82,8 @@ describe(@"buy button", ^{
             @"availability" : @"for sale",
             @"acquireable" : @YES,
             @"edition_sets" : @[
-                @{ @"id": @"set-1"},
-                @{ @"id": @"set-2"}
+                @{@"id" : @"set-1"},
+                @{@"id" : @"set-2"}
             ]
         }];
 
@@ -97,7 +97,7 @@ describe(@"buy button", ^{
         [routerMock verify];
         [vcMock verify];
     });
-    
+
     it(@"displays inquiry form if request fails", ^{
         [OHHTTPStubs stubJSONResponseAtPath:ARCreatePendingOrderURL withResponse:@[] andStatusCode:400];
 
@@ -111,7 +111,7 @@ describe(@"buy button", ^{
         vc = [[ARArtworkViewController alloc] initWithArtwork:artwork fair:nil];
         vcMock = [OCMockObject partialMockForObject:vc];
         [[vcMock expect] tappedContactGallery];
-        
+
         [[[[routerMock expect] andForwardToRealObject] classMethod] newPendingOrderWithArtworkID:OCMOCK_ANY editionSetID:OCMOCK_ANY];
 
         [vc tappedBuyButton];

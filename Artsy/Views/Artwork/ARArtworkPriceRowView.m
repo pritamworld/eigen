@@ -6,6 +6,7 @@
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 #import <ObjectiveSugar/ObjectiveSugar.h>
 
+
 @interface ARArtworkPriceRowView ()
 @property (nonatomic, strong, readonly) ARSerifLabel *bidStatusLabel;
 @end

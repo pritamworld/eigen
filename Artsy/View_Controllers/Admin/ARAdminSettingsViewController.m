@@ -270,7 +270,7 @@ NSString *const ARLabOptionCell = @"LabOptionCell";
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:actionTitle
                                                             style:UIAlertActionStyleDestructive
                                                           handler:^(UIAlertAction *action) {
-                                        handler();
+                                                              handler();
                                                           }];
 
 
@@ -311,18 +311,18 @@ NSString *const ARLabOptionCell = @"LabOptionCell";
     [cell setCellSelectionBlock:^(UITableView *tableView, NSIndexPath *indexPath) {
         UIAlertController *controller = [UIAlertController alertControllerWithTitle:name message:@"" preferredStyle:UIAlertControllerStyleAlert];
 
-        [controller addAction:[UIAlertAction actionWithTitle:@"Save + Restart" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [controller addAction:[UIAlertAction actionWithTitle:@"Save + Restart" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *_Nonnull action) {
             UITextField *theTextField = [controller textFields].firstObject;
             [defaults setObject:theTextField.text forKey:key];
             [defaults synchronize];
             exit(0);
         }]];
 
-        [controller addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [controller addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *_Nonnull action) {
             [controller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
         }]];
 
-        [controller addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        [controller addTextFieldWithConfigurationHandler:^(UITextField *_Nonnull textField) {
             textField.text = value;
         }];
 

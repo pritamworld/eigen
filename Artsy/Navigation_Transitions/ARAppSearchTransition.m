@@ -27,10 +27,10 @@
         delay:0.0
         options:UIViewAnimationOptionCurveEaseOut
         animations:^{
-                         toVC.view.alpha = 1;
+            toVC.view.alpha = 1;
         }
         completion:^(BOOL finished) {
-                        [transitionContext completeTransition:YES];
+            [transitionContext completeTransition:YES];
         }];
 }
 

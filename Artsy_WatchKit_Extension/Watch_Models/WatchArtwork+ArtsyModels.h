@@ -3,6 +3,7 @@
 
 @class Artwork;
 
+
 @interface WatchArtwork (FromArtwork)
 
 - (instancetype)initWithArtsyArtwork:(Artwork *)artwork;

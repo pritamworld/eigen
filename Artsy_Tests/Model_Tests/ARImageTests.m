@@ -6,9 +6,9 @@ __block Image *image;
 
 beforeEach(^{
     image = [Image modelWithJSON:@{
-        @"id": @"image-id",
-        @"max_tiled_width": @(400),
-        @"max_tiled_height": @(400),
+        @"id" : @"image-id",
+        @"max_tiled_width" : @(400),
+        @"max_tiled_height" : @(400),
         @"tile_size" : @(233),
         @"tile_base_url" : @"http://static0.artsy.net/maps/map-id/level/dztiles-512-0"
     }];

@@ -7,6 +7,7 @@
 #import "User.h"
 #import "ARTrialController.h"
 
+
 @implementation ARApplicationShortcutItemDelegate
 
 + (void)load
@@ -47,7 +48,7 @@
         [ARTrialController presentTrialWithContext:context success:^(BOOL newUser) {
             if (newUser) {
                 [[ARTopMenuViewController sharedController].tabContentView setCurrentViewIndex:ARTopTabControllerIndexFeed animated:NO];
-                
+
             } else {
                 [rootNavigationController pushViewController:[[ARFavoritesViewController alloc] init] animated:NO];
             }

@@ -171,7 +171,7 @@ static NSString *ARShowCellIdentifier = @"ARShowCellIdentifier";
 
     [ArtsyAPI getXappTokenWithCompletion:^(NSString *xappToken, NSDate *expirationDate) {
         [self.feedTimeline getNewItems:^(NSArray *items) {
-            __strong typeof (wself) sself = wself;
+            __strong typeof(wself) sself = wself;
 
             for (ARPartnerShowFeedItem *show in items) {
                 [sself addShowToTable:show];
@@ -185,15 +185,14 @@ static NSString *ARShowCellIdentifier = @"ARShowCellIdentifier";
             [ARAnalytics finishTimingEvent:ARAnalyticsInitialFeedLoadTime];
 
         } failure:^(NSError *error) {
-            NSHTTPURLResponse *response = error.userInfo[AFURLResponseSerializationErrorDomain]
-                                          ?: error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey];
+            NSHTTPURLResponse *response = error.userInfo[AFURLResponseSerializationErrorDomain] ?: error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey];
             ARErrorLog(@"There was a %@ error getting newest items for the feed: %@", @(response.statusCode), error.localizedDescription);
-            __strong typeof (wself) sself = wself;
+            __strong typeof(wself) sself = wself;
 
             // So that it won't stop the first one
             [sself.networkStatus.offlineView refreshFailed];
             [sself.networkStatus showOfflineViewIfNeeded];
-            
+
             [sself performSelector:@selector(refreshFeedItems) withObject:nil afterDelay:1];
             [ARAnalytics finishTimingEvent:ARAnalyticsInitialFeedLoadTime];
 

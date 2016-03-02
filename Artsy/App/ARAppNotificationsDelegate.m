@@ -107,9 +107,9 @@
         [ARNotificationView showNoticeInView:[self findVisibleWindow]
                                        title:message
                                     response:^{
-            if (url) {
-                [self tappedNotification:notificationInfo viewController:viewController];
-            }
+                                        if (url) {
+                                            [self tappedNotification:notificationInfo viewController:viewController];
+                                        }
                                     }];
     } else {
         // app was brought from the background after a user clicked on the notification

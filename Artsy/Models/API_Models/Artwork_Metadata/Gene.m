@@ -6,7 +6,8 @@
 #import "Gene.h"
 
 
-@interface Gene () {
+@interface Gene ()
+{
     BOOL _isFollowed;
 }
 
@@ -59,9 +60,9 @@
 
 - (void)updateGene:(void (^)(void))success
 {
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     [ArtsyAPI getGeneForGeneID:self.geneID success:^(id gene) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself mergeValuesForKeysFromModel:gene];
         success();
     } failure:^(NSError *error) {
@@ -91,16 +92,16 @@
 
 - (void)setFollowState:(BOOL)state success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     [ArtsyAPI setFavoriteStatus:state forGene:self success:^(id response) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         sself.followed = state;
         [ARSpotlight addToSpotlightIndex:state entity:self];
         if (success) {
             success(response);
         }
     } failure:^(NSError *error) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         sself.followed = !state;
         if (failure) {
             failure(error);
@@ -115,9 +116,9 @@
         return;
     }
 
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     [ArtsyAPI checkFavoriteStatusForGene:self success:^(BOOL result) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         sself.followed = result;
         success(result ? ARHeartStatusYes : ARHeartStatusNo);
     } failure:failure];

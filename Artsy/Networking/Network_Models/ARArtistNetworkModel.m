@@ -5,6 +5,7 @@
 #import "ArtsyAPI+Artworks.h"
 #import "ArtsyAPI+Following.h"
 
+
 @implementation ARArtistNetworkModel
 
 - (instancetype)initWithArtist:(Artist *)artist

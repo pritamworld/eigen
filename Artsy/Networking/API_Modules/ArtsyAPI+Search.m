@@ -8,6 +8,7 @@
 #import "MTLModel+JSON.h"
 #import "AFHTTPRequestOperation+JSON.h"
 
+
 @implementation ArtsyAPI (Search)
 
 + (AFHTTPRequestOperation *)searchWithQuery:(NSString *)query success:(void (^)(NSArray *results))success failure:(void (^)(NSError *error))failure

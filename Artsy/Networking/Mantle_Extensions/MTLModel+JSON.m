@@ -3,6 +3,7 @@
 #import <Mantle/Mantle.h>
 #import <ObjectiveSugar/ObjectiveSugar.h>
 
+
 @implementation MTLModel (JSON)
 
 + (NSArray *)arrayOfModelsWithJSON:(NSArray *)dictionaries

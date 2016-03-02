@@ -9,9 +9,12 @@ SpecBegin(ARFairPostsViewController);
 __block ARFairPostsViewController *fairVC = nil;
 
 beforeEach(^{
-    Fair *fair = [Fair modelWithJSON:@{ @"name" : @"The Armory Show", @"organizer" : @{ @"profile_id" : @"fair-profile-id" } }];
+    Fair *fair = [Fair modelWithJSON:@{ @"name" : @"The Armory Show",
+                                        @"organizer" : @{@"profile_id" : @"fair-profile-id"} }];
     ARStubbedFairNetworkModel *networkModel = [[ARStubbedFairNetworkModel alloc] init];
-    networkModel.postFeedItems = @[ [ARPostFeedItem modelWithJSON:@{ @"id": @"post-id", @"title": @"Post Title", @"_type" : @"Post" }] ];
+    networkModel.postFeedItems = @[ [ARPostFeedItem modelWithJSON:@{ @"id" : @"post-id",
+                                                                     @"title" : @"Post Title",
+                                                                     @"_type" : @"Post" }] ];
     fair.networkModel = networkModel;
 
     fairVC = [[ARFairPostsViewController alloc] initWithFair:fair];
@@ -39,16 +42,16 @@ describe(@"rendered", ^{
         // title
         UIView *titleView = fairVC.view.subviews[0];
         expect(titleView).to.beKindOf([UILabel class]);
-        expect(((UILabel *) titleView).text).to.equal(@"POSTS");
+        expect(((UILabel *)titleView).text).to.equal(@"POSTS");
 
         // first post
         UIView *firstPostView = fairVC.view.subviews[2];
         expect(firstPostView).to.beKindOf([ARPostFeedItemLinkView class]);
-        expect(((ARPostFeedItemLinkView *) firstPostView).targetPath).to.equal(@"/post/post-id");
+        expect(((ARPostFeedItemLinkView *)firstPostView).targetPath).to.equal(@"/post/post-id");
     });
 
     it(@"navigates to the target url when a post is tapped", ^{
-        ARPostFeedItemLinkView *firstPostView = (ARPostFeedItemLinkView *) fairVC.view.subviews[2];
+        ARPostFeedItemLinkView *firstPostView = (ARPostFeedItemLinkView *)fairVC.view.subviews[2];
 
         id mock = [OCMockObject partialMockForObject:ARSwitchBoard.sharedInstance];
         [[mock expect] loadPath:@"/post/post-id"];

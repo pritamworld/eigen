@@ -6,6 +6,7 @@
 
 @class RACCommand;
 
+
 @interface ARNavigationController : UINavigationController
 
 @property (readonly, nonatomic, strong) UIButton *backButton;

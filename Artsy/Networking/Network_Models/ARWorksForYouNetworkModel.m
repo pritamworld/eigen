@@ -58,7 +58,7 @@
 
         // sort notification items by date
         NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
-        success([notificationItems sortedArrayUsingDescriptors:@[descriptor]]);
+        success([notificationItems sortedArrayUsingDescriptors:@[ descriptor ]]);
 
     } failure:failure];
 }
@@ -70,7 +70,7 @@
     // AFNetworking should release the request operation as soon as it is done (be it success or failure),
     // then `self.currentRequest` will be set to `nil` automatically by the objc runtime (because it is `weak`)
     self.currentRequest = [ArtsyAPI getRecommendedArtworksForUser:[User currentUser].userID page:self.currentPage success:^(NSArray<Artwork *> *artworks) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         if (!sself) return;
 
         sself.currentPage++;
@@ -78,7 +78,7 @@
             sself.allDownloaded = YES;
         }
 
-       success(artworks);
+        success(artworks);
 
     } failure:failure];
 }

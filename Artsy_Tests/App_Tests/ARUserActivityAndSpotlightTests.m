@@ -29,8 +29,8 @@ StubThumbnailAtURL(id imageDownloaderMock, NSURL *URL)
                                              options:0
                                             progress:nil
                                            completed:[OCMArg checkWithBlock:^BOOL(SDWebImageCompletionWithFinishedBlock completionBlock) {
-        completionBlock([UIImage imageNamed:@"AttentionIcon"], nil, 0, YES, nil);
-        return YES;
+                                               completionBlock([UIImage imageNamed:@"AttentionIcon"], nil, 0, YES, nil);
+                                               return YES;
                                            }]];
 }
 
@@ -55,15 +55,16 @@ afterEach(^{
 describe(@"With an Artwork", ^{
     beforeEach(^{
         model = [Artwork modelWithJSON:@{
-            @"id": @"artwork_id",
-            @"title": @"Artwork Title",
-            @"artist":@{ @"id":@"artist_id", @"name":@"Artist Name" },
-            @"medium":@"Artwork Medium",
-            @"images":@[
-                  @{@"id": @"image_2_id",
-                    @"is_default": @YES,
-                    @"image_url": @"https://localhost/image/:version.jpg",
-                    @"image_versions": @[@"small", @"square", @"large"]}]
+            @"id" : @"artwork_id",
+            @"title" : @"Artwork Title",
+            @"artist" : @{@"id" : @"artist_id", @"name" : @"Artist Name"},
+            @"medium" : @"Artwork Medium",
+            @"images" : @[
+                @{@"id" : @"image_2_id",
+                  @"is_default" : @YES,
+                  @"image_url" : @"https://localhost/image/:version.jpg",
+                  @"image_versions" : @[ @"small", @"square", @"large" ]}
+            ]
         }];
         webpageURL = [NSURL URLWithString:@"https://www.artsy.net/artwork/artwork_id"];
         StubThumbnailAtURL(imageDownloaderMock, [[model defaultImage] urlForThumbnailImage]);
@@ -73,7 +74,8 @@ describe(@"With an Artwork", ^{
         beforeEach(^{
             attributeSet = [ARSpotlight searchAttributesForEntity:model
                                                 includeIdentifier:YES
-                                                       completion:^(CSSearchableItemAttributeSet *_) {}];
+                                                       completion:^(CSSearchableItemAttributeSet *_){
+                                                       }];
         });
 
         it(@"includes the URL as the identifier", ^{
@@ -96,7 +98,8 @@ describe(@"With an Artwork", ^{
             [model setDate:@"2014"];
             attributeSet = [ARSpotlight searchAttributesForEntity:model
                                                 includeIdentifier:YES
-                                                       completion:^(CSSearchableItemAttributeSet *_) {}];
+                                                       completion:^(CSSearchableItemAttributeSet *_){
+                                                       }];
             expect(attributeSet.contentDescription).to.equal(@"Artist Name, 2014\nArtwork Medium");
         });
     });
@@ -115,7 +118,7 @@ describe(@"With an Artwork", ^{
         });
 
         it(@"includes additional metadata", ^{
-            expect(activity.userInfo).to.equal(@{@"id": @"artwork_id" });
+            expect(activity.userInfo).to.equal(@{ @"id" : @"artwork_id" });
         });
 
         it(@"is eligible for everything", ^{
@@ -127,7 +130,8 @@ describe(@"With an Artwork", ^{
         it(@"includes the Spotlight attributes set, minus the identifier", ^{
             attributeSet = [ARSpotlight searchAttributesForEntity:model
                                                 includeIdentifier:NO
-                                                       completion:^(CSSearchableItemAttributeSet *_) {}];
+                                                       completion:^(CSSearchableItemAttributeSet *_){
+                                                       }];
             expect(activity.contentAttributeSet.description).to.equal(attributeSet.description);
         });
     });
@@ -136,14 +140,14 @@ describe(@"With an Artwork", ^{
 describe(@"With an Artist", ^{
     beforeEach(^{
         model = [Artist modelWithJSON:@{
-            @"id": @"some-artist",
-            @"name": @"Artist Name",
-            @"birthday": @"1908",
-            @"years": @"1928-1987",
-            @"published_artworks_count": @(396),
-            @"forsale_artworks_count": @(285),
-            @"artworks_count": @(919),
-            @"image_urls": @{ @"square": @"https://localhost/image/square.jpg" }
+            @"id" : @"some-artist",
+            @"name" : @"Artist Name",
+            @"birthday" : @"1908",
+            @"years" : @"1928-1987",
+            @"published_artworks_count" : @(396),
+            @"forsale_artworks_count" : @(285),
+            @"artworks_count" : @(919),
+            @"image_urls" : @{@"square" : @"https://localhost/image/square.jpg"}
         }];
         webpageURL = [NSURL URLWithString:@"https://www.artsy.net/artist/some-artist"];
         StubThumbnailAtURL(imageDownloaderMock, [model squareImageURL]);
@@ -153,7 +157,8 @@ describe(@"With an Artist", ^{
         beforeEach(^{
             attributeSet = [ARSpotlight searchAttributesForEntity:model
                                                 includeIdentifier:YES
-                                                       completion:^(CSSearchableItemAttributeSet *_) {}];
+                                                       completion:^(CSSearchableItemAttributeSet *_){
+                                                       }];
         });
 
         it(@"includes the URL as the identifier", ^{
@@ -176,7 +181,8 @@ describe(@"With an Artist", ^{
             [model setValue:@"An **artist** _blurb_." forKey:@"blurb"];
             attributeSet = [ARSpotlight searchAttributesForEntity:model
                                                 includeIdentifier:YES
-                                                       completion:^(CSSearchableItemAttributeSet *_) {}];
+                                                       completion:^(CSSearchableItemAttributeSet *_){
+                                                       }];
             expect(attributeSet.contentDescription).to.equal(@"An artist blurb.");
         });
     });
@@ -195,7 +201,7 @@ describe(@"With an Artist", ^{
         });
 
         it(@"includes additional metadata", ^{
-            expect(activity.userInfo).to.equal(@{@"id": @"some-artist" });
+            expect(activity.userInfo).to.equal(@{ @"id" : @"some-artist" });
         });
 
         it(@"is eligible for everything", ^{
@@ -207,7 +213,8 @@ describe(@"With an Artist", ^{
         it(@"includes the Spotlight attributes set, minus the identifier", ^{
             attributeSet = [ARSpotlight searchAttributesForEntity:model
                                                 includeIdentifier:NO
-                                                       completion:^(CSSearchableItemAttributeSet *_) {}];
+                                                       completion:^(CSSearchableItemAttributeSet *_){
+                                                       }];
             expect(activity.contentAttributeSet.description).to.equal(attributeSet.description);
         });
     });
@@ -216,9 +223,9 @@ describe(@"With an Artist", ^{
 describe(@"With a Gene", ^{
     beforeEach(^{
         model = [Gene modelWithJSON:@{
-            @"id": @"painting",
-            @"name": @"Painting",
-            @"image_url": @"https://localhost/image/version.jpg"
+            @"id" : @"painting",
+            @"name" : @"Painting",
+            @"image_url" : @"https://localhost/image/version.jpg"
         }];
         webpageURL = [NSURL URLWithString:@"https://www.artsy.net/gene/painting"];
         StubThumbnailAtURL(imageDownloaderMock, [model smallImageURL]);
@@ -228,7 +235,8 @@ describe(@"With a Gene", ^{
         beforeEach(^{
             attributeSet = [ARSpotlight searchAttributesForEntity:model
                                                 includeIdentifier:YES
-                                                       completion:^(CSSearchableItemAttributeSet *_) {}];
+                                                       completion:^(CSSearchableItemAttributeSet *_){
+                                                       }];
         });
 
         it(@"includes the URL as the identifier", ^{
@@ -251,7 +259,8 @@ describe(@"With a Gene", ^{
             [model setValue:@"A **gene** _description_." forKey:@"geneDescription"];
             attributeSet = [ARSpotlight searchAttributesForEntity:model
                                                 includeIdentifier:YES
-                                                       completion:^(CSSearchableItemAttributeSet *_) {}];
+                                                       completion:^(CSSearchableItemAttributeSet *_){
+                                                       }];
             expect(attributeSet.contentDescription).to.equal(@"A gene description.");
         });
     });
@@ -270,7 +279,7 @@ describe(@"With a Gene", ^{
         });
 
         it(@"includes additional metadata", ^{
-            expect(activity.userInfo).to.equal(@{@"id": @"painting" });
+            expect(activity.userInfo).to.equal(@{ @"id" : @"painting" });
         });
 
         it(@"is eligible for everything", ^{
@@ -282,7 +291,8 @@ describe(@"With a Gene", ^{
         it(@"includes the Spotlight attributes set, minus the identifier", ^{
             attributeSet = [ARSpotlight searchAttributesForEntity:model
                                                 includeIdentifier:NO
-                                                       completion:^(CSSearchableItemAttributeSet *_) {}];
+                                                       completion:^(CSSearchableItemAttributeSet *_){
+                                                       }];
             expect(activity.contentAttributeSet.description).to.equal(attributeSet.description);
         });
     });
@@ -307,7 +317,8 @@ describe(@"With a Fair", ^{
         beforeEach(^{
             attributeSet = [ARSpotlight searchAttributesForEntity:[[ARFairSpotlightMetadataProvider alloc] initWithFair:model profile:nil]
                                                 includeIdentifier:YES
-                                                       completion:^(CSSearchableItemAttributeSet *_) {}];
+                                                       completion:^(CSSearchableItemAttributeSet *_){
+                                                       }];
         });
 
         it(@"includes the URL as the identifier", ^{
@@ -329,9 +340,9 @@ describe(@"With a Fair", ^{
 
         xit(@"includes a thumbnail, if a profile is specified", ^{
             Profile *fairProfile = [Profile modelWithJSON:@{
-                @"icon": @{
-                    @"image_urls": @{
-                       @"version": @"https://localhost/image/version.jpg"
+                @"icon" : @{
+                    @"image_urls" : @{
+                        @"version" : @"https://localhost/image/version.jpg"
                     }
                 }
             }];
@@ -344,7 +355,8 @@ describe(@"With a Fair", ^{
 
             attributeSet = [ARSpotlight searchAttributesForEntity:[[ARFairSpotlightMetadataProvider alloc] initWithFair:model profile:fairProfile]
                                                 includeIdentifier:YES
-                                                       completion:^(CSSearchableItemAttributeSet *_) {}];
+                                                       completion:^(CSSearchableItemAttributeSet *_){
+                                                       }];
             expect(attributeSet.thumbnailData).to.equal(UIImagePNGRepresentation([UIImage imageNamed:@"AttentionIcon"]));
         });
 
@@ -357,7 +369,8 @@ describe(@"With a Fair", ^{
             [model setValue:@"NY" forKey:@"state"];
             attributeSet = [ARSpotlight searchAttributesForEntity:[[ARFairSpotlightMetadataProvider alloc] initWithFair:model profile:nil]
                                                 includeIdentifier:YES
-                                                       completion:^(CSSearchableItemAttributeSet *_) {}];
+                                                       completion:^(CSSearchableItemAttributeSet *_){
+                                                       }];
             expect(attributeSet.contentDescription).to.equal(@"NYC, NY");
         });
     });
@@ -376,7 +389,7 @@ describe(@"With a Fair", ^{
         });
 
         it(@"includes additional metadata", ^{
-            expect(activity.userInfo).to.equal(@{@"id": @"a-fair-affair" });
+            expect(activity.userInfo).to.equal(@{ @"id" : @"a-fair-affair" });
         });
 
         it(@"is eligible for everything", ^{
@@ -388,7 +401,8 @@ describe(@"With a Fair", ^{
         it(@"includes the Spotlight attributes set, minus the identifier", ^{
             attributeSet = [ARSpotlight searchAttributesForEntity:[[ARFairSpotlightMetadataProvider alloc] initWithFair:model profile:nil]
                                                 includeIdentifier:NO
-                                                       completion:^(CSSearchableItemAttributeSet *_) {}];
+                                                       completion:^(CSSearchableItemAttributeSet *_){
+                                                       }];
             expect(activity.contentAttributeSet.description).to.equal(attributeSet.description);
         });
     });
@@ -397,29 +411,29 @@ describe(@"With a Fair", ^{
 describe(@"With a Gene", ^{
     beforeEach(^{
         model = [PartnerShow modelWithJSON:@{
-            @"id": @"some-show",
-            @"name": @"Some Show",
-            @"partner": @{
-                @"id": @"some-partner",
-                @"name": @"Some Gallery",
-                @"default_profile_id": @"some-gallery",
-                @"default_profile_public": @YES
+            @"id" : @"some-show",
+            @"name" : @"Some Show",
+            @"partner" : @{
+                @"id" : @"some-partner",
+                @"name" : @"Some Gallery",
+                @"default_profile_id" : @"some-gallery",
+                @"default_profile_public" : @YES
             },
-            @"fair": @{
-                @"name": @"The Armory Show",
-                @"id": @"fair-id",
-                @"start_at": @"1976-01-30T15:00:00+00:00",
-                @"end_at": @"1976-02-02T15:00:00+00:00",
+            @"fair" : @{
+                @"name" : @"The Armory Show",
+                @"id" : @"fair-id",
+                @"start_at" : @"1976-01-30T15:00:00+00:00",
+                @"end_at" : @"1976-02-02T15:00:00+00:00",
             },
-            @"fair_location": @{
-                @"display": @"Armory Presents, Booth 666",
-                @"map_points": @[@{ @"x": @(0.15), @"y": @(0.75) }]
+            @"fair_location" : @{
+                @"display" : @"Armory Presents, Booth 666",
+                @"map_points" : @[ @{@"x" : @(0.15), @"y" : @(0.75)} ]
             },
-            @"location": @{ @"city": @"NYC", @"state": @"NY", @"country": @"US" },
-            @"start_at": @"1976-01-30T15:00:00+00:00",
-            @"end_at": @"1976-02-02T15:00:00+00:00",
-            @"image_url": @"https://localhost/image/:version.jpg",
-            @"image_versions": @[@"small", @"square", @"large"],
+            @"location" : @{@"city" : @"NYC", @"state" : @"NY", @"country" : @"US"},
+            @"start_at" : @"1976-01-30T15:00:00+00:00",
+            @"end_at" : @"1976-02-02T15:00:00+00:00",
+            @"image_url" : @"https://localhost/image/:version.jpg",
+            @"image_versions" : @[ @"small", @"square", @"large" ],
         }];
         webpageURL = [NSURL URLWithString:@"https://www.artsy.net/show/some-show"];
         StubThumbnailAtURL(imageDownloaderMock, [model smallPreviewImageURL]);
@@ -429,7 +443,8 @@ describe(@"With a Gene", ^{
         beforeEach(^{
             attributeSet = [ARSpotlight searchAttributesForEntity:model
                                                 includeIdentifier:YES
-                                                       completion:^(CSSearchableItemAttributeSet *_) {}];
+                                                       completion:^(CSSearchableItemAttributeSet *_){
+                                                       }];
         });
 
         it(@"includes the URL as the identifier", ^{
@@ -459,7 +474,8 @@ describe(@"With a Gene", ^{
             [fair setValue:@"CA" forKey:@"state"];
             attributeSet = [ARSpotlight searchAttributesForEntity:model
                                                 includeIdentifier:YES
-                                                       completion:^(CSSearchableItemAttributeSet *_) {}];
+                                                       completion:^(CSSearchableItemAttributeSet *_){
+                                                       }];
             expect(attributeSet.contentDescription).to.equal(@"Some Gallery\nSF, CA\nJan 30th - Feb 2nd, 1976");
         });
     });
@@ -478,7 +494,7 @@ describe(@"With a Gene", ^{
         });
 
         it(@"includes additional metadata", ^{
-            expect(activity.userInfo).to.equal(@{@"id": @"some-show" });
+            expect(activity.userInfo).to.equal(@{ @"id" : @"some-show" });
         });
 
         it(@"is eligible for everything", ^{
@@ -490,7 +506,8 @@ describe(@"With a Gene", ^{
         it(@"includes the Spotlight attributes set, minus the identifier", ^{
             attributeSet = [ARSpotlight searchAttributesForEntity:model
                                                 includeIdentifier:NO
-                                                       completion:^(CSSearchableItemAttributeSet *_) {}];
+                                                       completion:^(CSSearchableItemAttributeSet *_){
+                                                       }];
             expect(activity.contentAttributeSet.description).to.equal(attributeSet.description);
         });
     });
@@ -499,17 +516,17 @@ describe(@"With a Gene", ^{
 describe(@"With a Sale", ^{
     beforeEach(^{
         model = [Sale modelWithJSON:@{
-            @"id": @"some-auction",
-            @"name": @"That Auction",
+            @"id" : @"some-auction",
+            @"name" : @"That Auction",
             @"description" : @"Info about the auction",
-            @"start_at": @"1976-01-30T15:00:00+00:00",
-            @"end_at": @"1976-02-02T15:00:00+00:00",
-            @"image_url": @"https://localhost/image/:version.jpg",
-            @"image_versions": @[@"small", @"square", @"large"],
-            @"profile": @{
+            @"start_at" : @"1976-01-30T15:00:00+00:00",
+            @"end_at" : @"1976-02-02T15:00:00+00:00",
+            @"image_url" : @"https://localhost/image/:version.jpg",
+            @"image_versions" : @[ @"small", @"square", @"large" ],
+            @"profile" : @{
                 @"id" : @"sale-profile",
                 @"icon" : @{
-                    @"image_urls" : @{ @"square" : @"http://localhost/thumbnail.jpg" }
+                    @"image_urls" : @{@"square" : @"http://localhost/thumbnail.jpg"}
                 }
             }
         }];
@@ -521,7 +538,8 @@ describe(@"With a Sale", ^{
         beforeEach(^{
             attributeSet = [ARSpotlight searchAttributesForEntity:model
                                                 includeIdentifier:YES
-                                                       completion:^(CSSearchableItemAttributeSet *_) {}];
+                                                       completion:^(CSSearchableItemAttributeSet *_){
+                                                       }];
         });
 
         it(@"includes the URL as the identifier", ^{
@@ -558,21 +576,22 @@ describe(@"With a Sale", ^{
         it(@"includes the show’s name", ^{
             expect(activity.title).to.equal(@"That Auction");
         });
-        
+
         it(@"includes additional metadata", ^{
-            expect(activity.userInfo).to.equal(@{@"id": @"some-auction" });
+            expect(activity.userInfo).to.equal(@{ @"id" : @"some-auction" });
         });
-        
+
         it(@"is eligible for everything", ^{
             expect(activity.isEligibleForPublicIndexing).to.beTruthy();
             expect(activity.isEligibleForSearch).to.beTruthy();
             expect(activity.isEligibleForHandoff).to.beTruthy();
         });
-        
+
         it(@"includes the Spotlight attributes set, minus the identifier", ^{
             attributeSet = [ARSpotlight searchAttributesForEntity:model
                                                 includeIdentifier:NO
-                                                       completion:^(CSSearchableItemAttributeSet *_) {}];
+                                                       completion:^(CSSearchableItemAttributeSet *_){
+                                                       }];
             expect(activity.contentAttributeSet.description).to.equal(attributeSet.description);
         });
     });
@@ -598,9 +617,9 @@ describe(@"Indexing favourites", ^{
             [[[spotlightClassMock stub] andReturn:searchableIndexMock] searchableIndex];
 
             model = [Gene modelWithJSON:@{
-                @"id": @"painting",
-                @"name": @"Painting",
-                @"image_url": @"https://localhost/image/version.jpg"
+                @"id" : @"painting",
+                @"name" : @"Painting",
+                @"image_url" : @"https://localhost/image/version.jpg"
             }];
             webpageURL = [NSURL URLWithString:@"https://www.artsy.net/gene/painting"];
             StubThumbnailAtURL(imageDownloaderMock, [model smallImageURL]);
@@ -614,25 +633,23 @@ describe(@"Indexing favourites", ^{
         it(@"adds a favorite to the index", ^{
             attributeSet = [ARSpotlight searchAttributesForEntity:model
                                                 includeIdentifier:YES
-                                                       completion:^(CSSearchableItemAttributeSet *_) {}];
+                                                       completion:^(CSSearchableItemAttributeSet *_){
+                                                       }];
 
             [[searchableIndexMock expect] indexSearchableItems:[OCMArg checkWithBlock:^BOOL(NSArray *items) {
                 CSSearchableItem *item = items[0];
                 // The actual attribute set has some hidden keys based on the information assigned to the CSSearchableItem,
                 // these are located at the start so instead we check if the expected string comes after the hidden ones.
                 NSString *expectedDescription = [attributeSet.description substringFromIndex:1];
-                return items.count == 1
-                        && [item.uniqueIdentifier isEqualToString:webpageURL.absoluteString]
-                            && [item.domainIdentifier isEqualToString:ARUserActivityTypeGene]
-                                && [item.attributeSet.description rangeOfString:expectedDescription].location != NSNotFound;
+                return items.count == 1 && [item.uniqueIdentifier isEqualToString:webpageURL.absoluteString] && [item.domainIdentifier isEqualToString:ARUserActivityTypeGene] && [item.attributeSet.description rangeOfString:expectedDescription].location != NSNotFound;
             }]
-                                          completionHandler:OCMOCK_ANY];
+                                             completionHandler:OCMOCK_ANY];
 
             [ARSpotlight addToSpotlightIndex:YES entity:model];
         });
 
         it(@"removes a favorite from the index", ^{
-            [[searchableIndexMock expect] deleteSearchableItemsWithIdentifiers:@[webpageURL.absoluteString]
+            [[searchableIndexMock expect] deleteSearchableItemsWithIdentifiers:@[ webpageURL.absoluteString ]
                                                              completionHandler:OCMOCK_ANY];
 
             [ARSpotlight addToSpotlightIndex:NO entity:model];
@@ -645,19 +662,19 @@ describe(@"Indexing favourites", ^{
         beforeEach(^{
             networkModels = [NSMutableArray new];
             [networkModels addObject:[[ARStubbedFavoritesNetworkModel alloc] initWithFavoritesStack:@[
-                @[[Artwork modelWithJSON:@{ @"id": @"artwork-1-1" }], [Artwork modelWithJSON:@{ @"id": @"artwork-1-2" }]],
-                @[[Artwork modelWithJSON:@{ @"id": @"artwork-2-1" }], [Artwork modelWithJSON:@{ @"id": @"artwork-2-2" }]],
-                @[[Artwork modelWithJSON:@{ @"id": @"artwork-3-1" }], [Artwork modelWithJSON:@{ @"id": @"artwork-3-2" }]],
+                @[ [Artwork modelWithJSON:@{ @"id" : @"artwork-1-1" }], [Artwork modelWithJSON:@{ @"id" : @"artwork-1-2" }] ],
+                @[ [Artwork modelWithJSON:@{ @"id" : @"artwork-2-1" }], [Artwork modelWithJSON:@{ @"id" : @"artwork-2-2" }] ],
+                @[ [Artwork modelWithJSON:@{ @"id" : @"artwork-3-1" }], [Artwork modelWithJSON:@{ @"id" : @"artwork-3-2" }] ],
             ]]];
             [networkModels addObject:[[ARStubbedFavoritesNetworkModel alloc] initWithFavoritesStack:@[
-                @[[Artist modelWithJSON:@{ @"id": @"artist-1-1" }], [Artist modelWithJSON:@{ @"id": @"artist-1-2" }]],
-                @[[Artist modelWithJSON:@{ @"id": @"artist-2-1" }], [Artist modelWithJSON:@{ @"id": @"artist-2-2" }]],
-                @[[Artist modelWithJSON:@{ @"id": @"artist-3-1" }], [Artist modelWithJSON:@{ @"id": @"artist-3-2" }]],
+                @[ [Artist modelWithJSON:@{ @"id" : @"artist-1-1" }], [Artist modelWithJSON:@{ @"id" : @"artist-1-2" }] ],
+                @[ [Artist modelWithJSON:@{ @"id" : @"artist-2-1" }], [Artist modelWithJSON:@{ @"id" : @"artist-2-2" }] ],
+                @[ [Artist modelWithJSON:@{ @"id" : @"artist-3-1" }], [Artist modelWithJSON:@{ @"id" : @"artist-3-2" }] ],
             ]]];
             [networkModels addObject:[[ARStubbedFavoritesNetworkModel alloc] initWithFavoritesStack:@[
-                @[[Gene modelWithJSON:@{ @"id": @"gene-1-1" }], [Gene modelWithJSON:@{ @"id": @"gene-1-2" }]],
-                @[[Gene modelWithJSON:@{ @"id": @"gene-2-1" }], [Gene modelWithJSON:@{ @"id": @"gene-2-2" }]],
-                @[[Gene modelWithJSON:@{ @"id": @"gene-3-1" }], [Gene modelWithJSON:@{ @"id": @"gene-3-2" }]],
+                @[ [Gene modelWithJSON:@{ @"id" : @"gene-1-1" }], [Gene modelWithJSON:@{ @"id" : @"gene-1-2" }] ],
+                @[ [Gene modelWithJSON:@{ @"id" : @"gene-2-1" }], [Gene modelWithJSON:@{ @"id" : @"gene-2-2" }] ],
+                @[ [Gene modelWithJSON:@{ @"id" : @"gene-3-1" }], [Gene modelWithJSON:@{ @"id" : @"gene-3-2" }] ],
             ]]];
         });
 
@@ -671,12 +688,10 @@ describe(@"Indexing favourites", ^{
             [[[previouslyIndexedMock stub] andReturn:previouslyIndexedMock] mutableCopy];
 
             [[spotlightClassMock expect] indexFavoritesPass:[OCMArg checkWithBlock:^BOOL(NSArray *networkModels) {
-                return [networkModels[0] isKindOfClass:ARArtworkFavoritesNetworkModel.class]
-                        && [networkModels[1] isKindOfClass:ARArtistFavoritesNetworkModel.class]
-                            && [networkModels[2] isKindOfClass:ARGeneFavoritesNetworkModel.class];
+                return [networkModels[0] isKindOfClass:ARArtworkFavoritesNetworkModel.class] && [networkModels[1] isKindOfClass:ARArtistFavoritesNetworkModel.class] && [networkModels[2] isKindOfClass:ARGeneFavoritesNetworkModel.class];
             }]
-                                             previouslyIndexed:previouslyIndexedMock
-                                                 finalizeBlock:OCMOCK_ANY];
+                                          previouslyIndexed:previouslyIndexedMock
+                                              finalizeBlock:OCMOCK_ANY];
 
             [ARSpotlight indexAllUsersFavorites];
         });
@@ -690,7 +705,8 @@ describe(@"Indexing favourites", ^{
                 }
             }
 
-            [ARSpotlight indexFavoritesPass:networkModels previouslyIndexed:nil finalizeBlock:^{}];
+            [ARSpotlight indexFavoritesPass:networkModels previouslyIndexed:nil finalizeBlock:^{
+            }];
         });
 
         it(@"removes favorites from the index that are no longer present in the remote list of favorites", ^{
@@ -703,7 +719,8 @@ describe(@"Indexing favourites", ^{
                 [[spotlightClassMock expect] removeEntityByIdentifierFromSpotlightIndex:identifier];
             }
 
-            [ARSpotlight indexFavoritesPass:networkModels previouslyIndexed:previouslyIndexed finalizeBlock:^{}];
+            [ARSpotlight indexFavoritesPass:networkModels previouslyIndexed:previouslyIndexed finalizeBlock:^{
+            }];
         });
     });
 });

@@ -27,11 +27,11 @@ NSString *const ArtsyAPIInquiryAnalyticsLandingURL = @"ArtsyAPIInquiryAnalyticsL
                   failure:(void (^)(NSError *error))failure
 {
     NSParameterAssert(success);
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
 
     NSURLRequest *request = [ARRouter newOnDutyRepresentativeRequest];
     [self performRequest:request success:^(NSArray *results) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         if ([results count] == 0) {
             success(nil);
         } else {

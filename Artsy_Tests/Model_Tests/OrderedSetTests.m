@@ -10,14 +10,19 @@ it(@"initialize", ^{
 });
 
 it(@"getItems(FeaturedLink)", ^{
-    OrderedSet *orderedSet = [OrderedSet modelFromDictionary:@{ @"orderedSetID" : @"set-id", @"itemType" : @"FeaturedLink" }];
+    OrderedSet *orderedSet = [OrderedSet modelFromDictionary:@{ @"orderedSetID" : @"set-id",
+                                                                @"itemType" : @"FeaturedLink" }];
 
     [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/set/set-id/items" withResponse:@[
-        @{ @"id": @"one", @"href": @"/post/moby-my-highlights-from-art-los-angeles-contemporary", @"title" : @"Moby" },
-        @{ @"id": @"two", @"href": @"/post/iris_marden-my-highlights-from-art-los-angeles-contemporary", @"title" : @"Iris Marden" },
+        @{ @"id" : @"one",
+           @"href" : @"/post/moby-my-highlights-from-art-los-angeles-contemporary",
+           @"title" : @"Moby" },
+        @{ @"id" : @"two",
+           @"href" : @"/post/iris_marden-my-highlights-from-art-los-angeles-contemporary",
+           @"title" : @"Iris Marden" },
     ]];
 
-    __block NSArray * _orderedSetItems = nil;
+    __block NSArray *_orderedSetItems = nil;
     [orderedSet getItems:^(NSArray *items) {
         _orderedSetItems = items;
     }];
@@ -33,13 +38,15 @@ it(@"getItems(FeaturedLink)", ^{
 });
 
 it(@"getItems(Sale)", ^{
-    OrderedSet *orderedSet = [OrderedSet modelFromDictionary:@{ @"orderedSetID" : @"set-id", @"itemType" : @"Sale" }];
+    OrderedSet *orderedSet = [OrderedSet modelFromDictionary:@{ @"orderedSetID" : @"set-id",
+                                                                @"itemType" : @"Sale" }];
 
     [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/set/set-id/items" withResponse:@[
-        @{ @"id": @"frieze-london-sale-2013", @"name": @"Frieze London Sale 2013" }
+        @{ @"id" : @"frieze-london-sale-2013",
+           @"name" : @"Frieze London Sale 2013" }
     ]];
 
-    __block NSArray * _orderedSetItems = nil;
+    __block NSArray *_orderedSetItems = nil;
     [orderedSet getItems:^(NSArray *items) {
         _orderedSetItems = items;
     }];
@@ -55,7 +62,8 @@ it(@"getItems(Sale)", ^{
 });
 
 it(@"getItems raises an exception when retrieving items of an unsupported time", ^{
-    OrderedSet *orderedSet = [OrderedSet modelFromDictionary:@{ @"orderedSetID" : @"set-id", @"itemType" : @"Invalid" }];
+    OrderedSet *orderedSet = [OrderedSet modelFromDictionary:@{ @"orderedSetID" : @"set-id",
+                                                                @"itemType" : @"Invalid" }];
     expect(^{
         [orderedSet getItems:nil];
     }).to.raiseWithReason(@"NSInternalInconsistencyException", @"Unsupported item type: Invalid");

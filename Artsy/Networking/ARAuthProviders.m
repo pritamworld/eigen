@@ -33,9 +33,9 @@
             success(accessToken.key, accessToken.secret);
         }
         failure:^(NSError *error) {
-        if (failure) {
-            failure(error);
-        }
+            if (failure) {
+                failure(error);
+            }
         }];
 }
 
@@ -52,16 +52,15 @@
             failure(nil);
 
         } else if (!error && !result.token) {
-          NSString *description = error ? [error description] : @"token was nil";
-          [ARAnalytics event:ARAnalyticsErrorFailedToGetFacebookCredentials withProperties:@{ @"error" : description }];
-          ARErrorLog(@"Couldn't get Facebook credentials");
-          failure(error);
+            NSString *description = error ? [error description] : @"token was nil";
+            [ARAnalytics event:ARAnalyticsErrorFailedToGetFacebookCredentials withProperties:@{ @"error" : description }];
+            ARErrorLog(@"Couldn't get Facebook credentials");
+            failure(error);
 
         } else {
             FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
             [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, NSDictionary *user, NSError *error) {
                 if (!error) {
-                    
                     NSString *email = user[@"email"];
                     NSString *name = user[@"name"];
                     success(result.token.tokenString, email, name);

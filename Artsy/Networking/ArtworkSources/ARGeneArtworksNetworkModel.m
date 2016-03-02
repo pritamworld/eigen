@@ -33,11 +33,13 @@
 
     self.downloadLock = YES;
 
-   __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
 
     [self.gene getArtworksAtPage:self.currentPage success:^(NSArray *artworks) {
-        __strong typeof (wself) sself = wself;
-        if (!sself) { return; }
+        __strong typeof(wself) sself = wself;
+        if (!sself) {
+            return;
+        }
 
         self.currentPage++;
         self.downloadLock = NO;
@@ -46,7 +48,9 @@
             self.allDownloaded = YES;
         }
 
-        if(success) { success(artworks); }
+        if (success) {
+            success(artworks);
+        }
     }];
 }
 

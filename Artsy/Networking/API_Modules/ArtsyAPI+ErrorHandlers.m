@@ -2,6 +2,7 @@
 
 #import <AFNetworking/AFNetworking.h>
 
+
 @implementation ArtsyAPI (ErrorHandlers)
 
 + (void)handleHTTPError:(NSError *)error

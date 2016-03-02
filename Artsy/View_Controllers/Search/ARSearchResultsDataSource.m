@@ -1,6 +1,7 @@
 #import "ARSearchResultsDataSource.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
+
 @implementation ARSearchResultsDataSource
 
 - (id)init
@@ -38,9 +39,9 @@
 
     [cell.imageView setImageWithURLRequest:result.imageRequest placeholderImage:self.placeholderImage
                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-       __strong typeof (wcell) cell = wcell;
-       cell.imageView.image = image;
-       [cell layoutSubviews];
+                                       __strong typeof(wcell) cell = wcell;
+                                       cell.imageView.image = image;
+                                       [cell layoutSubviews];
 
                                    }
                                    failure:nil];

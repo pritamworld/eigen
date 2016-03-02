@@ -7,19 +7,19 @@ SpecBegin(ARSystemTimeTests);
 beforeEach(^{
     [ARSystemTime reset];
     [OHHTTPStubs stubJSONResponseAtPath:ARSystemTimeURL withResponse:@{
-        @"time": @"2422-03-24T13:29:34Z",
-        @"day": @(24),
-        @"wday": @(4),
-        @"month": @(3),
-        @"year": @(2422),
-        @"hour": @(13),
-        @"min": @(29),
-        @"sec": @(34),
-        @"dst": @(NO),
-        @"unix": @(1395926974),
-        @"utc_offset": @(0),
-        @"zone": @"UTC",
-        @"iso8601": @"2422-03-24T13:29:34Z"
+        @"time" : @"2422-03-24T13:29:34Z",
+        @"day" : @(24),
+        @"wday" : @(4),
+        @"month" : @(3),
+        @"year" : @(2422),
+        @"hour" : @(13),
+        @"min" : @(29),
+        @"sec" : @(34),
+        @"dst" : @(NO),
+        @"unix" : @(1395926974),
+        @"utc_offset" : @(0),
+        @"zone" : @"UTC",
+        @"iso8601" : @"2422-03-24T13:29:34Z"
     }];
 });
 

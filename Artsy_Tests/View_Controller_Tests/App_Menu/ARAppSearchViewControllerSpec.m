@@ -37,36 +37,36 @@ context(@"searching", ^{
 
             [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/match" withResponse:@[
                 @{
-                    @"model": @"artist",
-                    @"id": @"aes-plus-f",
-                    @"display": @"AES+F",
-                    @"label": @"Artist",
-                    @"score": @"excellent",
-                    @"search_detail": @"Russian, Founded 1987",
-                    @"published": @(YES),
-                    @"highlights": @[]
-                    },
+                    @"model" : @"artist",
+                    @"id" : @"aes-plus-f",
+                    @"display" : @"AES+F",
+                    @"label" : @"Artist",
+                    @"score" : @"excellent",
+                    @"search_detail" : @"Russian, Founded 1987",
+                    @"published" : @(YES),
+                    @"highlights" : @[]
+                },
                 @{
-                    @"model": @"artist",
-                    @"id": @"john-f-carlson",
-                    @"display": @"John F. Carlson",
-                    @"label": @"Artist",
-                    @"score": @"excellent",
-                    @"search_detail": @"Swedish-American, 1875-1947",
-                    @"published": @(YES),
-                    @"highlights": @[]
-                    },
+                    @"model" : @"artist",
+                    @"id" : @"john-f-carlson",
+                    @"display" : @"John F. Carlson",
+                    @"label" : @"Artist",
+                    @"score" : @"excellent",
+                    @"search_detail" : @"Swedish-American, 1875-1947",
+                    @"published" : @(YES),
+                    @"highlights" : @[]
+                },
                 @{
-                    @"model": @"artist",
-                    @"id": @"f-scott-hess",
-                    @"display": @"F. Scott Hess",
-                    @"label": @"Artist",
-                    @"score": @"excellent",
-                    @"search_detail": @"American, born 1955",
-                    @"published": @(YES),
-                    @"highlights": @[]
-                }]
-             ];
+                    @"model" : @"artist",
+                    @"id" : @"f-scott-hess",
+                    @"display" : @"F. Scott Hess",
+                    @"label" : @"Artist",
+                    @"score" : @"excellent",
+                    @"search_detail" : @"American, born 1955",
+                    @"published" : @(YES),
+                    @"highlights" : @[]
+                }
+            ]];
 
             [OHHTTPStubs stubImageResponseAtPathWithDefault:@"/api/v1/artist/aes-plus-f/image"];
             [OHHTTPStubs stubImageResponseAtPathWithDefault:@"/api/v1/artist/john-f-carlson/image"];
@@ -86,20 +86,21 @@ context(@"searching", ^{
 
             sharedBefore();
             sut.searchDataSource.searchResults = [NSOrderedSet orderedSetWithObjects:[SearchResult modelWithJSON:@{
-                @"model": @"artist",
-                @"id": @"f-scott-hess",
-                @"display": @"F. Scott Hess",
-                @"label": @"Artist",
-                @"score": @"excellent",
-                @"search_detail": @"American, born 1955",
-                @"published": @(YES),
-                @"highlights": @[]
-            }], nil];
+                @"model" : @"artist",
+                @"id" : @"f-scott-hess",
+                @"display" : @"F. Scott Hess",
+                @"label" : @"Artist",
+                @"score" : @"excellent",
+                @"search_detail" : @"American, born 1955",
+                @"published" : @(YES),
+                @"highlights" : @[]
+            }],
+                                                                                     nil];
             [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/match" withResponse:@[]];
-            
+
             sut.textField.text = @"f";
             [sut.textField sendActionsForControlEvents:UIControlEventEditingChanged];
-            
+
             expect(sut.searchResults.count).will.equal(0);
             return sut;
         });

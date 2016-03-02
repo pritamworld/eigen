@@ -176,12 +176,11 @@ describe(@"imageURL", ^{
                 @"id" : @"profile-id",
                 @"default_icon_version" : @"large",
                 @"icon" : @{
-                    @"image_urls" : @{
-                    }
+                    @"image_urls" : @{}
                 }
             }];
         });
-        
+
         it(@"uses the specified icon version", ^{
             expect(profile.iconURL).to.beNil();
         });

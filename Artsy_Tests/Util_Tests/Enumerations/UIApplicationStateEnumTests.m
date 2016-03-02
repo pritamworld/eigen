@@ -18,7 +18,7 @@ describe(@"toString", ^{
 
     it(@"invalid", ^{
         expect(^{
-            [UIApplicationStateEnum toString:(UIApplicationState) -1];
+            [UIApplicationStateEnum toString:(UIApplicationState)-1];
         }).to.raiseWithReason(@"NSGenericException", @"Unexpected UIApplicationState -1");
     });
 });

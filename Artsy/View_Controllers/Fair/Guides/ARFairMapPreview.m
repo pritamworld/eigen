@@ -9,6 +9,7 @@
 #import <EDColor/EDColor.h>
 #import <ObjectiveSugar/ObjectiveSugar.h>
 
+
 @interface ARFairMapPreview ()
 @property (nonatomic, weak, readonly) Map *map;
 @property (nonatomic, strong) ARFairShowMapper *showMapper;

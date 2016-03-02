@@ -20,27 +20,27 @@ describe(@"generates a location", ^{
         }];
         expect(fair.location).to.beNil();
     });
-    
+
     it(@"as a city", ^{
         Fair *fair = [Fair modelWithJSON:@{
             @"id" : @"fair-id",
-            @"location" : @{ @"city": @"Toronto" }
+            @"location" : @{@"city" : @"Toronto"}
         }];
         expect(fair.location).to.equal(@"Toronto");
     });
-    
+
     it(@"has a state", ^{
         Fair *fair = [Fair modelWithJSON:@{
             @"id" : @"fair-id",
-            @"location" : @{ @"state": @"ON" }
+            @"location" : @{@"state" : @"ON"}
         }];
         expect(fair.location).to.equal(@"ON");
     });
-    
+
     it(@"has a city and a state", ^{
         Fair *fair = [Fair modelWithJSON:@{
             @"id" : @"fair-id",
-            @"location" : @{ @"city": @"Toronto", @"state" : @"ON" }
+            @"location" : @{@"city" : @"Toronto", @"state" : @"ON"}
         }];
         expect(fair.location).to.equal(@"Toronto, ON");
     });
@@ -57,46 +57,46 @@ describe(@"getting image URL string", ^{
         expect([fair usesBrandedBanners]).to.beFalsy();
     });
 
-    it (@"gets nil for non-existent image version", ^{
+    it(@"gets nil for non-existent image version", ^{
         Fair *fair = [Fair modelFromDictionary:@{
             @"fairID" : @"fair-id",
-            @"imageURLs": @{
+            @"imageURLs" : @{
                 @"something_that_we_do_not_support" : @"http://something/something_that_we_do_not_support.jpg"
             }
         }];
         expect([fair bannerAddress]).to.beNil();
     });
-    
-    it (@"gets wide if availble", ^{
+
+    it(@"gets wide if availble", ^{
         Fair *fair = [Fair modelFromDictionary:@{
             @"fairID" : @"fair-id",
-            @"imageURLs": @{
-                @"wide": @"http://something/wide.jpg",
+            @"imageURLs" : @{
+                @"wide" : @"http://something/wide.jpg",
                 @"square" : @"http://something/square.jpg"
             }
         }];
         expect([fair bannerAddress]).to.equal(@"http://something/wide.jpg");
     });
 
-    it (@"prioritises banners if availble", ^{
+    it(@"prioritises banners if availble", ^{
         Fair *fair = [Fair modelFromDictionary:@{
-             @"fairID" : @"fair-id",
-             @"imageURLs": @{
-                 @"wide": @"http://something/wide.jpg",
-                 @"square" : @"http://something/square.jpg"
-             },
-             @"bannerURLs": @{
-                 @"wide": @"http://something/banner_wide.jpg",
-             }
-         }];
+            @"fairID" : @"fair-id",
+            @"imageURLs" : @{
+                @"wide" : @"http://something/wide.jpg",
+                @"square" : @"http://something/square.jpg"
+            },
+            @"bannerURLs" : @{
+                @"wide" : @"http://something/banner_wide.jpg",
+            }
+        }];
         expect([fair bannerAddress]).to.equal(@"http://something/banner_wide.jpg");
     });
 
-    it (@"can work with just banners", ^{
+    it(@"can work with just banners", ^{
         Fair *fair = [Fair modelFromDictionary:@{
             @"fairID" : @"fair-id",
-            @"bannerURLs": @{
-                @"wide": @"http://something/banner_wide.jpg",
+            @"bannerURLs" : @{
+                @"wide" : @"http://something/banner_wide.jpg",
             }
         }];
         expect([fair bannerAddress]).to.equal(@"http://something/banner_wide.jpg");

@@ -7,6 +7,7 @@ extern NSString *const ARUserActivityTypeGene;
 extern NSString *const ARUserActivityTypeFair;
 extern NSString *const ARUserActivityTypeShow;
 
+
 @interface ARUserActivity : NSUserActivity
 
 /// Creates a new ARUserActivity object. This object must be strongly held
@@ -14,4 +15,3 @@ extern NSString *const ARUserActivityTypeShow;
 + (instancetype)activityForEntity:(id<ARSpotlightMetadataProvider>)entity;
 
 @end
-

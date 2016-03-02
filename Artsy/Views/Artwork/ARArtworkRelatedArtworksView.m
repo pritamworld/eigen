@@ -102,11 +102,12 @@
     KSPromise *fairPromise = [artwork onFairUpdate:nil failure:nil];
 
     __block PartnerShow *show = nil;
-    KSPromise *partnerShowPromise = [artwork onPartnerShowUpdate:^(PartnerShow *s) { show = s;
+    KSPromise *partnerShowPromise = [artwork onPartnerShowUpdate:^(PartnerShow *s) {
+        show = s;
     } failure:nil];
 
     [[KSPromise when:@[ salePromise, fairPromise, partnerShowPromise ]] then:^id(id value) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
 
         if (show) {
             [sself addSectionsForShow:show];
@@ -129,7 +130,7 @@
         return nil;
 
     } error:^id(NSError *error) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         ARErrorLog(@"Error fetching sale/fair for %@. Error: %@", self.artwork.artworkID, error.localizedDescription);
         [sself addSectionWithRelatedArtworks];
         return error;
@@ -147,14 +148,14 @@
 {
     __weak typeof(self) wself = self;
     [self addRelatedArtworkRequest:[self.artwork getFeaturedShowsAtFair:fair success:^(NSArray *shows) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         for (PartnerShow *show in shows) {
             [sself addSectionWithOtherArtworksInShow:show];
         }
     }]];
 
     [self addRelatedArtworkRequest:[self.artwork getRelatedFairArtworks:fair success:^(NSArray *artworks) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself addSectionWithTag:ARRelatedArtworksSameFair artworks:artworks heading:@"Other works in fair"];
     }]];
 }
@@ -170,7 +171,7 @@
 {
     __weak typeof(self) wself = self;
     [self addRelatedArtworkRequest:[auction getArtworks:^(NSArray *artworks) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself addSectionWithTag:ARRelatedArtworksSameAuction artworks:artworks heading:@"Other works in auction"];
     }]];
 }
@@ -179,7 +180,7 @@
 {
     __weak typeof(self) wself = self;
     [self getArtworksInShow:show atPage:1 success:^(NSArray *artworks) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         ARArtworkRelatedArtworksContentView *view = [self addSectionWithTag:ARRelatedArtworksSameShow artworks:artworks heading:@"Other works in show"];
         [sself addArtworksInShow:show atPage:2 toView:view];
     }];
@@ -189,10 +190,12 @@
 {
     __weak typeof(self) wself = self;
     [self getArtworksInShow:show atPage:page success:^(NSArray *artworks) {
-        if (!artworks.count > 0) { return; }
-        __strong typeof (wself) sself = wself;
+        if (!artworks.count > 0) {
+            return;
+        }
+        __strong typeof(wself) sself = wself;
         [view.artworksVC appendItems:artworks];
-        [sself addArtworksInShow:show atPage:page+1 toView:view];
+        [sself addArtworksInShow:show atPage:page + 1 toView:view];
     }];
 }
 
@@ -209,10 +212,10 @@
 
     __weak typeof(self) wself = self;
     [self addRelatedArtworkRequest:[self.artwork.artist getArtworksAtPage:1 andParams:nil success:^(NSArray *artworks) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself addSectionWithTag:ARRelatedArtworksArtistArtworks
-                       artworks:artworks
-                        heading:[NSString stringWithFormat:@"Other works by %@", sself.artwork.artist.name]];
+                        artworks:artworks
+                         heading:[NSString stringWithFormat:@"Other works by %@", sself.artwork.artist.name]];
     }]];
 }
 
@@ -220,7 +223,7 @@
 {
     __weak typeof(self) wself = self;
     [self addRelatedArtworkRequest:[self.artwork getRelatedArtworks:^(NSArray *artworks) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself addSectionWithTag:ARRelatedArtworks artworks:artworks heading:@"Related artworks"];
     }]];
 }

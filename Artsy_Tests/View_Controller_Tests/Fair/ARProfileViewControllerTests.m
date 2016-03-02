@@ -15,6 +15,7 @@
 @property (atomic, strong) NSLayoutDimension *heightAnchor;
 @end
 
+
 @implementation ARProfileViewControllerTestsConcreteLayoutGuide
 @end
 
@@ -34,18 +35,18 @@ NSString *profileID = @"id";
 describe(@"initializer", ^{
     it(@"initializes with the correct profile ID", ^{
         ARProfileViewController *viewController = [[ARProfileViewController alloc] initWithProfileID:profileID];
-        
+
         expect(viewController.profileID).to.equal(profileID);
     });
 });
 
 describe(@"viewDidLoad", ^{
     __block ARProfileViewController *viewController;
-    
+
     beforeEach(^{
         viewController = [[ARProfileViewController alloc] initWithProfileID:profileID];
     });
-    
+
     it(@"Sets up viewDidAppear: to call loadProfile", ^{
         id mockViewController = [OCMockObject partialMockForObject:viewController];
         [[mockViewController expect] loadProfile];
@@ -53,7 +54,7 @@ describe(@"viewDidLoad", ^{
         [viewController viewWillAppear:NO];
         [mockViewController verify];
     });
-    
+
     it(@"Only calls loadProfile the first time viewDidAppear: is called", ^{
         id mockViewController = [OCMockObject partialMockForObject:viewController];
         [[mockViewController expect] loadProfile];
@@ -66,39 +67,39 @@ describe(@"viewDidLoad", ^{
 
 describe(@"loadProfile", ^{
     __block ARProfileViewController *viewController;
-    
+
     beforeEach(^{
         viewController = [[ARProfileViewController alloc] initWithProfileID:profileID];
     });
-    
+
     it(@"calls getProfileForProfileID:", ^{
         id apiMock = [OCMockObject mockForClass:[ArtsyAPI class]];
-        
+
         [[apiMock expect] getProfileForProfileID:profileID success:OCMOCK_ANY failure:OCMOCK_ANY];
-        
+
         [viewController loadProfile];
-        
+
         [apiMock verify];
         [apiMock stopMocking];
     });
-    
+
     pending(@"loads martsy view on failure", ^{
         id apiMock = [OCMockObject mockForClass:[ArtsyAPI class]];
-        
+
         id viewControllerMock = [OCMockObject partialMockForObject:viewController];
         [[viewControllerMock expect] loadMartsyView];
-        
+
         [[apiMock expect] getProfileForProfileID:profileID success:OCMOCK_ANY failure:[OCMArg checkWithBlock:^BOOL(void (^obj)(NSError *error)) {
             if (obj) {
                 obj(nil);
             }
             return YES;
         }]];
-        
+
         [viewController loadProfile];
-        
+
         [viewControllerMock verify];
-        
+
         [apiMock verify];
         [apiMock stopMocking];
     });
@@ -134,7 +135,7 @@ describe(@"loadProfile", ^{
 
             [viewController loadProfile];
             [viewControllerMock verify];
-            
+
             [apiMock verify];
             [apiMock stopMocking];
             [ARTestContext stopStubbing];
@@ -158,10 +159,10 @@ describe(@"loadProfile", ^{
                 }
                 return YES;
             }] failure:OCMOCK_ANY];
-            
+
             [viewController loadProfile];
             [viewControllerMock verify];
-            
+
             [apiMock verify];
             [apiMock stopMocking];
             [ARTestContext stopStubbing];
@@ -186,23 +187,23 @@ describe(@"loadProfile", ^{
                 }
                 return YES;
             }] failure:OCMOCK_ANY];
-            
+
             [viewController loadProfile];
             [viewControllerMock verify];
-            
+
             [apiMock verify];
             [apiMock stopMocking];
             [ARTestContext stopStubbing];
         });
     });
 
-    
+
     it(@"loads martsy when a profile's owner is anything but a fair or organizer", ^{
         id apiMock = [OCMockObject mockForClass:[ArtsyAPI class]];
-        
+
         id viewControllerMock = [OCMockObject partialMockForObject:viewController];
         [[viewControllerMock expect] loadMartsyView];
-        
+
         [[apiMock expect] getProfileForProfileID:profileID success:[OCMArg checkWithBlock:^BOOL(void (^obj)(Profile *profile)) {
             Profile *profile = [Profile modelWithJSON:@{
                 @"id" : @"profile-id",
@@ -218,11 +219,11 @@ describe(@"loadProfile", ^{
             }
             return YES;
         }] failure:OCMOCK_ANY];
-        
+
         [viewController loadProfile];
-        
+
         [viewControllerMock verify];
-        
+
         [apiMock verify];
         [apiMock stopMocking];
     });
@@ -230,50 +231,50 @@ describe(@"loadProfile", ^{
 
 describe(@"loadMartsyView", ^{
     __block ARProfileViewController *viewController;
-    
+
     beforeEach(^{
         viewController = [[ARProfileViewController alloc] initWithProfileID:profileID];
     });
-    
+
     it(@"creates and shows an internal mobile web browser", ^{
         id viewControllerMock = [OCMockObject partialMockForObject:viewController];
         [[viewControllerMock expect] showViewController:[OCMArg checkForClass:[ARInternalMobileWebViewController class]]];
-        
+
         [viewController loadMartsyView];
-        
+
         [viewControllerMock verify];
     });
 });
 
 describe(@"showViewController:", ^{
     __block ARProfileViewController *viewController;
-    
+
     beforeEach(^{
         viewController = [[ARProfileViewController alloc] initWithProfileID:profileID];
     });
-    
+
     it(@"adds as a child view controller", ^{
         id viewControllerParameter = [[UIViewController alloc] init];
-        
+
         id viewControllerMock = [OCMockObject partialMockForObject:viewController];
-        
+
         [[viewControllerMock expect] ar_addModernChildViewController:viewControllerParameter];
-        
+
         [viewController showViewController:viewControllerParameter];
         [viewControllerMock verify];
     });
-    
+
     it(@"Creates an alignment based on the top layout guide", ^{
         ARProfileViewControllerTestsConcreteLayoutGuide *layoutGuide = [[ARProfileViewControllerTestsConcreteLayoutGuide alloc] init];
         layoutGuide.length = 1337.0f;
-        
+
         id viewMock = [OCMockObject mockForClass:[UIView class]];
         [[viewMock expect] alignTop:[NSString stringWithFormat:@"%f", layoutGuide.length]
                             leading:@"0"
                              bottom:@"0"
                            trailing:@"0"
                              toView:OCMOCK_ANY];
-        
+
         id viewControllerMock = [OCMockObject partialMockForObject:viewController];
         [[[viewControllerMock stub] andReturn:layoutGuide] topLayoutGuide];
     });

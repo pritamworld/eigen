@@ -28,6 +28,7 @@
 /// Pretends to be an AFNetworking operation, but really, it just calls a block
 /// thanks Obj-C runtime.
 
+
 @interface ARFakeAFJSONOperation : NSBlockOperation
 @property (nonatomic, assign) dispatch_queue_t completionQueue;
 @property (nonatomic, strong) dispatch_group_t completionGroup;
@@ -64,10 +65,7 @@
                                                                                         NSString *className,
                                                                                         NSString *methodOrFunction) {
                 return !(
-                    ([className isEqualToString:@"ArtsyAPI"] && [methodOrFunction hasPrefix:@"getRequest:parseInto"])
-                    || [methodOrFunction hasPrefix:@"ar_dispatch"]
-                    || [methodOrFunction isEqualToString:@"main"]
-                );
+                    ([className isEqualToString:@"ArtsyAPI"] && [methodOrFunction hasPrefix:@"getRequest:parseInto"]) || [methodOrFunction hasPrefix:@"ar_dispatch"] || [methodOrFunction isEqualToString:@"main"]);
             });
             NSAssert(stackTrace.count > 0, @"Stack trace empty, might need more white listing.");
 
@@ -82,7 +80,7 @@
         return [super requestOperation:request success:success failure:failureCallback];
     }
 
-    
+
     OHHTTPStubsResponse *response = stub.responseBlock(request);
     [response.inputStream open];
     NSError *error = nil;
@@ -96,9 +94,13 @@
         NSHTTPURLResponse *URLresponse = [[NSHTTPURLResponse alloc] initWithURL:request.URL statusCode:response.statusCode HTTPVersion:@"1.0" headerFields:response.httpHeaders];
 
         if (response.statusCode >= 200 && response.statusCode < 205) {
-            if (success) { success(request, URLresponse, json); }
+            if (success) {
+                success(request, URLresponse, json);
+            }
         } else {
-            if (failureCallback) { failureCallback(request, URLresponse, response.error, json); }
+            if (failureCallback) {
+                failureCallback(request, URLresponse, response.error, json);
+            }
         }
     }];
 

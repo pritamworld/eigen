@@ -4,6 +4,7 @@
 
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 
+
 @interface ARAuctionBannerView ()
 @property (nonatomic) UILabel *label;
 @property (nonatomic, strong) NSLayoutConstraint *heightConstraint;

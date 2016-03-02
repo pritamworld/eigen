@@ -2,6 +2,7 @@
 
 @class Artist, Profile;
 
+
 @interface ARFollowArtistFeedItem : ARFeedItem <UIActivityItemSource>
 
 @property (nonatomic, copy, readonly) NSArray *artworks;

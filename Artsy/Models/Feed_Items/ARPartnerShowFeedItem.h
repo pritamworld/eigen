@@ -2,6 +2,7 @@
 
 @class PartnerShow;
 
+
 @interface ARPartnerShowFeedItem : ARFeedItem
 
 @property (nonatomic, strong, readonly) PartnerShow *show;

@@ -14,8 +14,10 @@
         __weak typeof(self) wself = self;
 
         return [ArtsyAPI getOrderedSetWithKey:@"favorites:suggested-genes" success:^(OrderedSet *set) {
-            __strong typeof (wself) sself = wself;
-            if (!sself) { return; }
+            __strong typeof(wself) sself = wself;
+            if (!sself) {
+                return;
+            }
 
             [ArtsyAPI getOrderedSetItems:set.orderedSetID.copy atPage:page withType:Gene.class success:success failure:failure];
 

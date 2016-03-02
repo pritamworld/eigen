@@ -2,6 +2,7 @@
 
 @class Artist, Gene;
 
+
 @interface ARPublishedArtworkSetFeedItem : ARFeedItem
 
 @property (readonly, nonatomic) Artist *artist;

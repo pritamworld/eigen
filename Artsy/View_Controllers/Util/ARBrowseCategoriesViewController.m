@@ -13,6 +13,7 @@
 
 #import "UIDevice-Hardware.h"
 
+
 @interface ARBrowseCategoriesViewController () <ARBrowseFeaturedLinksCollectionViewControllerDelegate>
 @end
 

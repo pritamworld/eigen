@@ -30,9 +30,9 @@
 
 - (void)getShowInfo:(void (^)(PartnerShow *))success failure:(void (^)(NSError *))failure
 {
-   __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     [ArtsyAPI getShowInfo:_show success:^(PartnerShow *show) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
 
         if (!sself.fair) {
             sself.fair = show.fair;

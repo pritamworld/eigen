@@ -4,6 +4,7 @@
 
 @class ARSerifLineHeightLabel;
 
+
 @interface ARSignUpActiveUserViewController : UIViewController
 
 @property (nonatomic, weak) AROnboardingViewController *delegate;

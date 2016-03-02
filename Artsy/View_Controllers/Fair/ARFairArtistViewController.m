@@ -78,12 +78,14 @@ AR_VC_OVERRIDE_SUPER_DESIGNATED_INITIALIZERS;
 
     __weak typeof(self) wself = self;
     [self.networkModel getArtistForArtistID:self.artist.artistID success:^(Artist *artist) {
-        __strong typeof (wself) sself = wself;
-        if (!sself) { return; }
+        __strong typeof(wself) sself = wself;
+        if (!sself) {
+            return;
+        }
         sself->_artist = artist;
         [sself artistDidLoad];
     } failure:^(NSError *error) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself artistDidLoad];
     }];
 }
@@ -108,8 +110,10 @@ AR_VC_OVERRIDE_SUPER_DESIGNATED_INITIALIZERS;
 
     __weak typeof(self) wself = self;
     [self.networkModel getShowsForArtistID:self.artist.artistID inFairID:self.fair.fairID success:^(NSArray *shows) {
-        __strong typeof (wself) sself = wself;
-        if (!sself) { return; }
+        __strong typeof(wself) sself = wself;
+        if (!sself) {
+            return;
+        }
 
         sself->_partnerShows = shows;
 
@@ -181,18 +185,20 @@ AR_VC_OVERRIDE_SUPER_DESIGNATED_INITIALIZERS;
 {
     __weak typeof(self) wself = self;
     [self.fair getFairMaps:^(NSArray *maps) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
 
         Map *map = maps.firstObject;
-        if (!map) { return; }
+        if (!map) {
+            return;
+        }
 
         // Reset follow button to have a top-margin of just 10 now that there will be a map.
         for (UIView *stackEntry in sself.view.stackView.subviews) {
-          if (stackEntry.tag == ARFairArtistFollow) {
-            [sself.view.stackView removeSubview:stackEntry];
-            [sself.view.stackView addSubview:stackEntry withTopMargin:@"10" sideMargin:@"40"];
-            break;
-          }
+            if (stackEntry.tag == ARFairArtistFollow) {
+                [sself.view.stackView removeSubview:stackEntry];
+                [sself.view.stackView addSubview:stackEntry withTopMargin:@"10" sideMargin:@"40"];
+                break;
+            }
         }
 
         CGRect frame = CGRectMake(0, 0, CGRectGetWidth(sself.view.frame), 85);
@@ -208,7 +214,7 @@ AR_VC_OVERRIDE_SUPER_DESIGNATED_INITIALIZERS;
 {
     __weak typeof(self) wself = self;
     [self.fair getFairMaps:^(NSArray *maps) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         ARFairMapViewController *viewController = [[ARSwitchBoard sharedInstance] loadMapInFair:sself.fair title:sself.header selectedPartnerShows:sself.partnerShows];
         [sself.navigationController pushViewController:viewController animated:ARPerformWorkAsynchronously];
     }];

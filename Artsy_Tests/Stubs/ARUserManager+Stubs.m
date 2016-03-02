@@ -13,7 +13,6 @@
 + (NSString *)stubUserEmail { return @"user@example.com"; };
 + (NSString *)stubUserPassword { return @"password"; };
 + (NSString *)stubUserName { return @"Joe Shmoe"; };
-
 + (void)stubAccessToken:(NSString *)accessToken expiresIn:(NSString *)expiresIn
 {
     [OHHTTPStubs stubJSONResponseAtPath:@"/oauth2/access_token" withResponse:@{ @"access_token" : accessToken,
@@ -59,27 +58,27 @@
         loginWithUsername:[ARUserManager stubUserEmail]
         password:[ARUserManager stubUserPassword]
         successWithCredentials:^(NSString *accessToken, NSDate *tokenExpiryDate) {
-         if (credentials) {
-             credentials(accessToken, tokenExpiryDate);
-         }
+            if (credentials) {
+                credentials(accessToken, tokenExpiryDate);
+            }
         }
         gotUser:^(User *currentUser) {
-         if (success) {
-             success(currentUser);
-         }
-             done = YES;
+            if (success) {
+                success(currentUser);
+            }
+            done = YES;
         }
         authenticationFailure:^(NSError *error) {
-         if (authFail) {
-             authFail(error);
-         }
-         done = YES;
+            if (authFail) {
+                authFail(error);
+            }
+            done = YES;
         }
         networkFailure:^(NSError *error) {
-         if (networkFailure) {
-             networkFailure(error);
-         }
-         done = YES;
+            if (networkFailure) {
+                networkFailure(error);
+            }
+            done = YES;
         }];
 
     while (!done) {
@@ -109,27 +108,27 @@
     [[ARUserManager sharedManager]
         loginWithFacebookToken:token
         successWithCredentials:^(NSString *accessToken, NSDate *tokenExpiryDate) {
-        if (credentials) {
-            credentials(accessToken, tokenExpiryDate);
-        }
+            if (credentials) {
+                credentials(accessToken, tokenExpiryDate);
+            }
         }
         gotUser:^(User *currentUser) {
-         if (success) {
-             success(currentUser);
-         }
-         done = YES;
+            if (success) {
+                success(currentUser);
+            }
+            done = YES;
         }
         authenticationFailure:^(NSError *error) {
-        if (authFail) {
-            authFail(error);
-        }
-        done = YES;
+            if (authFail) {
+                authFail(error);
+            }
+            done = YES;
         }
         networkFailure:^(NSError *error) {
-         if (networkFailure) {
-             networkFailure(error);
-         }
-         done = YES;
+            if (networkFailure) {
+                networkFailure(error);
+            }
+            done = YES;
         }];
 
     while (!done) {
@@ -161,27 +160,27 @@
     __block BOOL done = NO;
     [[ARUserManager sharedManager] loginWithTwitterToken:token secret:secret
         successWithCredentials:^(NSString *accessToken, NSDate *tokenExpiryDate) {
-         if (credentials) {
-             credentials(accessToken, tokenExpiryDate);
-         }
+            if (credentials) {
+                credentials(accessToken, tokenExpiryDate);
+            }
         }
         gotUser:^(User *currentUser) {
-         if (success) {
-             success(currentUser);
-         }
-         done = YES;
+            if (success) {
+                success(currentUser);
+            }
+            done = YES;
         }
         authenticationFailure:^(NSError *error) {
-         if (authFail) {
-             authFail(error);
-         }
-         done = YES;
+            if (authFail) {
+                authFail(error);
+            }
+            done = YES;
         }
         networkFailure:^(NSError *error) {
-         if (networkFailure) {
-             networkFailure(error);
-         }
-         done = YES;
+            if (networkFailure) {
+                networkFailure(error);
+            }
+            done = YES;
         }];
 
     while (!done) {

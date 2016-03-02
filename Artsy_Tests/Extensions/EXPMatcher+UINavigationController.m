@@ -30,27 +30,27 @@ EXPMatcherImplementationBegin(haveViewControllerClasses, (NSArray * expectedClas
         return matches;
     });
 
-    failureMessageForTo(^NSString *{
+    failureMessageForTo(^NSString * {
         if (actualIsNil)
             return @"the actual value is nil/null";
         if (expectedIsNil)
             return @"the expected value is nil/null";
-        
+
         return [NSString
-                stringWithFormat:@"expected: a view controller structure of %@, "
-                "got: a structure of %@",
-                [expectedClassStrings join:@" "], [actualsClassStrings join:@" "]];
+            stringWithFormat:@"expected: a view controller structure of %@, "
+                              "got: a structure of %@",
+                             [expectedClassStrings join:@" "], [actualsClassStrings join:@" "]];
     });
 
-    failureMessageForNotTo(^NSString *{
+    failureMessageForNotTo(^NSString * {
         if (actualIsNil)
             return @"the actual value is nil/null";
         if (expectedIsNil)
             return @"the expected value is nil/null";
         return [NSString
-               stringWithFormat:@"expected: a view controller to not have a structure of %@, "
-               "got: a structure of %@",
-               [expectedClassStrings join:@" "], [actualsClassStrings join:@" "]];
+            stringWithFormat:@"expected: a view controller to not have a structure of %@, "
+                              "got: a structure of %@",
+                             [expectedClassStrings join:@" "], [actualsClassStrings join:@" "]];
     });
 }
 EXPMatcherImplementationEnd

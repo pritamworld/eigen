@@ -2,6 +2,7 @@
 
 #import <UIView_BooleanAnimations/UIView+BooleanAnimations.h>
 
+
 @interface ARSpinner ()
 @property (nonatomic, strong) UIView *spinnerView;
 @property (nonatomic, strong) CABasicAnimation *rotationAnimation;

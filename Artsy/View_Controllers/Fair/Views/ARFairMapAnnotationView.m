@@ -6,6 +6,7 @@
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 #import <ObjectiveSugar/ObjectiveSugar.h>
 
+
 @interface ARFairMapAnnotationView ()
 @property (nonatomic, weak) UIImageView *mapFeatureView;
 @property (nonatomic, strong) UILabel *primaryTitleLabel;

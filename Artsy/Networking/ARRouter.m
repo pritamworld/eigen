@@ -92,16 +92,16 @@ static NSString *hostFromString(NSString *string)
 {
     staticHTTPClient = [[AFHTTPSessionManager alloc] initWithBaseURL:baseApiURL];
     [staticHTTPClient.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-            switch (status) {
-                case AFNetworkReachabilityStatusUnknown:
-                    break; // do nothing
-                case AFNetworkReachabilityStatusNotReachable:
-                    [[NSNotificationCenter defaultCenter] postNotificationName:ARNetworkUnavailableNotification object:nil];
-                    break;
-                default:
-                    [[NSNotificationCenter defaultCenter] postNotificationName:ARNetworkAvailableNotification object:nil];
-                    break;
-            }
+        switch (status) {
+            case AFNetworkReachabilityStatusUnknown:
+                break; // do nothing
+            case AFNetworkReachabilityStatusNotReachable:
+                [[NSNotificationCenter defaultCenter] postNotificationName:ARNetworkUnavailableNotification object:nil];
+                break;
+            default:
+                [[NSNotificationCenter defaultCenter] postNotificationName:ARNetworkAvailableNotification object:nil];
+                break;
+        }
     }];
 
     // Ensure the keychain is empty incase you've uninstalled and cleared user data
@@ -693,7 +693,8 @@ static NSString *hostFromString(NSString *string)
 
 + (NSURLRequest *)newFollowingRequestForGenes:(NSArray *)genes
 {
-    NSArray *slugs = [genes map:^(Gene *gene) { return gene.geneID;
+    NSArray *slugs = [genes map:^(Gene *gene) {
+        return gene.geneID;
     }];
     return [self requestWithMethod:@"GET" path:ARFollowGenesURL parameters:@{ @"genes" : slugs }];
 }

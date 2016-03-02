@@ -14,16 +14,16 @@ SpecBegin(ARSharingController);
 
 describe(@"sharing", ^{
     __block ARSharingController *sharingController;
-    
+
     describe(@"objectID", ^{
         before(^{
             sharingController = [ARSharingController new];
         });
-        
-        for (Class class in @[[Artwork class], [Artist class], [Gene class], [PartnerShow class]]){
+
+        for (Class class in @[ [Artwork class], [Artist class], [Gene class], [PartnerShow class] ]) {
             it([NSString stringWithFormat:@"returns %@ id", class], ^{
                 NSString *object_id = NSStringWithFormat(@"id_for_%@", NSStringFromClass(class));
-                sharingController.object = [class modelWithJSON:@{@"id" : object_id} error:nil];
+                sharingController.object = [class modelWithJSON:@{ @"id" : object_id } error:nil];
                 expect(sharingController.objectID).to.equal(object_id);
             });
         };
@@ -37,34 +37,34 @@ describe(@"sharing", ^{
         describe(@"with an Artwork", ^{
             __block Artwork *artwork;
             before(^{
-                artwork = [Artwork modelWithJSON:@{@"title" : @"Artwork Title"}];
+                artwork = [Artwork modelWithJSON:@{ @"title" : @"Artwork Title" }];
                 sharingController.object = artwork;
             });
             it(@"formats string when there is no Artist", ^{
                 expect([sharingController message]).to.equal(@"\"Artwork Title\"");
             });
             it(@"formats string when there is an Artist", ^{
-                Artist *artist = [Artist modelWithJSON:@{@"name" : @"An Artist"}];
+                Artist *artist = [Artist modelWithJSON:@{ @"name" : @"An Artist" }];
                 artwork.artist = artist;
                 expect([sharingController message]).to.equal(@"\"Artwork Title\" by An Artist");
             });
         });
 
         it(@"formats the string for a PartnerShow", ^{
-            PartnerShow *show = [PartnerShow modelWithJSON:@{@"name" : @"The Best Show Ever"}];
+            PartnerShow *show = [PartnerShow modelWithJSON:@{ @"name" : @"The Best Show Ever" }];
             sharingController.object = show;
             expect([sharingController message]).to.equal(@"See The Best Show Ever");
         });
 
 
         it(@"returns a Gene's name", ^{
-            Gene *gene = [Gene modelWithJSON:@{@"name" : @"Surrealism"}];
+            Gene *gene = [Gene modelWithJSON:@{ @"name" : @"Surrealism" }];
             sharingController.object = gene;
             expect([sharingController message]).to.equal(@"Surrealism");
         });
 
         it(@"returns an Artist's name", ^{
-            Artist *artist = [Artist modelWithJSON:@{@"name" : @"Jeff Koons"}];
+            Artist *artist = [Artist modelWithJSON:@{ @"name" : @"Jeff Koons" }];
             sharingController.object = artist;
             expect([sharingController message]).to.equal(@"Jeff Koons");
         });

@@ -54,16 +54,16 @@ const NSInteger ARFairFavoritesNetworkModelMaxRandomExhibitors = 10;
             RACSubject *partnerSubject = [[RACSubject subject] setNameWithFormat:@"getProfileFollowsForFair:success:"];
 
             [[RACSignal
-                combineLatest:@[[[RACObserve(fair, shows) ignore:nil] take:1], partnerSubject]
-                reduce:^id(NSSet *shows, NSArray *exhibitors) {
-                   return exhibitors;
-                }] subscribeNext:^(NSArray *partnersArray) {
-                    NSArray *buttons = [partnersArray map:^id(Partner *partner) {
-                        return [self navigationButtonForPartner:partner inFair:fair];
-                    }];
-
-                    exhibitorsBlock(buttons);
+                combineLatest:@[ [[RACObserve(fair, shows) ignore:nil] take:1], partnerSubject ]
+                       reduce:^id(NSSet *shows, NSArray *exhibitors) {
+                           return exhibitors;
+                       }] subscribeNext:^(NSArray *partnersArray) {
+                NSArray *buttons = [partnersArray map:^id(Partner *partner) {
+                    return [self navigationButtonForPartner:partner inFair:fair];
                 }];
+
+                exhibitorsBlock(buttons);
+            }];
 
             if (follows.count == 0) {
                 // No content returned from API – just use random content generated once the shows property has been set
@@ -110,10 +110,12 @@ const NSInteger ARFairFavoritesNetworkModelMaxRandomExhibitors = 10;
                                 NSArray *buttons = [show.artworks map:^id(Artwork *artwork) {
                                     return [self navigationButtonForArtwork:artwork inFair:fair];
                                 }];
-                                appendArtistArtworksBlock (buttons);
+                                appendArtistArtworksBlock(buttons);
                             }
                         } failure:^(NSError *error) {
-                            if (failure) { failure (error); };
+                            if (failure) {
+                                failure(error);
+                            };
                         }];
                     }
                 }
@@ -199,7 +201,7 @@ const NSInteger ARFairFavoritesNetworkModelMaxRandomExhibitors = 10;
     ARFairShowFeed *feed = [[ARFairShowFeed alloc] initWithFair:fair partner:partner];
     __weak typeof(self) wself = self;
     [feed getFeedItemsWithCursor:feed.cursor success:^(NSOrderedSet *parsed) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         ARPartnerShowFeedItem *showFeedItem = parsed.firstObject;
         if (feed && showFeedItem) { // check feed to retain it
             UIViewController *viewController = [[ARSwitchBoard sharedInstance] loadShow:showFeedItem.show fair:fair];

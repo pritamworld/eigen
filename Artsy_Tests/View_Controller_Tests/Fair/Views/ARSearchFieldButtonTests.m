@@ -12,7 +12,7 @@ it(@"adds a gesture recogniser when a delegate is set", ^{
     // starts out nil
     expect(button.gestureRecognizers).to.beFalsy();
 
-    id <ARSearchFieldButtonDelegate> object = (id)[[NSObject alloc] init];
+    id<ARSearchFieldButtonDelegate> object = (id)[[NSObject alloc] init];
     [button setDelegate:object];
     expect(button.gestureRecognizers).to.haveCountOf(1);
 });

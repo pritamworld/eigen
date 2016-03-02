@@ -1,5 +1,6 @@
 #import <Mantle/Mantle.h>
 
+
 @implementation MTLModel (Dictionary)
 
 + (instancetype)modelFromDictionary:(NSDictionary *)dictionaryValue

@@ -137,7 +137,7 @@ static const CGFloat ARMenuButtonDimension = 46;
         if (index == 0) {
             [button alignLeadingEdgeWithView:tabContainer predicate:@"0"];
         } else {
-            [constraintsForButtons addObject:[[button constrainLeadingSpaceToView:buttons[index - 1] predicate:@"0"] lastObject] ];
+            [constraintsForButtons addObject:[[button constrainLeadingSpaceToView:buttons[index - 1] predicate:@"0"] lastObject]];
         }
         if (index == buttons.count - 1) {
             [constraintsForButtons addObject:[[tabContainer alignTrailingEdgeWithView:button predicate:@"0"] lastObject]];
@@ -191,7 +191,9 @@ static const CGFloat ARMenuButtonDimension = 46;
     NSArray *buttons = self.tabContentView.buttons;
     __block CGFloat buttonsWidth = ARMenuButtonDimension;
     [buttons eachWithIndex:^(UIButton *button, NSUInteger index) {
-        if (index == 0){ return; }
+        if (index == 0) {
+            return;
+        }
         buttonsWidth += button.intrinsicContentSize.width;
     }];
 
@@ -201,7 +203,9 @@ static const CGFloat ARMenuButtonDimension = 46;
 
     [self.constraintsForButtons eachWithIndex:^(NSLayoutConstraint *constraint, NSUInteger index) {
         CGFloat margin = eachMargin;
-        if (index == 0 || index == self.constraintsForButtons.count - 1){ margin /= 2; }
+        if (index == 0 || index == self.constraintsForButtons.count - 1) {
+            margin /= 2;
+        }
         constraint.constant = margin;
     }];
 }

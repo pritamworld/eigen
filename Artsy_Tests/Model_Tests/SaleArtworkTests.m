@@ -10,37 +10,39 @@ describe(@"artwork for sale", ^{
     it(@"has default state", ^{
         expect([_saleArtwork auctionState]).to.equal(ARAuctionStateDefault);
     });
-    
+
     it(@"says it has no estimate when there is no min/max estimate", ^{
         _saleArtwork = [[SaleArtwork alloc] init];
         expect(_saleArtwork.hasEstimate).to.beFalsy();
     });
-    
+
     it(@"says it has an estimate when there is no min/max estimate", ^{
-        _saleArtwork = [SaleArtwork modelWithJSON:@{@"high_estimate_cents" : @20000}];
+        _saleArtwork = [SaleArtwork modelWithJSON:@{ @"high_estimate_cents" : @20000 }];
         expect(_saleArtwork.hasEstimate).to.beTruthy();
 
-        _saleArtwork = [SaleArtwork modelWithJSON:@{@"low_estimate_cents" : @20000}];
+        _saleArtwork = [SaleArtwork modelWithJSON:@{ @"low_estimate_cents" : @20000 }];
         expect(_saleArtwork.hasEstimate).to.beTruthy();
 
-        _saleArtwork = [SaleArtwork modelWithJSON:@{@"high_estimate_cents" : @20000, @"low_estimate_cents" : @10000}];
+        _saleArtwork = [SaleArtwork modelWithJSON:@{ @"high_estimate_cents" : @20000,
+                                                     @"low_estimate_cents" : @10000 }];
         expect(_saleArtwork.hasEstimate).to.beTruthy();
     });
-    
+
     describe(@"estimate string", ^{
-        
+
         it(@"returns a string showing both low and high ", ^{
-            _saleArtwork = [SaleArtwork modelWithJSON:@{ @"high_estimate_cents" : @20000, @"low_estimate_cents" : @10000}];
+            _saleArtwork = [SaleArtwork modelWithJSON:@{ @"high_estimate_cents" : @20000,
+                                                         @"low_estimate_cents" : @10000 }];
             expect(_saleArtwork.estimateString).to.equal(@"Estimate: $100 – $200");
         });
-        
+
         it(@"returns a string showing low if available ", ^{
-            _saleArtwork = [SaleArtwork modelWithJSON:@{ @"low_estimate_cents" : @10000}];
+            _saleArtwork = [SaleArtwork modelWithJSON:@{ @"low_estimate_cents" : @10000 }];
             expect(_saleArtwork.estimateString).to.equal(@"Estimate: $100");
         });
-        
+
         it(@"returns a string showing high if available", ^{
-            _saleArtwork = [SaleArtwork modelWithJSON:@{ @"high_estimate_cents" : @100000}];
+            _saleArtwork = [SaleArtwork modelWithJSON:@{ @"high_estimate_cents" : @100000 }];
             expect(_saleArtwork.estimateString).to.equal(@"Estimate: $1,000");
         });
     });
@@ -119,7 +121,7 @@ describe(@"artwork for sale", ^{
     });
 
     describe(@"with multiple bidder positions", ^{
-        __block BidderPosition * _position;
+        __block BidderPosition *_position;
 
         beforeEach(^{
             _position = [BidderPosition modelFromDictionary:@{ @"maxBidAmountCents" : @(103) }];

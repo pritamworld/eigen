@@ -35,14 +35,14 @@ describe(@"signup splash", ^{
             [mock verify];
         });
 
-        it (@"not ipad", ^{
+        it(@"not ipad", ^{
             [ARTestContext stubDevice:ARDeviceTypePhone5];
             [[mock reject] presentWebOnboarding];
             [[mock expect] presentCollectorLevel];
             [vc didSignUpAndLogin];
             [mock verify];
         });
-        
+
         describe(@"when registering to bid", ^{
             it(@"does not onboard on iPhone", ^{
                 [ARTestContext stubDevice:ARDeviceTypePhone5];

@@ -38,7 +38,7 @@
     [postsFeedTimeline getNewItems:^(NSArray *items) {
         success(postsFeedTimeline);
     } failure:^(NSError *error) {
-        success (postsFeedTimeline);
+        success(postsFeedTimeline);
     }];
 }
 
@@ -50,7 +50,9 @@
 - (void)getMapInfoForFair:(Fair *)fair success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure
 {
     [ArtsyAPI getMapInfoForFair:fair success:^(NSArray *maps) {
-        if (!fair) { return; }
+        if (!fair) {
+            return;
+        }
         fair.maps = maps;
         if (success) {
             success(maps);

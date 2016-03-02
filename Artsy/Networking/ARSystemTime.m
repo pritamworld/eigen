@@ -12,7 +12,8 @@ static NSTimeInterval ARSystemTimeInterval = NSTimeIntervalSince1970;
 + (void)sync
 {
     [ArtsyAPI getSystemTime:^(SystemTime *systemTime) {
-        @synchronized(self) {
+        @synchronized(self)
+        {
             ARSystemTimeInterval = [[NSDate date] timeIntervalSinceDate:systemTime.date];
             ARActionLog(@"Synchronized clock with server, local time is %.2f second(s) %@", ABS(ARSystemTimeInterval), ARSystemTimeInterval > 0 ? @"ahead" : @"behind");
         }

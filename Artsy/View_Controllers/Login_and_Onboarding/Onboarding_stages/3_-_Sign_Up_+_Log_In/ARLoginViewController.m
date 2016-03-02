@@ -186,22 +186,24 @@
             secret:secret
             successWithCredentials:nil
             gotUser:^(User *currentUser) {
-                __strong typeof (wself) sself = wself;
+                __strong typeof(wself) sself = wself;
                 [sself loggedInWithType:ARLoginViewControllerLoginTypeTwitter user:currentUser];
-            } authenticationFailure:^(NSError *error) {
-                __strong typeof (wself) sself = wself;
+            }
+            authenticationFailure:^(NSError *error) {
+                __strong typeof(wself) sself = wself;
                 [sself ar_removeIndeterminateLoadingIndicatorAnimated:YES];
                 [sself twitterError];
 
-            } networkFailure:^(NSError *error) {
-                __strong typeof (wself) sself = wself;
+            }
+            networkFailure:^(NSError *error) {
+                __strong typeof(wself) sself = wself;
                 [sself failedToLoginToTwitter:error];
             }];
 
     } failure:^(NSError *error) {
-             __strong typeof (wself) sself = wself;
-             [sself ar_removeIndeterminateLoadingIndicatorAnimated:YES];
-             [sself twitterError];
+        __strong typeof(wself) sself = wself;
+        [sself ar_removeIndeterminateLoadingIndicatorAnimated:YES];
+        [sself twitterError];
     }];
 }
 
@@ -225,28 +227,31 @@
     __weak typeof(self) wself = self;
     [ARAuthProviders getTokenForFacebook:^(NSString *token, NSString *email, NSString *name) {
         [[ARUserManager sharedManager] loginWithFacebookToken:token
-           successWithCredentials:nil gotUser:^(User *currentUser) {
-               __strong typeof (wself) sself = wself;
+            successWithCredentials:nil
+            gotUser:^(User *currentUser) {
+                __strong typeof(wself) sself = wself;
                 [sself loggedInWithType:ARLoginViewControllerLoginTypeFacebook user:currentUser];
-           } authenticationFailure:^(NSError *error) {
-               __strong typeof (wself) sself = wself;
+            }
+            authenticationFailure:^(NSError *error) {
+                __strong typeof(wself) sself = wself;
 
-               [sself ar_removeIndeterminateLoadingIndicatorAnimated:YES];
+                [sself ar_removeIndeterminateLoadingIndicatorAnimated:YES];
 
-               NSString * reason = error.userInfo[@"com.facebook.sdk:ErrorLoginFailedReason"];
-               if (![reason isEqualToString:@"com.facebook.sdk:UserLoginCancelled"]) {
-                   [sself fbError];
-               } else if ([error.userInfo[@"AFNetworkingOperationFailingURLResponseErrorKey"] statusCode] == 401) {
-                   // This case handles a 401 from Artsy's server, which means the Facebook account is not associated with a user.
-                   [sself fbNoUser];
-               }
+                NSString *reason = error.userInfo[@"com.facebook.sdk:ErrorLoginFailedReason"];
+                if (![reason isEqualToString:@"com.facebook.sdk:UserLoginCancelled"]) {
+                    [sself fbError];
+                } else if ([error.userInfo[@"AFNetworkingOperationFailingURLResponseErrorKey"] statusCode] == 401) {
+                    // This case handles a 401 from Artsy's server, which means the Facebook account is not associated with a user.
+                    [sself fbNoUser];
+                }
 
-           } networkFailure:^(NSError *error) {
-               __strong typeof (wself) sself = wself;
-               [sself failedToLoginToFacebook:error];
-           }];
+            }
+            networkFailure:^(NSError *error) {
+                __strong typeof(wself) sself = wself;
+                [sself failedToLoginToFacebook:error];
+            }];
     } failure:^(NSError *error) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
 
         [sself ar_removeIndeterminateLoadingIndicatorAnimated:YES];
         [sself fbError];
@@ -417,18 +422,18 @@
         password:password
         successWithCredentials:nil
         gotUser:^(User *currentUser) {
-        __strong typeof (wself) sself = wself;
-        [sself loggedInWithType:ARLoginViewControllerLoginTypeEmail user:currentUser];
+            __strong typeof(wself) sself = wself;
+            [sself loggedInWithType:ARLoginViewControllerLoginTypeEmail user:currentUser];
         }
 
         authenticationFailure:^(NSError *error) {
-        __strong typeof (wself) sself = wself;
-        [sself authenticationFailure];
+            __strong typeof(wself) sself = wself;
+            [sself authenticationFailure];
         }
 
         networkFailure:^(NSError *error) {
-        __strong typeof (wself) sself = wself;
-        [sself networkFailure:error];
+            __strong typeof(wself) sself = wself;
+            [sself networkFailure:error];
         }];
 }
 

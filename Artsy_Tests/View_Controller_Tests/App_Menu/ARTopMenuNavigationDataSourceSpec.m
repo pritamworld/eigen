@@ -77,7 +77,7 @@ describe(@"notifications", ^{
         [navDataSource setNotificationCount:1 forControllerAtIndex:ARTopTabControllerIndexNotifications];
         [appMock verify];
     });
-    
+
     it(@"resets the app icon badge if there are 0 notifications", ^{
         id appMock = [OCMockObject partialMockForObject:[UIApplication sharedApplication]];
         [[appMock expect] setApplicationIconBadgeNumber:0];

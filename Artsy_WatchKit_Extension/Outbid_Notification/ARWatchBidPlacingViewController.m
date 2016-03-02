@@ -23,7 +23,7 @@
     WatchMessage *message = [WatchMessage messageToRequestBidWithDetails:self.details];
     [self.class openParentApplication:message.dictionaryRepresentation reply:^(NSDictionary *replyInfo, NSError *error) {
 
-        WatchMessage *message  = [[WatchMessage alloc] initWithDictionary:replyInfo];
+        WatchMessage *message = [[WatchMessage alloc] initWithDictionary:replyInfo];
         enum ARWatchBiddingStatus status = [message.referenceObject integerValue];
         [self.doneButtonGroup setHidden:NO];
 

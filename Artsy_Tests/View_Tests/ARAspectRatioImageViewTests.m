@@ -13,7 +13,7 @@ describe(@"intrinsicContentSize", ^{
         });
 
         it(@"returns no metric", ^{
-            CGSize size = (CGSize) { UIViewNoIntrinsicMetric, UIViewNoIntrinsicMetric };
+            CGSize size = (CGSize){UIViewNoIntrinsicMetric, UIViewNoIntrinsicMetric};
             expect([view intrinsicContentSize]).to.equal(size);
         });
     });

@@ -4,6 +4,7 @@
 
 @class Artist, Fair;
 
+
 @interface ARArtistViewController : UIViewController <ARFairAwareObject>
 
 - (instancetype)initWithArtistID:(NSString *)artistID;

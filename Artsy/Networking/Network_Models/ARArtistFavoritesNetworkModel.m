@@ -14,7 +14,9 @@
         __weak typeof(self) wself = self;
 
         return [ArtsyAPI getOrderedSetWithKey:@"personalize:suggested-artists" success:^(OrderedSet *set) {
-            if (!wself) { return; }
+            if (!wself) {
+                return;
+            }
 
             [ArtsyAPI getOrderedSetItems:set.orderedSetID.copy atPage:page withType:Artist.class success:success failure:failure];
 

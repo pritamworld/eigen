@@ -15,7 +15,8 @@
 @end
 
 
-@interface ARAnimatedTickView () {
+@interface ARAnimatedTickView ()
+{
     ARTickViewBackLayer *_backLayer;
 }
 @end

@@ -2,6 +2,7 @@
 
 @class Fair;
 
+
 @interface ARFairSectionViewController : UIViewController
 
 - (instancetype)initWithFair:(Fair *)fair;

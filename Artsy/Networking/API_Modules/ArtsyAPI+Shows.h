@@ -3,6 +3,7 @@
 @class PartnerShow;
 @class AFHTTPRequestOperation;
 
+
 @interface ArtsyAPI (Shows)
 
 + (AFHTTPRequestOperation *)getShowInfo:(PartnerShow *)show success:(void (^)(PartnerShow *show))success failure:(void (^)(NSError *error))failure;

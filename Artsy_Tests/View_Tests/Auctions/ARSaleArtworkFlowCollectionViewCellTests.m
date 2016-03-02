@@ -21,7 +21,7 @@ beforeEach(^{
 it(@"looks good with compact cells", ^{
     CGSize size = CGSizeMake(375, 120);
     id layoutAttributesMock = [OCMockObject mockForClass:[UICollectionViewLayoutAttributes class]];
-    [[[layoutAttributesMock stub] andReturnValue:[NSValue valueWithCGSize:size] ] size];
+    [[[layoutAttributesMock stub] andReturnValue:[NSValue valueWithCGSize:size]] size];
     ARSaleArtworkFlowCollectionViewCell *subject = [[ARSaleArtworkFlowCollectionViewCompactCell alloc] init];
 
     [subject applyLayoutAttributes:layoutAttributesMock];
@@ -36,7 +36,7 @@ it(@"looks good with compact cells", ^{
 it(@"looks good with regular cells", ^{
     CGSize size = CGSizeMake(688, 120);
     id layoutAttributesMock = [OCMockObject mockForClass:[UICollectionViewLayoutAttributes class]];
-    [[[layoutAttributesMock stub] andReturnValue:[NSValue valueWithCGSize:size] ] size];
+    [[[layoutAttributesMock stub] andReturnValue:[NSValue valueWithCGSize:size]] size];
     ARSaleArtworkFlowCollectionViewCell *subject = [[ARSaleArtworkFlowCollectionViewRegularCell alloc] init];
 
     [subject applyLayoutAttributes:layoutAttributesMock];

@@ -129,9 +129,9 @@ AR_VC_OVERRIDE_SUPER_DESIGNATED_INITIALIZERS;
     }
 
     if (![self hasNewStyledBanner] && [self hasIconImage]) {
-       __weak typeof (self) wself = self;
+        __weak typeof(self) wself = self;
         [self.iconImageView ar_setImageWithURL:[NSURL URLWithString:[self.profile iconURL]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            __strong typeof (wself) sself = wself;
+            __strong typeof(wself) sself = wself;
             if (image) {
                 [sself.iconImageView alignBottomEdgeWithView:sself.view predicate:@"0"];
                 [sself.iconImageView alignLeadingEdgeWithView:sself.view predicate:@"20"];

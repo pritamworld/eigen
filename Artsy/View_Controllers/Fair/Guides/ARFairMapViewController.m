@@ -148,7 +148,7 @@
     // Due to a problem in the custom UIViewController transitions API (when the VC's view is a scrollview subclass)
     __weak typeof(self) wself = self;
     [[self rac_signalForSelector:@selector(viewWillDisappear:)] subscribeNext:^(id x) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
 
         CGPoint contentOffset = sself.mapView.contentOffset;
 

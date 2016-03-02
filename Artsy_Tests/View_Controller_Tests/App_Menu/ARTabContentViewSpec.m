@@ -38,11 +38,11 @@ it(@"sets current and previous view index", ^{
 });
 
 describe(@"correctly shows a navigation controller", ^{
-    it(@"at first index" , ^{
+    it(@"at first index", ^{
         expect(outerController).to.haveValidSnapshot();
     });
 
-    it(@"at another index" , ^{
+    it(@"at another index", ^{
         [sut setCurrentViewIndex:1 animated:NO];
         expect(outerController).to.haveValidSnapshot();
     });
@@ -58,12 +58,12 @@ it(@"correctly sets the child view controller", ^{
 });
 
 describe(@"sends appearance message to child view controller", ^{
-    
+
     before(^{
         mockVC1 = [OCMockObject partialMockForObject:innerController1];
         mockVC2 = [OCMockObject partialMockForObject:innerController2];
     });
-    
+
     it(@"viewDidLoad", ^{
         UIViewController *newController = [[UIViewController alloc] init];
         OCMockObject *mockVC3 = [OCMockObject partialMockForObject:newController];
@@ -73,7 +73,7 @@ describe(@"sends appearance message to child view controller", ^{
         [sut setCurrentViewIndex:1 animated:NO];
         [mockVC3 verify];
     });
-    
+
     it(@"viewWillAppear", ^{
         [[mockVC2 expect] viewWillAppear:NO];
         [sut setCurrentViewIndex:1 animated:NO];

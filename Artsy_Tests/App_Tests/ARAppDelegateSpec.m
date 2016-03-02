@@ -9,11 +9,11 @@ it(@"doesn't setup a UI during will/did launch process", ^{
     UIApplication *app = (id)[[NSObject alloc] init];
 
     // not currently set up, but here for future proofing
-    if ([sut respondsToSelector:@selector(application:willFinishLaunchingWithOptions:)]){
+    if ([sut respondsToSelector:@selector(application:willFinishLaunchingWithOptions:)]) {
         [sut application:app willFinishLaunchingWithOptions:@{}];
     }
 
-    if ([sut respondsToSelector:@selector(application:didFinishLaunchingWithOptions:)]){
+    if ([sut respondsToSelector:@selector(application:didFinishLaunchingWithOptions:)]) {
         [sut application:app didFinishLaunchingWithOptions:@{}];
     }
 

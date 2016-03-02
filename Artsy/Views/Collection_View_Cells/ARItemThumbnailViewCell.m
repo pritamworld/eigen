@@ -8,6 +8,7 @@
 
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 
+
 @interface ARItemThumbnailViewCell ()
 @property (nonatomic, strong) UIImageView *imageView;
 @end

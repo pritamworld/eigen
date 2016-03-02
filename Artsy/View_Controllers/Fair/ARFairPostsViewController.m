@@ -7,6 +7,7 @@
 #import "ORStackView+ArtsyViews.h"
 #import "ARSwitchBoard+Eigen.h"
 
+
 @implementation ARFairPostsViewController
 
 - (instancetype)initWithFair:(Fair *)fair
@@ -16,9 +17,9 @@
         return nil;
     }
 
-   __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     [fair getPosts:^(ARFeedTimeline *feedTimeline) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself setFeedTimeline:feedTimeline];
     }];
 

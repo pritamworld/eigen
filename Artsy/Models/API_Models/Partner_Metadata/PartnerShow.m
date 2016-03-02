@@ -187,7 +187,8 @@ static ARStandardDateFormatter *staticDateFormatter;
 
 - (AFHTTPRequestOperation *)getArtworksAtPage:(NSInteger)page success:(void (^)(NSArray *artworks))success;
 {
-    return [ArtsyAPI getArtworksForShow:self atPage:page success:success failure:^(NSError *_) { success(@[]);
+    return [ArtsyAPI getArtworksForShow:self atPage:page success:success failure:^(NSError *_) {
+        success(@[]);
     }];
 }
 

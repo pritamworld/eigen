@@ -10,9 +10,9 @@ describe(@"init", ^{
 
     beforeEach(^{
         image = [Image modelWithJSON:@{
-            @"id": @"image-id",
-            @"max_tiled_height": @(2376),
-            @"max_tiled_width": @(4224),
+            @"id" : @"image-id",
+            @"max_tiled_height" : @(2376),
+            @"max_tiled_width" : @(4224),
             @"tile_size" : @(233),
             @"tile_base_url" : @"http://static0.artsy.net/maps/map-id/level/dztiles-512-0"
         }];
@@ -47,7 +47,7 @@ describe(@"init", ^{
 
         it(@"stores and retrieves a tile", ^{
             UIImage *uiImage = [UIImage imageFromColor:[UIColor whiteColor]];
-            NSURL * url = [NSURL URLWithString:@"http://static0.artsy.net/maps/map-id/level/dztiles-512-0/11/1_0.jpg"];
+            NSURL *url = [NSURL URLWithString:@"http://static0.artsy.net/maps/map-id/level/dztiles-512-0/11/1_0.jpg"];
             [dataSource tiledImageView:nil didDownloadTiledImage:uiImage atURL:url];
             UIImage *loadedImage = [dataSource tiledImageView:nil imageTileForLevel:11 x:1 y:0];
             expect(loadedImage).toNot.beNil();

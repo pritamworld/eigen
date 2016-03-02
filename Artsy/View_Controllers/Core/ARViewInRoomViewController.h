@@ -10,6 +10,7 @@
 
 @class Artwork;
 
+
 @interface ARViewInRoomViewController : UIViewController <ARMenuAwareViewController>
 
 + (UIImageView *)imageViewForFramedArtwork;

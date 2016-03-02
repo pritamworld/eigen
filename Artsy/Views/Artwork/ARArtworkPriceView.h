@@ -2,6 +2,7 @@
 
 @class Artwork, SaleArtwork;
 
+
 @interface ARArtworkPriceView : ORStackView
 
 - (void)addContactForPrice;

@@ -57,9 +57,9 @@
         case ARWatchMessageRequestBid: {
             WatchBiddingDetails *details = [[WatchBiddingDetails alloc] initWithDictionary:incoming.referenceObject];
 
-            __weak typeof (self) wself = self;
+            __weak typeof(self) wself = self;
             [ARWatchBidNetworkModel bidWithDetails:details:^(BidderPosition *position) {
-                __strong typeof (wself) sself = wself;
+                __strong typeof(wself) sself = wself;
                 [sself validateTopBidderWithDetails:details completion:reply];
 
             } failure:^(NSError *error) {

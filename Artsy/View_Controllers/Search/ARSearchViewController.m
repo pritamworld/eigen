@@ -15,6 +15,7 @@
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 #import <AFNetworking/AFNetworking.h>
 
+
 @interface ARSearchViewController () <UITextFieldDelegate, UITableViewDelegate>
 @property (readonly, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (readonly, nonatomic) UITableView *resultsView;
@@ -227,9 +228,9 @@
 
 - (void)fetchSearchResults:(NSString *)text replace:(BOOL)replaceResults
 {
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     _searchRequest = [self searchWithQuery:text success:^(NSArray *results) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself addResults:results replace:replaceResults];
         [sself finishSearching];
     } failure:^(NSError *error) {
@@ -293,14 +294,16 @@
 
 - (void)removeResultsViewAnimated:(BOOL)animated
 {
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
 
     [UIView animateIf:animated duration:0.15:^{
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         sself.resultsView.alpha = 0;
     } completion:^(BOOL finished) {
-        __strong typeof (wself) sself = wself;
-        if (!sself) { return; }
+        __strong typeof(wself) sself = wself;
+        if (!sself) {
+            return;
+        }
 
         sself.resultsView.hidden = YES;
     }];
@@ -327,14 +330,16 @@
         self.infoLabel.alpha = show ? 1 : 0;
     } completion:^(BOOL finished) {
         if (!show) self.infoLabel.hidden = YES;
-        if (completion) { completion(); };
+        if (completion) {
+            completion();
+        };
     }];
 }
 
 // display the info label if there's nothing to search for
 - (void)updateInfoLabel:(BOOL)animated
 {
-    [self showInfoLabel:(self.textField.text.length == 0)animated:animated];
+    [self showInfoLabel:(self.textField.text.length == 0) animated:animated];
 }
 
 - (void)setDefaultInfoLabelText

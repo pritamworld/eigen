@@ -4,6 +4,7 @@
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
+
 @implementation PartnerShowCoordinates
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey

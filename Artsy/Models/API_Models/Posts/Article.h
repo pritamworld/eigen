@@ -2,6 +2,7 @@
 
 #import "ARShareableObject.h"
 
+
 @interface Article : NSObject <ARShareableObject>
 
 @property (nonatomic, copy, readonly) NSString *name;

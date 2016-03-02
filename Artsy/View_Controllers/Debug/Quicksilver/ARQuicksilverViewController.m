@@ -170,7 +170,7 @@
 
         __weak typeof(self) wself = self;
         _searchRequest = [ArtsyAPI searchWithQuery:query success:^(NSArray *results) {
-            __strong typeof (wself) sself = wself;
+            __strong typeof(wself) sself = wself;
             sself.searchResults = [results copy];
             sself.selectedIndex = 0;
 
@@ -215,9 +215,9 @@
     [cell.imageView setImageWithURLRequest:result.imageRequest placeholderImage:placeholder
 
                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        __weak typeof (wcell) cell = wcell;
-         cell.imageView.image = image;
-         [cell layoutSubviews];
+                                       __weak typeof(wcell) cell = wcell;
+                                       cell.imageView.image = image;
+                                       [cell layoutSubviews];
 
                                    }
                                    failure:nil];

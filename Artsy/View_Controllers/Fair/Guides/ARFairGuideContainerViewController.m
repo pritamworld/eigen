@@ -70,21 +70,21 @@ AR_VC_OVERRIDE_SUPER_DESIGNATED_INITIALIZERS;
 
     self.view.backgroundColor = [UIColor whiteColor];
 
-   __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     [[[self rac_signalForSelector:@selector(viewWillAppear:)] take:1] subscribeNext:^(id _) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself downloadContent];
     }];
 
     [[RACSignal combineLatest:@[ RACObserve(self, mapsLoaded), RACObserve(self, fairLoaded) ]] subscribeNext:^(id x) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself checkForDataLoaded];
     }];
 
     // Every time the mapCollapsed property changes, we want to setup the constraints.
     // We skip the first time because we don't want to fire immediately.
     [[[RACObserve(self, mapCollapsed) skip:1] distinctUntilChanged] subscribeNext:^(id _) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
 
         CGFloat height = 0;
         if (sself.mapCollapsed) {
@@ -100,16 +100,18 @@ AR_VC_OVERRIDE_SUPER_DESIGNATED_INITIALIZERS;
         }
 
         [UIView animateIf:sself.animatedTransitions
-             duration:0.3f :^{
-                 sself.fairMapViewController.titleHidden = self.mapCollapsed;
-                 [sself setupContraints];
-                 [sself setBackButtonRotation];
+            duration:
+            0.3f:^{
+                sself.fairMapViewController.titleHidden = self.mapCollapsed;
+                [sself setupContraints];
+                [sself setBackButtonRotation];
 
-             } completion:^(BOOL finished) {
-                 if (parentButtonsVisible) {
-                     [sself updateBackButtonAlpha];
-                 }
-             }];
+            }
+            completion:^(BOOL finished) {
+                if (parentButtonsVisible) {
+                    [sself updateBackButtonAlpha];
+                }
+            }];
     }];
 }
 

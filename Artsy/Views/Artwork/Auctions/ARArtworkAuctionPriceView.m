@@ -8,6 +8,7 @@
 #import <Artsy_UILabels/NSNumberFormatter+ARCurrency.h>
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 
+
 @implementation ARArtworkAuctionPriceView
 
 - (void)updateWithSaleArtwork:(SaleArtwork *)saleArtwork

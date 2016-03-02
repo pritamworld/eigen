@@ -22,9 +22,9 @@
         return nil;
     }
 
-   __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     [artwork onArtworkUpdate:^{
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself updateWithArtwork:artwork];
     } failure:nil];
 

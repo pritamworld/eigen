@@ -2,6 +2,7 @@
 
 #import "ARFonts.h"
 
+
 @implementation ARTermsAndConditionsView
 
 

@@ -89,7 +89,8 @@
 
 - (AFHTTPRequestOperation *)getArtworks:(void (^)(NSArray *artworks))success;
 {
-    return [ArtsyAPI getArtworksForSale:self.saleID success:success failure:^(NSError *_) { success(@[]);
+    return [ArtsyAPI getArtworksForSale:self.saleID success:success failure:^(NSError *_) {
+        success(@[]);
     }];
 }
 

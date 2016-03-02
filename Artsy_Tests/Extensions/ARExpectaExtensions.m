@@ -4,7 +4,9 @@ void _itTestsWithDevicesRecordingAsynchronouslyWithName(id self, int lineNumber,
 {
     void (^snapshot)(id, NSString *) = ^void(id sut, NSString *suffix) {
 
-        EXPExpect *expectation = _EXP_expect(self, lineNumber, fileName, ^id{ return EXPObjectify((sut)); });
+        EXPExpect *expectation = _EXP_expect(self, lineNumber, fileName, ^id {
+            return EXPObjectify((sut));
+        });
 
         expectation = async ? expectation.will : expectation.to;
 

@@ -86,7 +86,7 @@ WebViewNavigationControllerWithPath(NSString *path)
 - (void)prefetchBrowse
 {
     [self.browseViewController.networkModel getBrowseFeaturedLinks:^(NSArray *links) {
-        NSArray *urls = [links map:^(FeaturedLink * link){
+        NSArray *urls = [links map:^(FeaturedLink *link) {
             return link.largeImageURL;
         }];
         SDWebImagePrefetcher *browsePrefetcher = [[SDWebImagePrefetcher alloc] init];

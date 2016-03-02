@@ -18,6 +18,7 @@
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 #import <ObjectiveSugar/ObjectiveSugar.h>
 
+
 @interface ARSignUpSplashTextViewController : UIViewController
 @property (nonatomic, readwrite) NSInteger index;
 @property (nonatomic, strong, readwrite) NSString *text;
@@ -316,7 +317,7 @@
 - (void)setFormEnabled:(BOOL)enabled animated:(BOOL)animated
 {
     [UIView animateIf:animated duration:0.15:^{
-        for (UIView *view in @[self.trialButton, self.logInButton, self.signUpButton]) {
+        for (UIView *view in @[ self.trialButton, self.logInButton, self.signUpButton ]) {
             view.userInteractionEnabled = enabled;
             view.alpha = enabled ? 1 : 0.3;
         }

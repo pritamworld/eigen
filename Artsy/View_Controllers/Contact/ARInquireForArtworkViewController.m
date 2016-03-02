@@ -733,16 +733,16 @@ typedef NS_ENUM(NSInteger, ARInquireFormState) {
 {
     __weak typeof(self) wself = self;
     [ArtsyAPI getInquiryContact:^(User *contactStub) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         sself.specialistNameLabel.text = contactStub.name;
 
     } withProfile:^(Profile *contactProfile) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         // Use a white BG because the square to circle looks ugly
         [sself.specialistHeadImage ar_setImageWithURL:[NSURL URLWithString:contactProfile.iconURL] placeholderImage:[UIImage imageFromColor:[UIColor whiteColor]]];
 
     } failure:^(NSError *error) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         ARErrorLog(@"Couldn't get an inquiry contact. %@", error.localizedDescription);
         [sself performSelector:@selector(getCurrentAdmin) withObject:nil afterDelay:2];
     }];
@@ -875,10 +875,10 @@ typedef NS_ENUM(NSInteger, ARInquireFormState) {
 
     __weak typeof(self) wself = self;
     self.emailValidator.validatorStateChangedHandler = ^(ALPValidatorState newState) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         sself.sendButton.enabled = sself.emailValidator.isValid;
-      // We can also use newState to determine what to do in more complex situations. Validator states include:
-      // ALPValidatorValidationStateValid, ALPValidatorValidationStateInvalid, ALPValidatorValidationStateWaitingForRemote
+        // We can also use newState to determine what to do in more complex situations. Validator states include:
+        // ALPValidatorValidationStateValid, ALPValidatorValidationStateInvalid, ALPValidatorValidationStateWaitingForRemote
     };
 }
 

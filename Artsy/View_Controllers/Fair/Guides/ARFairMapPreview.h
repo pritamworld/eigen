@@ -2,6 +2,7 @@
 
 @class Map, PartnerShow;
 
+
 @interface ARFairMapPreview : ARAnnotatedMapView
 
 - (id)initWithFairMap:(Map *)map andFrame:(CGRect)frame;

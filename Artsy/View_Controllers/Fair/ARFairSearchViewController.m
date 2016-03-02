@@ -114,7 +114,7 @@
     AFHTTPRequestOperation *request = [ArtsyAPI searchWithFairID:self.fair.fairID andQuery:query success:^(NSArray *searchResults) {
         success([searchResults select:^BOOL(SearchResult *searchResult) {
             // we have local search results for shows
-            return ! [searchResult.model isEqual:[PartnerShow class]];
+            return ![searchResult.model isEqual:[PartnerShow class]];
         }]);
     } failure:failure];
 

@@ -12,7 +12,6 @@
 
 // NOP. doesn't try grab a JSON file for parsing
 - (void)setup {}
-
 /// Lets us choose whether a op completes or not
 - (void)checkForUpdates:(void (^)(BOOL updatedDataOnServer))updateCheckCompleted
 {
@@ -62,7 +61,7 @@ describe(@"ARSwitchboard+Echo", ^{
     it(@"updates routes from Echo when updateRoutes is called", ^{
         expect(canRoute(switchboard.routes, testRoute.path)).to.beFalsy();
 
-        switchboard.echo.routes = @{ testRoute.name : testRoute };
+        switchboard.echo.routes = @{testRoute.name : testRoute};
         [switchboard updateRoutes];
 
         expect(canRoute(switchboard.routes, testRoute.path)).to.beTruthy();
@@ -72,13 +71,13 @@ describe(@"ARSwitchboard+Echo", ^{
         ARStubbedEcho *echo = (id)switchboard.echo;
 
         // Add the initial route
-        switchboard.echo.routes = @{ testRoute.name : testRoute };
+        switchboard.echo.routes = @{testRoute.name : testRoute};
         [switchboard updateRoutes];
 
         expect(canRoute(switchboard.routes, testRoute.path)).to.beTruthy();
 
         // Ok, now update the routes
-        switchboard.echo.routes = @{ alternativeRoute.name : alternativeRoute };
+        switchboard.echo.routes = @{alternativeRoute.name : alternativeRoute};
 
         // Trigger an update
         echo.givenUpdateBlock(YES);

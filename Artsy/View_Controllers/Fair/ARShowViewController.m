@@ -189,8 +189,8 @@ self.actionButtonsView.actionButtonDescriptions = descriptions;
 {
     __weak typeof(self) wself = self;
     [self.showNetworkModel getFairMaps:^(NSArray *maps) {
-        __strong typeof (wself) sself = wself;
-        ARFairMapViewController *viewController = [[ARSwitchBoard sharedInstance] loadMapInFair:sself.fair title:sself.show.title selectedPartnerShows:@[sself.show]];
+        __strong typeof(wself) sself = wself;
+        ARFairMapViewController *viewController = [[ARSwitchBoard sharedInstance] loadMapInFair:sself.fair title:sself.show.title selectedPartnerShows:@[ sself.show ]];
         [sself.navigationController pushViewController:viewController animated:ARPerformWorkAsynchronously];
     }];
 }
@@ -237,16 +237,20 @@ self.actionButtonsView.actionButtonDescriptions = descriptions;
 
     __weak typeof(self) wself = self;
     [self.showNetworkModel getShowInfo:^(PartnerShow *show) {
-        __strong typeof (wself) sself = wself;
-        if (!sself) { return; }
+        __strong typeof(wself) sself = wself;
+        if (!sself) {
+            return;
+        }
 
         [sself.show mergeValuesForKeysFromModel:show];
 
-        if (!sself.fair) { sself->_fair = show.fair; }
+        if (!sself.fair) {
+            sself->_fair = show.fair;
+        }
 
         [self showDidLoad];
     } failure:^(NSError *error) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself showDidLoad];
     }];
 }
@@ -388,7 +392,7 @@ self.actionButtonsView.actionButtonDescriptions = descriptions;
 
     __weak typeof(self) wself = self;
     [self getArtworksAtPage:1 onArtworks:^(NSArray *artworks) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         if (artworks.count > 0) {
             [sself.showArtworksViewController appendItems:artworks];
         } else {
@@ -404,7 +408,7 @@ self.actionButtonsView.actionButtonDescriptions = descriptions;
 
     __weak typeof(self) wself = self;
     [self.showNetworkModel getArtworksAtPage:page success:^(NSArray *artworks) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         onArtworks(artworks);
         if (artworks.count > 0) {
             [sself getArtworksAtPage:page + 1 onArtworks:onArtworks];
@@ -435,10 +439,12 @@ self.actionButtonsView.actionButtonDescriptions = descriptions;
 {
     __weak typeof(self) wself = self;
     [self.showNetworkModel getFairMaps:^(NSArray *maps) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
 
         Map *map = maps.firstObject;
-        if (!map) { return; }
+        if (!map) {
+            return;
+        }
 
         CGRect frame = CGRectMake(0, 0, CGRectGetWidth(sself.view.frame), 85);
         ARFairMapPreviewButton *mapButton = [[ARFairMapPreviewButton alloc] initWithFrame:frame map:map];

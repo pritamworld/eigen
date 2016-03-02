@@ -4,6 +4,7 @@
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
+
 @interface ARZoomArtworkImageViewController () <ARZoomViewDelegate>
 
 @property (nonatomic, assign) BOOL popped;
@@ -78,14 +79,14 @@
 
     [[[viewFrameSignal skip:1] throttle:0.01] subscribeNext:^(id x) {
 
-        __strong typeof (wZoomView) zoomView = wZoomView;
+        __strong typeof(wZoomView) zoomView = wZoomView;
         CGRect frame = [x CGRectValue];
         CGSize size = frame.size;
-        
+
         [zoomView setMaxMinZoomScalesForSize:size];
         CGFloat zoomScale = [zoomView scaleForFullScreenZoomInSize:size];
         CGPoint targetContentOffset = [zoomView centerContentOffsetForZoomScale:zoomScale minimumSize:size];
-        
+
         [zoomView performBlockWhileIgnoringContentOffsetChanges:^{
             [zoomView setZoomScale:zoomScale animated:YES];
         }];

@@ -35,11 +35,12 @@ describe(@"getArtworks", ^{
     it(@"does not make a request if another request is in progress", ^{
         id mock = [OCMockObject partialMockForObject:networkModel];
         networkModel.currentRequest = (id)[OHHTTPStubs stubRequestsPassingTest:nil withStubResponse:nil];
-        [mock getWorksForYou:^(NSArray<ARWorksForYouNotificationItem *> *items) {} failure:nil];
+        [mock getWorksForYou:^(NSArray<ARWorksForYouNotificationItem *> *items) {
+        } failure:nil];
         [[[mock reject] ignoringNonObjectArgs] performWorksForYouRequest:OCMOCK_ANY failure:OCMOCK_ANY];
         [mock verify];
     });
-    
+
     it(@"makes request if no request is in progress", ^{
         id mock = [OCMockObject partialMockForObject:networkModel];
         [[[mock expect] ignoringNonObjectArgs] performWorksForYouRequest:OCMOCK_ANY failure:OCMOCK_ANY];
@@ -50,23 +51,27 @@ describe(@"getArtworks", ^{
 
 describe(@"success", ^{
     beforeEach(^{
-        [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/me/notifications" withResponse:@[[Artwork stubbedArtworkJSON], [Artwork stubbedArtworkJSON]]];
+        [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/me/notifications" withResponse:@[ [Artwork stubbedArtworkJSON], [Artwork stubbedArtworkJSON] ]];
     });
-    
+
     it(@"increments currentPage", ^{
-        [networkModel getWorksForYou:^(NSArray<ARWorksForYouNotificationItem *> *items) {} failure:nil];
-        [networkModel getWorksForYou:^(NSArray<ARWorksForYouNotificationItem *> *items) {} failure:nil];
+        [networkModel getWorksForYou:^(NSArray<ARWorksForYouNotificationItem *> *items) {
+        } failure:nil];
+        [networkModel getWorksForYou:^(NSArray<ARWorksForYouNotificationItem *> *items) {
+        } failure:nil];
         expect(networkModel.currentPage).will.equal(2);
     });
-    
+
     it(@"does not set allDownloaded if artworks count is not 0", ^{
-        [networkModel getWorksForYou:^(NSArray<ARWorksForYouNotificationItem *> *items) {} failure:nil];
+        [networkModel getWorksForYou:^(NSArray<ARWorksForYouNotificationItem *> *items) {
+        } failure:nil];
         expect(networkModel.allDownloaded).will.beFalsy();
     });
-    
+
     it(@"sets allDownloaded if artworks count is 0", ^{
         [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/me/notifications" withResponse:@[]];
-        [networkModel getWorksForYou:^(NSArray<ARWorksForYouNotificationItem *> *items) {} failure:nil];
+        [networkModel getWorksForYou:^(NSArray<ARWorksForYouNotificationItem *> *items) {
+        } failure:nil];
         expect(networkModel.allDownloaded).will.beTruthy();
     });
 });

@@ -2,6 +2,7 @@
 
 #import "ARMacros.h"
 
+
 @interface Article ()
 @property (nonatomic, copy, readonly) NSString *publicArtsyPath;
 @property (nonatomic, copy, readonly) NSString *publicArtsyID;

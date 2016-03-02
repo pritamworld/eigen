@@ -43,15 +43,15 @@ describe(@"getFavorites", ^{
 
     it(@"makes request if no request is in progress", ^{
         id mock = [OCMockObject partialMockForObject:networkModel];
-        [[[mock expect]  ignoringNonObjectArgs] requestOperationAtPage:0 withSuccess:OCMOCK_ANY failure:OCMOCK_ANY];
+        [[[mock expect] ignoringNonObjectArgs] requestOperationAtPage:0 withSuccess:OCMOCK_ANY failure:OCMOCK_ANY];
         [networkModel getFavorites:nil failure:nil];
         [networkModel getFavorites:nil failure:nil];
         [mock verify];
     });
-    
+
     describe(@"success with artworks", ^{
         beforeEach(^{
-            [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/collection/saved-artwork/artworks" withResponse:@[[Artwork stubbedArtworkJSON], [Artwork stubbedArtworkJSON]]];
+            [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/collection/saved-artwork/artworks" withResponse:@[ [Artwork stubbedArtworkJSON], [Artwork stubbedArtworkJSON] ]];
         });
 
         it(@"increments currentPage", ^{
@@ -65,21 +65,21 @@ describe(@"getFavorites", ^{
         });
     });
 
-//    describe(@"success without artworks", ^{
-//        beforeEach(^{
-//            [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/collection/saved-artwork/artworks" withResponse:@[]];
-//        });
-//
-//        it(@"does not increment currentPage", ^{
-//            [networkModel getFavorites:nil failure:nil];
-//            expect(networkModel.currentPage).will.equal(1);
-//        });
-//
-//        it(@"sets allDownloaded", ^{
-//            [networkModel getFavorites:nil failure:nil];
-//            expect(networkModel.allDownloaded).will.beTruthy();
-//        });
-//    });
+    //    describe(@"success without artworks", ^{
+    //        beforeEach(^{
+    //            [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/collection/saved-artwork/artworks" withResponse:@[]];
+    //        });
+    //
+    //        it(@"does not increment currentPage", ^{
+    //            [networkModel getFavorites:nil failure:nil];
+    //            expect(networkModel.currentPage).will.equal(1);
+    //        });
+    //
+    //        it(@"sets allDownloaded", ^{
+    //            [networkModel getFavorites:nil failure:nil];
+    //            expect(networkModel.allDownloaded).will.beTruthy();
+    //        });
+    //    });
 
     describe(@"failure", ^{
         before(^{

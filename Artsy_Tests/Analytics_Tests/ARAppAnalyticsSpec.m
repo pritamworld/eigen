@@ -39,11 +39,11 @@ beforeEach(^{
 describe(@"ARSiteHeroUnitView", ^{
     it(@"triggers when tapped", ^{
 
-        ARSiteHeroUnitViewController *controller = [[ARSiteHeroUnitViewController alloc] initWithHeroUnit:[SiteHeroUnit modelWithJSON:@{ @"link":@"/day-2-remember"}] andIndex:0];
+        ARSiteHeroUnitViewController *controller = [[ARSiteHeroUnitViewController alloc] initWithHeroUnit:[SiteHeroUnit modelWithJSON:@{ @"link" : @"/day-2-remember" }] andIndex:0];
         [controller tappedUnit:nil];
 
         expect(analytics.lastEventName).to.equal(ARAnalyticsTappedHeroUnit);
-        expect(analytics.lastEventProperties).to.equal(@{ @"destination" : @"/day-2-remember"});
+        expect(analytics.lastEventProperties).to.equal(@{ @"destination" : @"/day-2-remember" });
     });
 
 });

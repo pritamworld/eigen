@@ -182,8 +182,8 @@ ARStringByStrippingMarkdown(NSString *markdownString)
         });
     }
         failure:^(NSError *error) {
-        ARErrorLog(@"Failed to fetch favorites, cancelling: %@", error);
-        finalizeBlock();
+            ARErrorLog(@"Failed to fetch favorites, cancelling: %@", error);
+            finalizeBlock();
         }];
 }
 
@@ -213,7 +213,7 @@ ARStringByStrippingMarkdown(NSString *markdownString)
             CSSearchableItem *item = [[CSSearchableItem alloc] initWithUniqueIdentifier:identifier
                                                                        domainIdentifier:domainIdentifier
                                                                            attributeSet:attributeSet];
-            [self.searchableIndex indexSearchableItems:@[item] completionHandler:^(NSError *error) {
+            [self.searchableIndex indexSearchableItems:@[ item ] completionHandler:^(NSError *error) {
                 if (error) {
                     ARErrorLog(@"Failed to index entity `%@': %@", identifier, error);
                 } else {
@@ -238,18 +238,18 @@ ARStringByStrippingMarkdown(NSString *markdownString)
 + (void)removeEntityByIdentifierFromSpotlightIndex:(NSString *)identifier;
 {
     ar_dispatch_on_queue(ARSpotlightQueue, ^{
-        [self.searchableIndex deleteSearchableItemsWithIdentifiers:@[identifier]
-                                              completionHandler:^(NSError *error) {
-            if (error) {
-                ARErrorLog(@"Failed to remove `%@' from index: %@", identifier, error);
-            } else {
-                ar_dispatch_on_queue(ARSpotlightQueue, ^{
-                    [self.indexedEntities removeObject:identifier];
-                    [self.indexedEntities.allObjects writeToFile:ARIndexedEntitiesFile atomically:YES];
-                    ARActionLog(@"Removed from index: %@", identifier);
-                });
-            }
-        }];
+        [self.searchableIndex deleteSearchableItemsWithIdentifiers:@[ identifier ]
+                                                 completionHandler:^(NSError *error) {
+                                                     if (error) {
+                                                         ARErrorLog(@"Failed to remove `%@' from index: %@", identifier, error);
+                                                     } else {
+                                                         ar_dispatch_on_queue(ARSpotlightQueue, ^{
+                                                             [self.indexedEntities removeObject:identifier];
+                                                             [self.indexedEntities.allObjects writeToFile:ARIndexedEntitiesFile atomically:YES];
+                                                             ARActionLog(@"Removed from index: %@", identifier);
+                                                         });
+                                                     }
+                                                 }];
     });
 }
 
@@ -294,28 +294,28 @@ ARStringByStrippingMarkdown(NSString *markdownString)
                               options:0
                              progress:nil
                             completed:^(UIImage *image, NSError *_, SDImageCacheType __, BOOL ____, NSURL *_____) {
-            if (image) {
-                // Instead of dumping the image back to data, just have Spotlight load it from disk.
-                // This will save us a lot of memory.
-                NSString *cacheKey = [manager cacheKeyForURL:thumbnailURL];
-                // Need to use the block variant, to ensure that the cache has saved the file yet.
-                [manager.imageCache diskImageExistsWithKey:cacheKey completion:^(BOOL isInCache) {
-                    ar_dispatch_on_queue(ARSpotlightQueue, ^{
-                        if (isInCache) {
-                            NSString *cachePath = [manager.imageCache defaultCachePathForKey:cacheKey];
-                            attributeSet.thumbnailURL = [NSURL fileURLWithPath:cachePath];
-                        } else {
-                            // Cache miss, for some reason.
-                            attributeSet.thumbnailData = UIImagePNGRepresentation(image);
-                        }
-                        completion(attributeSet);
-                    });
-                }];
-            } else {
-                ar_dispatch_on_queue(ARSpotlightQueue, ^{
-                    completion(attributeSet);
-                });
-            }
+                                if (image) {
+                                    // Instead of dumping the image back to data, just have Spotlight load it from disk.
+                                    // This will save us a lot of memory.
+                                    NSString *cacheKey = [manager cacheKeyForURL:thumbnailURL];
+                                    // Need to use the block variant, to ensure that the cache has saved the file yet.
+                                    [manager.imageCache diskImageExistsWithKey:cacheKey completion:^(BOOL isInCache) {
+                                        ar_dispatch_on_queue(ARSpotlightQueue, ^{
+                                            if (isInCache) {
+                                                NSString *cachePath = [manager.imageCache defaultCachePathForKey:cacheKey];
+                                                attributeSet.thumbnailURL = [NSURL fileURLWithPath:cachePath];
+                                            } else {
+                                                // Cache miss, for some reason.
+                                                attributeSet.thumbnailData = UIImagePNGRepresentation(image);
+                                            }
+                                            completion(attributeSet);
+                                        });
+                                    }];
+                                } else {
+                                    ar_dispatch_on_queue(ARSpotlightQueue, ^{
+                                        completion(attributeSet);
+                                    });
+                                }
                             }];
     }
 

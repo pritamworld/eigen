@@ -42,14 +42,14 @@ static NSString *ARHeroUnitsDataSourceItemsKey = @"ARHeroUnitsDataSourceItemsKey
     }
 
     self.isLoading = YES;
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
 
     // This is generally one of the first networking calls, lets make sure it comes through.
 
     [ArtsyAPI getXappTokenWithCompletion:^(NSString *xappToken, NSDate *expirationDate) {
         [ArtsyAPI getSiteHeroUnits:^(NSArray *heroUnits) {
 
-            __strong typeof (wself) sself = wself;
+            __strong typeof(wself) sself = wself;
             sself.isLoading = NO;
 
             NSArray *filteredHeroUnits = [heroUnits select:^BOOL(SiteHeroUnit *unit) {
@@ -63,7 +63,7 @@ static NSString *ARHeroUnitsDataSourceItemsKey = @"ARHeroUnitsDataSourceItemsKey
             }
 
         } failure:^(NSError *error) {
-            __strong typeof (wself) sself = wself;
+            __strong typeof(wself) sself = wself;
             ARErrorLog(@"There was an error getting Hero Units: %@", error.localizedDescription);
             sself.isLoading = NO;
             if (failure) {
@@ -71,7 +71,7 @@ static NSString *ARHeroUnitsDataSourceItemsKey = @"ARHeroUnitsDataSourceItemsKey
             }
         }];
     } failure:^(NSError *error) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         ARErrorLog(@"There was an error getting Hero Units: %@", error.localizedDescription);
         sself.isLoading = NO;
         if (failure) {

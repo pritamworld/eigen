@@ -15,6 +15,7 @@
 
 #import <UIView_BooleanAnimations/UIView+BooleanAnimations.h>
 
+
 @interface ARArtworkViewController () <UIScrollViewDelegate, ARArtworkRelatedArtworksViewParentViewController, ARArtworkBlurbViewDelegate, ARPostsViewControllerDelegate>
 
 @property (nonatomic, strong) ARArtworkView *view;
@@ -81,10 +82,10 @@
         [self ar_removeIndeterminateLoadingIndicatorAnimated:ARPerformWorkAsynchronously];
     }
 
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
 
     void (^completion)(void) = ^{
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself ar_removeIndeterminateLoadingIndicatorAnimated:ARPerformWorkAsynchronously];
         [sself ar_setDataLoaded];
     };
@@ -145,9 +146,9 @@
 
 - (void)getRelatedPosts
 {
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     [self.artwork getRelatedPosts:^(NSArray *posts) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself updateWithRelatedPosts:posts];
     }];
 }
@@ -210,7 +211,7 @@
     [UIView animateWithDuration:.1 animations:^{
         self.view.metadataView.right.alpha = 0;
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:.1 delay:transitionDuration-.2 options:0 animations:^{
+        [UIView animateWithDuration:.1 delay:transitionDuration - .2 options:0 animations:^{
             self.view.metadataView.right.alpha = 1;
         } completion:nil];
     }];

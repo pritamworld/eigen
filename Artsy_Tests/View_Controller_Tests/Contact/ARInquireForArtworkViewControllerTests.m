@@ -33,27 +33,27 @@ beforeEach(^{
         @"id" : @"cory-arcangel-photoshop-cs",
         @"title" : @"Photoshop CS",
         @"artist" : @{
-               @"id": @"cory-arcangel",
-               @"name": @"Cory Arcangel"
+            @"id" : @"cory-arcangel",
+            @"name" : @"Cory Arcangel"
         },
         @"partner" : @{
-               @"id" : @"partner_id",
-               @"type" : @"Gallery",
-               @"name" : @"Lisson Gallery"
+            @"id" : @"partner_id",
+            @"type" : @"Gallery",
+            @"name" : @"Lisson Gallery"
         }
     }];
-    
+
     museumGallery = [Artwork modelWithJSON:@{
         @"id" : @"cory-arcangel-photoshop-cs",
         @"title" : @"Photoshop CS",
         @"artist" : @{
-             @"id": @"cory-arcangel",
-             @"name": @"Cory Arcangel"
+            @"id" : @"cory-arcangel",
+            @"name" : @"Cory Arcangel"
         },
         @"partner" : @{
-             @"id" : @"partner_id",
-             @"type" : @"Museum",
-             @"name" : @"Guggenheim Museum"
+            @"id" : @"partner_id",
+            @"type" : @"Museum",
+            @"name" : @"Guggenheim Museum"
         }
     }];
 
@@ -125,7 +125,7 @@ describe(@"logged out", ^{
             [vc ar_presentWithFrame:[[UIScreen mainScreen] bounds]];
             return vc;
         });
-        
+
         itHasAsyncronousSnapshotsForDevicesWithName(@"works for an artwork without a title", ^{
             museumGallery.title = nil;
             ARInquireForArtworkViewController *vc = [[ARInquireForArtworkViewController alloc] initWithPartnerInquiryForArtwork:museumGallery fair:nil];
@@ -136,7 +136,7 @@ describe(@"logged out", ^{
 
     describe(@"send button", ^{
         __block Artwork *artwork;
-        
+
         beforeEach(^{
             [ARUserManager clearUserData];
             [ARUserManager sharedManager].trialUserName = @"Trial User";
@@ -150,7 +150,7 @@ describe(@"logged out", ^{
 
         itHasAsyncronousSnapshotsForDevicesWithName(@"does not initially enable send if stored email is invalid", ^{
             [ARUserManager sharedManager].trialUserEmail = @"invalidEmail";
-            
+
             ARInquireForArtworkViewController *vc = [[ARInquireForArtworkViewController alloc] initWithAdminInquiryForArtwork:museumGallery fair:nil];
             [vc ar_presentWithFrame:[[UIScreen mainScreen] bounds]];
             return vc;
@@ -163,32 +163,32 @@ describe(@"logged out", ^{
             [vc ar_presentWithFrame:[[UIScreen mainScreen] bounds]];
             return vc;
         });
-        
+
         itHasAsyncronousSnapshotsForDevicesWithName(@"toggles the send button with empty email", ^{
             [ARUserManager sharedManager].trialUserEmail = nil;
-            
+
             ARInquireForArtworkViewController *vc = [[ARInquireForArtworkViewController alloc] initWithAdminInquiryForArtwork:museumGallery fair:nil];
             [vc ar_presentWithFrame:[[UIScreen mainScreen] bounds]];
             return vc;
         });
-        
+
         itHasAsyncronousSnapshotsForDevicesWithName(@"toggles the send button when email becomes valid", ^{
             [ARUserManager sharedManager].trialUserEmail = nil;
-            
+
             ARInquireForArtworkViewController *vc = [[ARInquireForArtworkViewController alloc] initWithAdminInquiryForArtwork:museumGallery fair:nil];
             [vc ar_presentWithFrame:[[UIScreen mainScreen] bounds]];
-            
+
             vc.emailInput.text = @"validemail@gmail.com";
             [vc emailInputHasChanged:vc.emailInput];
             return vc;
         });
-        
+
         itHasAsyncronousSnapshotsForDevicesWithName(@"toggles the send button when valid email becomes invalid", ^{
             [ARUserManager sharedManager].trialUserEmail = nil;
-            
+
             ARInquireForArtworkViewController *vc = [[ARInquireForArtworkViewController alloc] initWithAdminInquiryForArtwork:museumGallery fair:nil];
             [vc ar_presentWithFrame:[[UIScreen mainScreen] bounds]];
-            
+
             vc.emailInput.text = @"validemail@gmail.com";
             [vc emailInputHasChanged:vc.emailInput];
             vc.emailInput.text = @"invalidEmail";
@@ -212,7 +212,7 @@ describe(@"sending", ^{
         vc = [[ARInquireForArtworkViewController alloc] initWithPartnerInquiryForArtwork:galleryArtwork fair:nil];
         [vc ar_presentWithFrame:[[UIScreen mainScreen] bounds]];
     });
-    
+
     afterEach(^{
         [userMock stopMocking];
         [ARUserManager sharedManager].trialUserName = nil;

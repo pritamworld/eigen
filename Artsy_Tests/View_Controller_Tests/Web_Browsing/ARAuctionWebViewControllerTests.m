@@ -81,7 +81,8 @@ describe(@"with an artwork", ^{
 
             [[mock expect] notificationWithName:ARAuctionArtworkBidUpdatedNotification
                                          object:controller
-                                       userInfo:@{ ARAuctionIDKey: @"the-auction", ARAuctionArtworkIDKey: @"the-artwork" }];
+                                       userInfo:@{ ARAuctionIDKey : @"the-auction",
+                                                   ARAuctionArtworkIDKey : @"the-artwork" }];
             [controller bidHasBeenConfirmed];
 
             [mock verify];
@@ -98,7 +99,7 @@ describe(@"with an artwork", ^{
             [controller bidHasBeenConfirmed];
             expect(navigationController.viewControllers.count).to.equal(1);
         });
-        
+
         it(@"inserts an artwork view controller underneath the webview if there is none", ^{
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[UIViewController new]];
             [navigationController pushViewController:controller animated:NO];
@@ -120,7 +121,8 @@ describe(@"with an artwork", ^{
         [(ARAuctionWebViewController *)[mock reject] reload];
         [notificationCenter postNotificationName:ARAuctionArtworkBidUpdatedNotification
                                           object:nil
-                                        userInfo:@{ ARAuctionIDKey: @"another-auction", ARAuctionArtworkIDKey: @"the-artwork" }];
+                                        userInfo:@{ ARAuctionIDKey : @"another-auction",
+                                                    ARAuctionArtworkIDKey : @"the-artwork" }];
         [mock verifyWithDelay:1];
         [mock stopMocking];
 
@@ -128,7 +130,8 @@ describe(@"with an artwork", ^{
         [(ARAuctionWebViewController *)[mock reject] reload];
         [notificationCenter postNotificationName:ARAuctionArtworkBidUpdatedNotification
                                           object:nil
-                                        userInfo:@{ ARAuctionIDKey: @"the-auction", ARAuctionArtworkIDKey: @"another-artwork" }];
+                                        userInfo:@{ ARAuctionIDKey : @"the-auction",
+                                                    ARAuctionArtworkIDKey : @"another-artwork" }];
         [mock verifyWithDelay:1];
         [mock stopMocking];
 
@@ -136,7 +139,8 @@ describe(@"with an artwork", ^{
         [(ARAuctionWebViewController *)[mock expect] reload];
         [notificationCenter postNotificationName:ARAuctionArtworkBidUpdatedNotification
                                           object:nil
-                                        userInfo:@{ ARAuctionIDKey: @"the-auction", ARAuctionArtworkIDKey: @"the-artwork" }];
+                                        userInfo:@{ ARAuctionIDKey : @"the-auction",
+                                                    ARAuctionArtworkIDKey : @"the-artwork" }];
         [mock verifyWithDelay:1];
         [mock stopMocking];
     });
@@ -153,7 +157,8 @@ describe(@"with an auction", ^{
         [(ARAuctionWebViewController *)[mock reject] reload];
         [notificationCenter postNotificationName:ARAuctionArtworkBidUpdatedNotification
                                           object:nil
-                                        userInfo:@{ ARAuctionIDKey: @"another-auction", ARAuctionArtworkIDKey: @"any-artwork" }];
+                                        userInfo:@{ ARAuctionIDKey : @"another-auction",
+                                                    ARAuctionArtworkIDKey : @"any-artwork" }];
         [mock verifyWithDelay:1];
         [mock stopMocking];
 
@@ -161,7 +166,8 @@ describe(@"with an auction", ^{
         [(ARAuctionWebViewController *)[mock expect] reload];
         [notificationCenter postNotificationName:ARAuctionArtworkBidUpdatedNotification
                                           object:nil
-                                        userInfo:@{ ARAuctionIDKey: @"the-auction", ARAuctionArtworkIDKey: @"any-artwork" }];
+                                        userInfo:@{ ARAuctionIDKey : @"the-auction",
+                                                    ARAuctionArtworkIDKey : @"any-artwork" }];
         [mock verifyWithDelay:1];
         [mock stopMocking];
     });

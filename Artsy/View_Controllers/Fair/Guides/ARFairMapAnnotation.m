@@ -7,6 +7,7 @@
 
 #import <NAMapKit/NAMapView.h>
 
+
 @interface ARFairMapAnnotation ()
 @property (nonatomic, readonly) ARFairMapAnnotationView *view;
 @end

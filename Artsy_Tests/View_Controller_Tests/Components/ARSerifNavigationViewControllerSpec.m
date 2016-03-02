@@ -19,7 +19,7 @@ describe(@"", ^{
         // the view controller has to exist within a key window + view controller
         // structure, or present will not do it's work.
 
-        [ARTestContext useDevice:ARDeviceTypePad :^{
+        [ARTestContext useDevice:ARDeviceTypePad:^{
             UIViewController *host = [[UIViewController alloc] init];
 
             // Setting the frame after ensures that whatever internal

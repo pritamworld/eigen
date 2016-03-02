@@ -19,7 +19,7 @@ describe(@"not hearted", ^{
     beforeEach(^{
         _button.hearted = NO;
     });
-    
+
     it(@"becomes enabled when not hearted", ^{
         expect(_button).will.haveValidSnapshotNamed(@"unhearted");
         expect(_button.enabled).to.beTruthy();
@@ -30,7 +30,7 @@ describe(@"not hearted", ^{
         expect(_button).will.haveValidSnapshotNamed(@"unhearted");
         expect(_button.enabled).to.beTruthy();
     });
-    
+
     it(@"toggles", ^{
         _button.hearted = YES;
         expect(_button).will.haveValidSnapshotNamed(@"hearted");
@@ -46,7 +46,7 @@ describe(@"hearted", ^{
     beforeEach(^{
         _button.hearted = YES;
     });
-    
+
     it(@"becomes enabled when hearted", ^{
         expect(_button).will.haveValidSnapshotNamed(@"hearted");
         expect(_button.enabled).to.beTruthy();

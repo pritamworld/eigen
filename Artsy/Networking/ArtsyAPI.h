@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 
+
 @interface ArtsyAPI : NSObject
 
 /// Gets a temporary Xapp token asyncronously, or if the user has one will run syncronously

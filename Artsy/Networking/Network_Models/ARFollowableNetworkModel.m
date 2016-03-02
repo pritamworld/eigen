@@ -17,10 +17,12 @@
 
     _representedObject = representedObject;
 
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     [self.representedObject getFollowState:^(ARHeartStatus status) {
-        __strong typeof (wself) sself = wself;
-        if (!sself) { return; }
+        __strong typeof(wself) sself = wself;
+        if (!sself) {
+            return;
+        }
 
         [sself willChangeValueForKey:@"following"];
         sself->_following = (status == ARHeartStatusYes);
@@ -36,17 +38,17 @@
 {
     if (following == _following) return;
 
-   __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     if (following) {
         [_representedObject followWithSuccess:nil failure:^(NSError *error) {
-            __strong typeof (wself) sself = wself;
+            __strong typeof(wself) sself = wself;
             ARErrorLog(@"Error following %@ - %@", sself.representedObject, error.localizedDescription);
             [sself _setFollowing:NO];
         }];
 
     } else {
         [_representedObject unfollowWithSuccess:nil failure:^(NSError *error) {
-            __strong typeof (wself) sself = wself;
+            __strong typeof(wself) sself = wself;
             ARErrorLog(@"Error following %@ - %@", sself.representedObject, error.localizedDescription);
             [sself _setFollowing:YES];
         }];

@@ -15,6 +15,7 @@ typedef void (^ARSearchAttributesCompletionBlock)(CSSearchableItemAttributeSet *
 - (NSDate *)endDate;
 @end
 
+
 @interface ARSpotlight : NSObject
 
 + (NSURL *)webpageURLForEntity:(id<ARSpotlightMetadataProvider>)entity;
@@ -43,6 +44,7 @@ typedef void (^ARSearchAttributesCompletionBlock)(CSSearchableItemAttributeSet *
 
 @class Fair;
 @class Profile;
+
 
 @interface ARFairSpotlightMetadataProvider : NSProxy <ARSpotlightMetadataProvider>
 @property (readonly, nonatomic, strong) Fair *fair;

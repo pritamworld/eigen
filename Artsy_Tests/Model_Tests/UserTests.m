@@ -4,7 +4,8 @@ describe(@"with profile", ^{
     __block User *user;
 
     beforeEach(^{
-        user = [User modelWithJSON:@{ @"id" : @"user-id", @"default_profile_id" : @"user-profile" }];
+        user = [User modelWithJSON:@{ @"id" : @"user-id",
+                                      @"default_profile_id" : @"user-profile" }];
         user.profile = [Profile modelWithJSON:@{
             @"id" : @"profile-id",
             @"owner_type" : @"User",

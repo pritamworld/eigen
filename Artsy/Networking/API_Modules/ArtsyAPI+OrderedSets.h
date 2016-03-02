@@ -3,6 +3,7 @@
 @class OrderedSet;
 @class AFHTTPRequestOperation;
 
+
 @interface ArtsyAPI (OrderedSets)
 
 + (AFHTTPRequestOperation *)getOrderedSetsWithOwnerType:(NSString *)ownerType

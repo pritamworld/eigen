@@ -41,17 +41,17 @@ const CGFloat ARArtworkActionButtonSpacing = 8;
     _shareButton = [self newShareButton];
     _favoriteButton = [self newFavoriteButton];
 
-   __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     [artwork getFavoriteStatus:^(ARHeartStatus status) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself.favoriteButton setStatus:status animated:YES];
     } failure:^(NSError *error) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself.favoriteButton setStatus:ARHeartStatusNo animated:YES];
     }];
 
     [artwork onArtworkUpdate:^{
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself updateWithArtwork:artwork andFair:fair];
     } failure:nil];
 

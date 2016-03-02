@@ -59,7 +59,7 @@ describe(@"networking", ^{
         });
 
         it(@"asks the gene for artworks at a page", ^{
-            NSArray *artworks = @[ [Artwork stubbedArtwork]];
+            NSArray *artworks = @[ [Artwork stubbedArtwork] ];
             stubNetworkingForPartialGeneAtPageWithArray(partialGene, 1, artworks);
 
             [partialArtworknetworkModel getNextArtworkPage:nil];
@@ -67,7 +67,7 @@ describe(@"networking", ^{
         });
 
         it(@"adds one to the current page when there is artworks", ^{
-            NSArray *artworks = @[ [Artwork stubbedArtwork]];
+            NSArray *artworks = @[ [Artwork stubbedArtwork] ];
             NSInteger page = 1;
             stubNetworkingForPartialGeneAtPageWithArray(partialGene, page, artworks);
 
@@ -84,7 +84,7 @@ describe(@"networking", ^{
         });
 
         it(@"does not say it's complete if artworks arrive", ^{
-            NSArray *artworks = @[ [Artwork stubbedArtwork]];
+            NSArray *artworks = @[ [Artwork stubbedArtwork] ];
             stubNetworkingForPartialGeneAtPageWithArray(partialGene, 1, artworks);
 
             [partialArtworknetworkModel getNextArtworkPage:nil];

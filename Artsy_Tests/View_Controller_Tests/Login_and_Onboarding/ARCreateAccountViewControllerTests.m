@@ -20,7 +20,7 @@ __block ARCreateAccountViewController *vc;
 __block ARTopMenuViewController *topMenuViewController;
 
 describe(@"warning view", ^{
-    
+
     before(^{
         vc = [[ARCreateAccountViewController alloc] init];
         [vc ar_presentWithFrame:[[UIScreen mainScreen] bounds]];
@@ -30,44 +30,44 @@ describe(@"warning view", ^{
         vc.topMenuViewController = ocPartialTop;
         [[[ocPartialTop stub] andReturn:vc] visibleViewController];
     });
-    
+
     it(@"displays a message", ^{
         [vc showWarning:@"The owls are not what they seem" animated:NO];
-        
+
         expect(vc).to.haveValidSnapshot();
     });
-    
+
     it(@"displays a warning if password too short", ^{
         vc.email.text = @"jory@email.com";
         vc.password.text = @"1234";
-        
+
         [vc textFieldShouldReturn:vc.password];
-        
+
         BOOL warningIsCorrect = checkViewControllerHasWarningWithMessage(vc, @"Password must be at least 6 characters");
         expect(warningIsCorrect).to.beTruthy();
     });
-    
+
     it(@"displays a warning if email is missing @", ^{
         vc.email.text = @"email.com";
         vc.password.text = @"12341234";
-        
+
         [vc textFieldShouldReturn:vc.password];
-        
+
         BOOL warningIsCorrect = checkViewControllerHasWarningWithMessage(vc, @"Email address appears to be invalid");
         expect(warningIsCorrect).to.beTruthy();
     });
-    
+
     it(@"displays only one warning at a time @", ^{
         vc.email.text = @"email.com";
         vc.password.text = @"12341234";
-        
+
         [vc textFieldShouldReturn:vc.password];
-        
+
         vc.email.text = @"jory@email.com";
         vc.password.text = @"1234";
-        
+
         [vc textFieldShouldReturn:vc.password];
-        
+
         NSInteger viewCount = 0;
         for (UIView *child in vc.view.subviews) {
             if ([child isKindOfClass:ARWarningView.class]) {

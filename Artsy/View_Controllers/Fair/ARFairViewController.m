@@ -110,7 +110,7 @@ NSString *const ARFairHighlightFavoritePartnersKey = @"ARFairHighlightFavoritePa
     __weak typeof(self) wself = self;
 
     [_fair updateFair:^{
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself fairDidLoad];
     }];
 
@@ -181,13 +181,13 @@ NSString *const ARFairHighlightFavoritePartnersKey = @"ARFairHighlightFavoritePa
         [self.fair getOrderedSets:^(NSMutableDictionary *orderedSets) {
             for (OrderedSet *primarySet in orderedSets[@"primary"]) {
                 [primarySet getItems:^(NSArray *items) {
-                    __strong typeof (wself) sself = wself;
+                    __strong typeof(wself) sself = wself;
 
                     NSArray *buttonDescriptions = [[items ?: @[]
                         select:displayOnMobile]
                         map:^(FeaturedLink *link) {
                             return [sself buttonDescriptionForFeaturedLink:link buttonClass:[ARButtonWithImage class]];
-                    }];
+                        }];
 
                     if (sself.hasMap) {
                         NSMutableArray *mutableArray = [buttonDescriptions mutableCopy];
@@ -207,23 +207,23 @@ NSString *const ARFairHighlightFavoritePartnersKey = @"ARFairHighlightFavoritePa
             };
 
             for (OrderedSet *curatorSet in orderedSets[@"editorial"]) {
-              [curatorSet getItems:^(NSArray *items) {
-                __strong typeof (wself) sself = wself;
-                sself.editorialVC.buttonDescriptions = [[items select:displayOnMobile] map:^(FeaturedLink *link) {
-                  return [sself buttonDescriptionForFeaturedLink:link buttonClass:[ARButtonWithImage class]];
+                [curatorSet getItems:^(NSArray *items) {
+                    __strong typeof(wself) sself = wself;
+                    sself.editorialVC.buttonDescriptions = [[items select:displayOnMobile] map:^(FeaturedLink *link) {
+                        return [sself buttonDescriptionForFeaturedLink:link buttonClass:[ARButtonWithImage class]];
+                    }];
+                    sself.editorialVC.view.hidden = NO;
+                    if (sself.editorialVC.buttonDescriptions.count == 0) {
+                        [sself.stackView.stackView removeSubview:sself.editorialVC.view];
+                    }
                 }];
-                sself.editorialVC.view.hidden = NO;
-                if (sself.editorialVC.buttonDescriptions.count == 0) {
-                  [sself.stackView.stackView removeSubview:sself.editorialVC.view];
-                }
-              }];
-              // TODO why always break after the first set and not just get the first set?
-              break;
+                // TODO why always break after the first set and not just get the first set?
+                break;
             }
 
             for (OrderedSet *curatorSet in orderedSets[@"curator"]) {
                 [curatorSet getItems:^(NSArray *items) {
-                    __strong typeof (wself) sself = wself;
+                    __strong typeof(wself) sself = wself;
                     sself.curatorVC.buttonDescriptions = [[items select:displayOnMobile] map:^(FeaturedLink *link) {
                         return [sself buttonDescriptionForFeaturedLink:link buttonClass:[ARButtonWithCircularImage class]];
                     }];

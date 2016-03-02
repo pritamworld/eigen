@@ -8,6 +8,7 @@
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 #import <ObjectiveSugar/ObjectiveSugar.h>
 
+
 @interface AROfflineView ()
 @property (readonly, nonatomic, strong) ARMenuButton *refreshButton;
 @property (readwrite, nonatomic, assign) BOOL stopRotating;
@@ -65,22 +66,22 @@
         delay:0.0
         options:UIViewKeyframeAnimationOptionCalculationModePaced | UIViewAnimationOptionCurveLinear
         animations:^{
-                                  [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.0 animations:^{
-                                    self.refreshButton.transform = CGAffineTransformMakeRotation(M_PI * 2.0 / 3.0);
-                                  }];
-                                  [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.0 animations:^{
-                                    self.refreshButton.transform = CGAffineTransformMakeRotation(M_PI * 4.0 / 3.0);
-                                  }];
-                                  [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.0 animations:^{
-                                    self.refreshButton.transform = CGAffineTransformIdentity;
-                                  }];
+            [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.0 animations:^{
+                self.refreshButton.transform = CGAffineTransformMakeRotation(M_PI * 2.0 / 3.0);
+            }];
+            [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.0 animations:^{
+                self.refreshButton.transform = CGAffineTransformMakeRotation(M_PI * 4.0 / 3.0);
+            }];
+            [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.0 animations:^{
+                self.refreshButton.transform = CGAffineTransformIdentity;
+            }];
         }
         completion:^(BOOL _) {
-        if (self.stopRotating) {
-            self.stopRotating = NO;
-        } else {
-            [self rotate];
-        }
+            if (self.stopRotating) {
+                self.stopRotating = NO;
+            } else {
+                [self rotate];
+            }
         }];
 }
 

@@ -7,6 +7,7 @@
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
+
 @interface ARFollowableButton ()
 @property (readwrite, nonatomic, weak) ARFollowableNetworkModel *model;
 @property (readonly, nonatomic, assign) BOOL followingStatus;

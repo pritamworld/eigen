@@ -74,49 +74,49 @@ __attribute__((constructor)) static void PSPDFKitImproveRecursiveDescription(voi
         PSPDFReplaceMethodWithBlock(UIView.class, @selector(description), descriptionSEL, ^(id self) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-      NSMutableString *description = [self performSelector:descriptionSEL];
+            NSMutableString *description = [self performSelector:descriptionSEL];
 #pragma clang diagnostic pop
-      SEL viewDelegateSEL = NSSelectorFromString([NSString stringWithFormat:@"%@ewDelegate", @"_vi"]); // pr. API
-      if ([self respondsToSelector:viewDelegateSEL]) {
+            SEL viewDelegateSEL = NSSelectorFromString([NSString stringWithFormat:@"%@ewDelegate", @"_vi"]); // pr. API
+            if ([self respondsToSelector:viewDelegateSEL]) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        UIViewController *viewController = [self performSelector:viewDelegateSEL];
+                UIViewController *viewController = [self performSelector:viewDelegateSEL];
 #pragma clang diagnostic pop
-        NSString *viewControllerClassName = NSStringFromClass(viewController.class);
-        
-        if (viewControllerClassName.length) {
-          NSString *children = @""; // iterate over childViewControllers
-          
-          if ([viewController respondsToSelector:@selector(childViewControllers)] && viewController.childViewControllers.count) {
-            NSString *origDescription = description;
-            description = [NSMutableString stringWithFormat:@"%luc.[", (unsigned long)viewController.childViewControllers.count];
-            for (UIViewController *childViewController in viewController.childViewControllers) {
-              [description appendFormat:@"%@ %p: ", childViewController.class, childViewController];
+                NSString *viewControllerClassName = NSStringFromClass(viewController.class);
+
+                if (viewControllerClassName.length) {
+                    NSString *children = @""; // iterate over childViewControllers
+
+                    if ([viewController respondsToSelector:@selector(childViewControllers)] && viewController.childViewControllers.count) {
+                        NSString *origDescription = description;
+                        description = [NSMutableString stringWithFormat:@"%luc.[", (unsigned long)viewController.childViewControllers.count];
+                        for (UIViewController *childViewController in viewController.childViewControllers) {
+                            [description appendFormat:@"%@ %p: ", childViewController.class, childViewController];
+                        }
+                        [description appendFormat:@"] %@", origDescription];
+                    }
+
+                    // check if the frame of a childViewController is bigger than the one of a parentViewController. (usually this is a bug)
+                    NSString *warnString = @"";
+                    if (viewController && viewController.parentViewController && [viewController isViewLoaded] && [viewController.parentViewController isViewLoaded]) {
+                        CGRect parentRect = viewController.parentViewController.view.bounds;
+                        CGRect childRect = viewController.view.frame;
+
+                        if (parentRect.size.width < childRect.origin.x + childRect.size.width ||
+                            parentRect.size.height < childRect.origin.y + childRect.size.height) {
+                            warnString = @"* OVERLAP! ";
+                        } else if (CGRectIsEmpty(childRect)) {
+                            warnString = @"* ZERORECT! ";
+                        }
+                    }
+                    description = [NSMutableString stringWithFormat:@"%@%@:%p%@ %@", warnString, viewControllerClassName, viewController, children, description];
+                }
             }
-            [description appendFormat:@"] %@", origDescription];
-          }
-          
-          // check if the frame of a childViewController is bigger than the one of a parentViewController. (usually this is a bug)
-          NSString *warnString = @"";
-          if (viewController && viewController.parentViewController && [viewController isViewLoaded] && [viewController.parentViewController isViewLoaded]) {
-            CGRect parentRect = viewController.parentViewController.view.bounds;
-            CGRect childRect = viewController.view.frame;
-            
-            if (parentRect.size.width < childRect.origin.x + childRect.size.width ||
-                parentRect.size.height < childRect.origin.y + childRect.size.height) {
-              warnString = @"* OVERLAP! ";
-            }else if (CGRectIsEmpty(childRect)) {
-              warnString = @"* ZERORECT! ";
+            // add marker if view (or a superview) is hidden
+            if (!PSPDFIsVisibleView(self)) {
+                description = [NSMutableString stringWithFormat:@"XX (%@)", description];
             }
-          }
-          description = [NSMutableString stringWithFormat:@"%@%@:%p%@ %@", warnString, viewControllerClassName, viewController, children, description];
-        }
-      }
-      // add marker if view (or a superview) is hidden
-      if (!PSPDFIsVisibleView(self)) {
-        description = [NSMutableString stringWithFormat:@"XX (%@)", description];
-      }
-      return description;
+            return description;
         });
     }
 }
@@ -129,18 +129,18 @@ __attribute__((constructor)) static void PSPDFKitImproveImageDescription(void)
     {
         SEL descriptionSEL = NSSelectorFromString(@"pspdf_description");
         PSPDFReplaceMethodWithBlock(UIImage.class, @selector(description), descriptionSEL, ^(UIImage *self) {
-      NSMutableString *description = [NSMutableString stringWithFormat:@"<%@: %p size:%@", self.class, self, NSStringFromCGSize(self.size)];
-      if (self.scale > 1) {
-        [description appendFormat:@" scale:%.0f", self.scale];
-      }
-      if ([self imageOrientation] != UIImageOrientationUp) {
-        [description appendFormat:@" imageOrientation:%d", (int)self.imageOrientation];
-      }
-      [description appendString:@">"];
+            NSMutableString *description = [NSMutableString stringWithFormat:@"<%@: %p size:%@", self.class, self, NSStringFromCGSize(self.size)];
+            if (self.scale > 1) {
+                [description appendFormat:@" scale:%.0f", self.scale];
+            }
+            if ([self imageOrientation] != UIImageOrientationUp) {
+                [description appendFormat:@" imageOrientation:%d", (int)self.imageOrientation];
+            }
+            [description appendString:@">"];
 #if __has_feature(objc_arc)
-      return [description copy];
+            return [description copy];
 #else
-      return [[description copy] autorelease];
+            return [[description copy] autorelease];
 #endif
         });
     }

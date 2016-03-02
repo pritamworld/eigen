@@ -85,7 +85,7 @@ static NSString *CellId = @"OnboardingGeneFollow";
 
     NSString *geneID = gene.geneID;
     [gene setFollowState:newState success:^(id response) {
-        ARActionLog(@"%@ gene %@", newState ? @"Followed" : @"Unfollowed" , geneID);
+        ARActionLog(@"%@ gene %@", newState ? @"Followed" : @"Unfollowed", geneID);
 
     } failure:^(NSError *error) {
         [cell toggleFollowState];

@@ -29,6 +29,7 @@ static void *ARNavigationControllerScrollingChiefContext = &ARNavigationControll
 
 @protocol ARMenuAwareViewController;
 
+
 @interface ARNavigationController () <UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, assign) BOOL isAnimatingTransition;
@@ -396,10 +397,10 @@ ShouldHideItem(UIViewController *viewController, SEL itemSelector, ...)
     __weak typeof(self) wself = self;
 
     return [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         RACSubject *completionSubject = [RACSubject subject];
 
-        [UIView animateIf:sself.animatesLayoverChanges duration:ARAnimationDuration :^{
+        [UIView animateIf:sself.animatesLayoverChanges duration:ARAnimationDuration:^{
             sself.pendingOperationViewController.view.alpha = 0.0;
         } completion:^(BOOL finished) {
             [sself ar_removeChildViewController:self.pendingOperationViewController];

@@ -3,6 +3,7 @@
 
 @class Artwork;
 
+
 @interface ARArtworkThumbnailMetadataView : UIView
 
 - (void)configureWithArtwork:(Artwork *)artwork showPriceLabel:(BOOL)showPrice;

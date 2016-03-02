@@ -16,6 +16,7 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 
+
 @interface ARProfileViewController () <ARMenuAwareViewController>
 
 @property (nonatomic, strong, readwrite) NSString *profileID;
@@ -44,10 +45,10 @@
 {
     [super viewDidLoad];
 
-    __weak typeof (self) wself = self;
-        // On the first viewWillAppear:
+    __weak typeof(self) wself = self;
+    // On the first viewWillAppear:
     [[[self rac_signalForSelector:@selector(viewWillAppear:)] take:1] subscribeNext:^(id _) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself loadProfile];
     }];
 }
@@ -59,7 +60,7 @@
     [ArtsyAPI getProfileForProfileID:self.profileID success:^(Profile *profile) {
 
         if ([profile.profileOwner isKindOfClass:[Fair class]] && ![UIDevice isPad]) {
-            NSString * fairID = ((Fair *) profile.profileOwner).fairID;
+            NSString *fairID = ((Fair *)profile.profileOwner).fairID;
             Fair *fair = [[Fair alloc] initWithFairID:fairID];
 
             ARFairViewController *viewController = [[ARFairViewController alloc] initWithFair:fair andProfile:profile];

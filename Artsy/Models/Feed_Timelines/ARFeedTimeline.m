@@ -2,6 +2,7 @@
 
 #import "ARFeedItem.h"
 
+
 @interface ARFeedTimeline ()
 @property (nonatomic, strong) ARFeed *currentFeed;
 @property (nonatomic, copy) NSString *currentlyLoadingCursor;
@@ -36,9 +37,9 @@
 
 - (void)getNewItems:(void (^)(NSArray *items))success failure:(void (^)(NSError *error))failure
 {
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     [_currentFeed getFeedItemsWithCursor:nil success:^(NSOrderedSet *parsedItems) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
 
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [parsedItems count])];
         NSArray *newItems = [parsedItems array];
@@ -65,9 +66,9 @@
     self.networking = true;
     self.currentlyLoadingCursor = self.currentFeed.cursor;
 
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     void (^successBlock)(id) = ^(NSOrderedSet *parsedItems) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         sself.networking = NO;
         if (parsedItems.count) {
             [sself.items addObjectsFromArray:[parsedItems array]];
@@ -82,7 +83,7 @@
     };
 
     void (^failureBlock)(NSError *) = ^(NSError *error) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         sself.networking = NO;
         sself.currentlyLoadingCursor = nil;
         if (failure) {

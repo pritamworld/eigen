@@ -3,6 +3,7 @@
 #import <ARTiledImageView/ARTiledImageView.h>
 #import <NAMapKit/NAMapView.h>
 
+
 @implementation ARFairMapZoomManager
 
 - (id)initWithMap:(NAMapView *)map dataSource:(NSObject<ARTiledImageViewDataSource> *)dataSource

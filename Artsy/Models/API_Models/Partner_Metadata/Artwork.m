@@ -24,7 +24,8 @@
 #import <AFNetworking/AFNetworking.h>
 
 
-@implementation Artwork {
+@implementation Artwork
+{
     // If we give these as properties they can cause
     // chaos with Mantle & State Resotoration.
 
@@ -105,13 +106,13 @@
 + (NSValueTransformer *)defaultImageJSONTransformer
 {
     return [MTLValueTransformer reversibleTransformerWithForwardBlock:^Image *(NSArray *items) {
-        NSDictionary *defaultImageDict = [[items select: ^(NSDictionary *item) {
+        NSDictionary *defaultImageDict = [[items select:^(NSDictionary *item) {
             return [item[@"is_default"] boolValue];
         }] first];
         return defaultImageDict ? [Image modelWithJSON:defaultImageDict] : nil;
     }
         reverseBlock:^NSArray *(Image *image) {
-        return @[image];
+            return @[ image ];
         }];
 }
 
@@ -209,15 +210,15 @@
 {
     return [ArtsyAPI getRelatedArtworksForArtwork:self success:success
                                           failure:^(NSError *error) {
-        success(@[]);
+                                              success(@[]);
                                           }];
 }
 
 - (AFHTTPRequestOperation *)getRelatedFairArtworks:(Fair *)fair success:(void (^)(NSArray *artworks))success
 {
-    return [ArtsyAPI getRelatedArtworksForArtwork:self inFair:(fair ?: self.fair)success:success
+    return [ArtsyAPI getRelatedArtworksForArtwork:self inFair:(fair ?: self.fair) success:success
                                           failure:^(NSError *error) {
-            success(@[]);
+                                              success(@[]);
                                           }];
 }
 
@@ -225,7 +226,7 @@
 {
     return [ArtsyAPI getAuctionComparablesForArtwork:self success:success
                                              failure:^(NSError *error) {
-            success(@[]);
+                                                 success(@[]);
                                              }];
 }
 
@@ -233,7 +234,7 @@
 {
     return [ArtsyAPI getRelatedPostsForArtwork:self success:success
                                        failure:^(NSError *error) {
-            success(@[]);
+                                           success(@[]);
                                        }];
 }
 
@@ -241,7 +242,7 @@
 {
     return [ArtsyAPI getShowsForArtworkID:self.artworkID inFairID:fair.fairID success:success
                                   failure:^(NSError *error) {
-            success(@[]);
+                                      success(@[]);
                                   }];
 }
 
@@ -293,7 +294,7 @@
     ar_dispatch_async(^{
         [ArtsyAPI getArtworkInfo:self.artworkID success:^(id artwork) {
             ar_dispatch_main_queue(^{
-                __strong typeof (wself) sself = wself;
+                __strong typeof(wself) sself = wself;
                 [sself mergeValuesForKeysFromModel:artwork];
                 [deferred resolveWithValue:sself];
             });
@@ -319,13 +320,17 @@
     }
 
     return [_artworkUpdateDeferred.promise then:^(id value) {
-        if (success) { success(); }
+        if (success) {
+            success();
+        }
         return self;
 
     } error:^id(NSError *error) {
-        if (failure) { failure(error); }
+        if (failure) {
+            failure(error);
+        }
 
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         ARErrorLog(@"Failed fetching full JSON for artwork %@. Error: %@", sself.artworkID, error.localizedDescription);
         return error;
     }];
@@ -362,7 +367,7 @@
         }
 
         if (auction) {
-            __strong typeof (wself) sself = wself;
+            __strong typeof(wself) sself = wself;
             [ArtsyAPI getAuctionArtworkWithSale:auction.saleID artwork:sself.artworkID success:^(SaleArtwork *saleArtwork) {
                 saleArtwork.auction = auction;
                 [deferred resolveWithValue:saleArtwork];
@@ -427,7 +432,7 @@
     KSDeferred *deferred = [self deferredFairUpdate];
 
     [ArtsyAPI getFairsForArtwork:self success:^(NSArray *fairs) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         // we're not checking for count > 0 cause we wanna fulfill with nil if no fairs
         Fair *fair = [fairs firstObject];
         sself.fair = fair;
@@ -494,10 +499,12 @@
 {
     __weak typeof(self) wself = self;
     [ArtsyAPI setFavoriteStatus:state forArtwork:self success:^(id response) {
-        __strong typeof (wself) sself = wself;
-        if (!self) { return; }
+        __strong typeof(wself) sself = wself;
+        if (!self) {
+            return;
+        }
 
-        sself->_heartStatus = state? ARHeartStatusYes : ARHeartStatusNo;
+        sself->_heartStatus = state ? ARHeartStatusYes : ARHeartStatusNo;
 
         [ARSpotlight addToSpotlightIndex:state entity:self];
 
@@ -505,8 +512,10 @@
             success(response);
         }
     } failure:^(NSError *error) {
-        __strong typeof (wself) sself = wself;
-        if (!self) { return; }
+        __strong typeof(wself) sself = wself;
+        if (!self) {
+            return;
+        }
 
         sself->_heartStatus = ARHeartStatusNo;
 
@@ -530,8 +539,10 @@
     if (!_favDeferred) {
         KSDeferred *deferred = [KSDeferred defer];
         [ArtsyAPI checkFavoriteStatusForArtwork:self success:^(BOOL status) {
-            __strong typeof (wself) sself = wself;
-            if (!sself) { return; }
+            __strong typeof(wself) sself = wself;
+            if (!sself) {
+                return;
+            }
 
             sself->_heartStatus = status ? ARHeartStatusYes : ARHeartStatusNo;
 
@@ -544,13 +555,13 @@
     }
 
     [_favDeferred.promise then:^(id value) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
 
         success(sself.heartStatus);
         return self;
     } error:^(NSError *error) {
         // Its a 404 if you have no artworks
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         NSHTTPURLResponse *response = [error userInfo][AFNetworkingOperationFailingURLResponseErrorKey];
         if (response.statusCode == 404) {
             success(ARHeartStatusNo);

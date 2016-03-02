@@ -16,13 +16,13 @@ describe(@"init", ^{
     it(@"should create buttons based on the descriptions", ^{
         NSArray *buttonDescriptions = @[
             @{
-                ARNavigationButtonPropertiesKey: @{
-                    @"title": @"foo"
+                ARNavigationButtonPropertiesKey : @{
+                    @"title" : @"foo"
                 }
             },
             @{
-                ARNavigationButtonPropertiesKey: @{
-                    @"title": @"bar"
+                ARNavigationButtonPropertiesKey : @{
+                    @"title" : @"bar"
                 }
             }
         ];
@@ -57,16 +57,16 @@ describe(@"creating buttons", ^{
     __block ARNavigationButtonsViewController *vc;
 
     beforeEach(^{
-         NSArray *buttonDescriptions = @[
+        NSArray *buttonDescriptions = @[
             @{
-                ARNavigationButtonPropertiesKey: @{
-                    @"backgroundColor": UIColor.redColor
+                ARNavigationButtonPropertiesKey : @{
+                    @"backgroundColor" : UIColor.redColor
                 }
             },
             @{
-                ARNavigationButtonClassKey: ARButtonWithImage.class,
-                ARNavigationButtonPropertiesKey: @{
-                    @"title": NSNull.null,
+                ARNavigationButtonClassKey : ARButtonWithImage.class,
+                ARNavigationButtonPropertiesKey : @{
+                    @"title" : NSNull.null,
                 }
             }
         ];
@@ -107,7 +107,7 @@ describe(@"creating buttons", ^{
 
         vc.buttonDescriptions = @[
             @{
-                ARNavigationButtonClassKey: ARButtonWithImage.class
+               ARNavigationButtonClassKey : ARButtonWithImage.class
             }
         ];
 

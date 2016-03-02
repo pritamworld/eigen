@@ -26,7 +26,7 @@ describe(@"message provider", ^{
         it(@"sets the placeholderItem", ^{
             expect(provider.placeholderItem).to.equal(@"So And So");
         });
-        
+
         it(@"sets the path", ^{
             expect(provider.path).to.equal(path);
         });
@@ -47,7 +47,7 @@ describe(@"message provider", ^{
             });
         });
     });
-        
+
     describe(@"item", ^{
         __block id providerMock;
 
@@ -63,8 +63,8 @@ describe(@"message provider", ^{
 
         it(@"formats HTML for Mail", ^{
             [(ARMessageItemProvider *)[[providerMock stub] andReturn:UIActivityTypeMail] activityType];
-            NSString *email = [NSString stringWithFormat: @"<html><body><a href='%@/%@'>%@</a></body></html>",
-                               [ARRouter baseWebURL].absoluteString, path, @"So And So on Artsy"];
+            NSString *email = [NSString stringWithFormat:@"<html><body><a href='%@/%@'>%@</a></body></html>",
+                                                         [ARRouter baseWebURL].absoluteString, path, @"So And So on Artsy"];
             expect([provider item]).to.equal(email);
         });
 

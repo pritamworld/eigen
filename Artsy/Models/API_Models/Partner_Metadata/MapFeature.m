@@ -7,6 +7,7 @@
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
+
 @implementation MapFeature
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
@@ -61,25 +62,25 @@ NSString *NSStringFromARMapFeatureType(enum ARMapFeatureType featureType)
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         mapFeatureToStringDictionary = @{
-           @(ARMapFeatureTypeDefault): @"Default",
-           @(ARMapFeatureTypeArtsy): @"Artsy",
-           @(ARMapFeatureTypeDrink): @"Drink",
-           @(ARMapFeatureTypeCoatCheck): @"CoatCheck",
-           @(ARMapFeatureTypeFood): @"Food",
-           @(ARMapFeatureTypeLounge): @"Lounge",
-           @(ARMapFeatureTypeRestroom): @"Restroom",
-           @(ARMapFeatureTypeSaved): @"Saved",
-           @(ARMapFeatureTypeSearch): @"Search",
-           @(ARMapFeatureTypeVIP): @"VIP",
-           @(ARMapFeatureTypeHighlighted): @"Highlighted",
-           @(ARMapFeatureTypeGenericEvent): @"Event",
-           @(ARMapFeatureTypeEntrance): @"Entrance",
-           @(ARMapFeatureTypeTicket): @"Ticket",
-           @(ARMapFeatureTypeExit): @"Exit",
-           @(ARMapFeatureTypeBooks): @"Books",
-           @(ARMapFeatureTypeInstallation): @"Installation",
-           @(ARMapFeatureTypeTransport): @"Transport",
-           @(ARMapFeatureTypeInfo): @"Info"
+            @(ARMapFeatureTypeDefault) : @"Default",
+            @(ARMapFeatureTypeArtsy) : @"Artsy",
+            @(ARMapFeatureTypeDrink) : @"Drink",
+            @(ARMapFeatureTypeCoatCheck) : @"CoatCheck",
+            @(ARMapFeatureTypeFood) : @"Food",
+            @(ARMapFeatureTypeLounge) : @"Lounge",
+            @(ARMapFeatureTypeRestroom) : @"Restroom",
+            @(ARMapFeatureTypeSaved) : @"Saved",
+            @(ARMapFeatureTypeSearch) : @"Search",
+            @(ARMapFeatureTypeVIP) : @"VIP",
+            @(ARMapFeatureTypeHighlighted) : @"Highlighted",
+            @(ARMapFeatureTypeGenericEvent) : @"Event",
+            @(ARMapFeatureTypeEntrance) : @"Entrance",
+            @(ARMapFeatureTypeTicket) : @"Ticket",
+            @(ARMapFeatureTypeExit) : @"Exit",
+            @(ARMapFeatureTypeBooks) : @"Books",
+            @(ARMapFeatureTypeInstallation) : @"Installation",
+            @(ARMapFeatureTypeTransport) : @"Transport",
+            @(ARMapFeatureTypeInfo) : @"Info"
         };
     });
 

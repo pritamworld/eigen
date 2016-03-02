@@ -12,18 +12,19 @@ describe(@"image provider item", ^{
     __block ARImageItemProvider *provider = [[ARImageItemProvider alloc] initWithPlaceholderItem:image];
     __block id providerMock = [OCMockObject partialMockForObject:provider];
 
-    NSArray *imagelessActivities = @[@"Twitter", @"Facebook"];
+    NSArray *imagelessActivities = @[ @"Twitter", @"Facebook" ];
 
     for (NSString *activity in imagelessActivities) {
         it([NSString stringWithFormat:@"%@%@", @"returns nil for ", activity], ^{
-            NSString *activityType = [NSString stringWithFormat:@"%@%@",@"com.apple.UIKit.activity.PostTo", activity];
+            NSString *activityType = [NSString stringWithFormat:@"%@%@", @"com.apple.UIKit.activity.PostTo", activity];
             [(ARImageItemProvider *)[[providerMock stub] andReturn:activityType] activityType];
             expect(provider.item).to.beNil();
         });
     }
 
     it(@"returns placeholderItem for other activities", ^{
-        [(ARImageItemProvider *)[[providerMock stub] andReturn:@"another activity"] activityType];;
+        [(ARImageItemProvider *)[[providerMock stub] andReturn:@"another activity"] activityType];
+        ;
         expect(provider.item).to.equal(image);
     });
 

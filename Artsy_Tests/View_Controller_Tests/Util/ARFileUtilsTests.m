@@ -65,15 +65,15 @@ pending(@"application support", ^{
     __block NSString *bundleID;
     afterEach(^{
         bundleID = [[NSBundle bundleForClass:Artwork.class] bundleIdentifier];
-        
+
         NSString *testFolder = [ARFileUtils appSupportPathWithFolder:@"testFolder" filename:nil];
         [[NSFileManager defaultManager] removeItemAtPath:testFolder error:nil];
     });
-    
+
     it(@"returns a path namespaced to the app", ^{
         expect([ARFileUtils appSupportFolder]).to.contain(bundleID);
     });
-    
+
     it(@"returns a ignores the directory /filename inside the app scoped dir", ^{
         expect([ARFileUtils appSupportPathWithFolder:nil filename:@"testFile"]).to.endWith([bundleID stringByAppendingString:@"/testFile"]);
     });

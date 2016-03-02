@@ -10,6 +10,7 @@
 #import <Artsy_UILabels/ARLabelSubclasses.h>
 #import <ORStackView/ORStackScrollView.h>
 
+
 @interface ARArtworkInfoViewController () <ARTextViewDelegate>
 @property (nonatomic, strong) Artwork *artwork;
 @property (nonatomic, strong) ORStackScrollView *view;

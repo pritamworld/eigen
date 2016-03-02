@@ -30,8 +30,10 @@
     __weak typeof(self) wself = self;
 
     self.currentRequest = [self requestOperationAtPage:self.currentPage withSuccess:^(NSArray *items) {
-        __strong typeof (wself) sself = wself;
-        if (!sself) { return; }
+        __strong typeof(wself) sself = wself;
+        if (!sself) {
+            return;
+        }
 
         sself.currentPage++;
 
@@ -39,15 +41,17 @@
             sself.allDownloaded = YES;
         }
 
-        if(success) success(items);
+        if (success) success(items);
 
     } failure:^(NSError *error) {
-        __strong typeof (wself) sself = wself;
-        if (!sself) { return; }
+        __strong typeof(wself) sself = wself;
+        if (!sself) {
+            return;
+        }
 
         sself.allDownloaded = YES;
 
-        if(success) success(@[]);
+        if (success) success(@[]);
     }];
 }
 

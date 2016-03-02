@@ -14,6 +14,7 @@
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
+
 @implementation ARFeedLinkUnitViewController
 
 - (void)fetchLinks:(void (^)(void))completion
@@ -32,7 +33,7 @@
 
     // edit set here: http://admin.artsy.net/set/52277573c9dc24da5b00020c
     [ArtsyAPI getOrderedSetItemsWithKey:@"eigen:feed-links" success:^(NSArray *items) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself addButtonDescriptions:[sself phoneNavigationForFeaturedLinks:items]];
         completion();
     } failure:^(NSError *error) {
@@ -42,7 +43,7 @@
     // edit set here: https://admin.artsy.net/set/54e255e9726169752bbb1b00
     if ([User currentUser]) {
         [ArtsyAPI getOrderedSetItemsWithKey:@"eigen:logged-in-feed-links" success:^(NSArray *items) {
-            __strong typeof (wself) sself = wself;
+            __strong typeof(wself) sself = wself;
             [sself addButtonDescriptions:[sself phoneNavigationForFeaturedLinks:items]];
             completion();
         } failure:^(NSError *error) {
@@ -53,7 +54,7 @@
     if (ARAppStatus.isBetaOrDev) {
         // edit set here: http://admin.artsy.net/set/5308e7be9c18db75fd000343
         [ArtsyAPI getOrderedSetItemsWithKey:@"eigen:beta-feed-links" success:^(NSArray *items) {
-            __strong typeof (wself) sself = wself;
+            __strong typeof(wself) sself = wself;
             [sself addButtonDescriptions:[sself phoneNavigationForFeaturedLinks:items]];
             completion();
         } failure:^(NSError *error) {

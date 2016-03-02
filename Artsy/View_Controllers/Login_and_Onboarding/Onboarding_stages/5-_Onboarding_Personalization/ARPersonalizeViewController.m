@@ -59,7 +59,7 @@ static NSString *SearchCellId = @"OnboardingSearchCell";
             // Convert names to Gene Objects
             _genesToFollow = [fallbackGenes map:^id(NSString *name) {
                 NSString *geneID = [[name stringByReplacingOccurrencesOfString:@" " withString:@"-"]
-                                    lowercaseString];
+                    lowercaseString];
                 Gene *gene = [Gene modelWithJSON:@{
                     @"name" : name,
                     @"id" : geneID
@@ -143,9 +143,9 @@ static NSString *SearchCellId = @"OnboardingSearchCell";
     self.artistTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.artistTableView.scrollEnabled = NO;
 
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     [self.artistController setPostRemoveBlock:^{
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself updateArtistTableViewAnimated:YES];
     }];
 

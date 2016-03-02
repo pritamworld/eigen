@@ -108,23 +108,25 @@ context(@"with no map", ^{
 
         ARStubbedFairNetworkModel *networkModel = [[ARStubbedFairNetworkModel alloc] init];
         networkModel.maps = @[];
-        OrderedSet *set = [OrderedSet modelWithJSON: @{
-            @"description": @"",
-            @"display_on_mobile": @(1),
-            @"id": @"set-id",
-            @"internal_name": @"The Armory Show 2014 Primary Features",
-            @"item_type": @"FeaturedLink",
-            @"key": @"primary",
-            @"name": @"The Armory Show 2014 Primary Features",
-            @"published": @(1),
+        OrderedSet *set = [OrderedSet modelWithJSON:@{
+            @"description" : @"",
+            @"display_on_mobile" : @(1),
+            @"id" : @"set-id",
+            @"internal_name" : @"The Armory Show 2014 Primary Features",
+            @"item_type" : @"FeaturedLink",
+            @"key" : @"primary",
+            @"name" : @"The Armory Show 2014 Primary Features",
+            @"published" : @(1),
         }];
 
-        networkModel.orderedSets =  @[set];
+        networkModel.orderedSets = @[ set ];
 
         fair.networkModel = networkModel;
 
         [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/set/set-id/items" withResponse:@[
-            @{ @"id": @"one", @"href": @"/post/moby-my-highlights-from-art-los-angeles-contemporary", @"title" : @"Moby" },
+            @{ @"id" : @"one",
+               @"href" : @"/post/moby-my-highlights-from-art-los-angeles-contemporary",
+               @"title" : @"Moby" },
         ]];
 
         fairVC = [[ARFairViewController alloc] initWithFair:fair];
@@ -142,16 +144,16 @@ context(@"with no map", ^{
 
             expect(fairVC.fair.name).will.equal(@"The Fair Affair");
 
-            ORStackView *stackView = ((ORStackScrollView *) fairVC.stackView).stackView;
+            ORStackView *stackView = ((ORStackScrollView *)fairVC.stackView).stackView;
             expect(stackView.subviews.count).will.beGreaterThan(0);
 
             UIView *titleView = stackView.subviews[0];
             expect(titleView).to.beKindOf([UILabel class]);
-            expect(((UILabel *) titleView).text).to.equal(@"The Fair Affair");
+            expect(((UILabel *)titleView).text).to.equal(@"The Fair Affair");
 
             UIView *subtitleView = stackView.subviews[1];
             expect(subtitleView).to.beKindOf([UILabel class]);
-            expect(((UILabel *) subtitleView).text).to.equal(@"Jan 30th - Feb 2nd, 1976");
+            expect(((UILabel *)subtitleView).text).to.equal(@"Jan 30th - Feb 2nd, 1976");
         });
     });
 
@@ -178,40 +180,42 @@ context(@"with a map", ^{
         }];
 
         ARStubbedFairNetworkModel *networkModel = [[ARStubbedFairNetworkModel alloc] init];
-        networkModel.maps = @[[Map modelWithJSON:@{@"id": @"map-id"}]];
-        OrderedSet *set = [OrderedSet modelWithJSON: @{
-            @"description": @"",
-            @"display_on_mobile": @(1),
-            @"id": @"set-id",
-            @"internal_name": @"The Armory Show 2014 Primary Features",
-            @"item_type": @"FeaturedLink",
-            @"key": @"primary",
-            @"name": @"The Armory Show 2014 Primary Features",
-            @"published": @(1),
+        networkModel.maps = @[ [Map modelWithJSON:@{ @"id" : @"map-id" }] ];
+        OrderedSet *set = [OrderedSet modelWithJSON:@{
+            @"description" : @"",
+            @"display_on_mobile" : @(1),
+            @"id" : @"set-id",
+            @"internal_name" : @"The Armory Show 2014 Primary Features",
+            @"item_type" : @"FeaturedLink",
+            @"key" : @"primary",
+            @"name" : @"The Armory Show 2014 Primary Features",
+            @"published" : @(1),
         }];
 
-        networkModel.orderedSets = @[set];
-        
+        networkModel.orderedSets = @[ set ];
+
         fair.networkModel = networkModel;
-        
+
         [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/set/set-id/items" withResponse:@[
-            @{ @"id": @"one", @"href": @"/post/moby-my-highlights-from-art-los-angeles-contemporary", @"title" : @"Moby" },
+            @{ @"id" : @"one",
+               @"href" : @"/post/moby-my-highlights-from-art-los-angeles-contemporary",
+               @"title" : @"Moby" },
         ]];
 
         fairVC = [[ARFairViewController alloc] initWithFair:fair];
         fairVC.animatesSearchBehavior = NO;
         fairVC.view.frame = [[UIScreen mainScreen] bounds];
-        
+
     });
-    
+
     afterEach(^{
         [OHHTTPStubs removeAllStubs];
     });
-    
+
     it(@"has a map", ^{
         expect(fairVC.hasMap).will.beTruthy();
     });
-    
+
     it(@"has a map button", ^{
         expect(fairVC.primaryNavigationVC).willNot.beNil();
         expect(fairVC.primaryNavigationVC.buttonDescriptions.count).will.beGreaterThan(0);
@@ -219,7 +223,7 @@ context(@"with a map", ^{
             return [button[@"ARNavigationButtonPropertiesKey"][@"title"] isEqualToString:@"Map"];
         }]).willNot.beNil();
     });
-    
+
     it(@"search view looks correct", ^{
         [fairVC searchFieldButtonWasPressed:nil];
         [fairVC.searchVC beginAppearanceTransition:YES animated:NO];
@@ -229,30 +233,30 @@ context(@"with a map", ^{
 });
 
 it(@"creates an NSUserActivity", ^{
-    
+
     Fair *fair = [Fair modelWithJSON:@{
         @"id" : @"a-fair-affair",
         @"name" : @"The Fair Affair",
         @"start_at" : @"1976-01-30T15:00:00+00:00",
         @"end_at" : @"1976-02-02T15:00:00+00:00"
     }];
-    
+
     ARStubbedFairNetworkModel *networkModel = [[ARStubbedFairNetworkModel alloc] init];
-    networkModel.maps = @[[Map modelWithJSON:@{@"id": @"map-id"}]];
-    OrderedSet *set = [OrderedSet modelWithJSON: @{
-        @"description": @"",
-        @"display_on_mobile": @(1),
-        @"id": @"set-id",
-        @"internal_name": @"The Armory Show 2014 Primary Features",
-        @"item_type": @"FeaturedLink",
-        @"key": @"primary",
-        @"name": @"The Armory Show 2014 Primary Features",
-        @"published": @(1),
+    networkModel.maps = @[ [Map modelWithJSON:@{ @"id" : @"map-id" }] ];
+    OrderedSet *set = [OrderedSet modelWithJSON:@{
+        @"description" : @"",
+        @"display_on_mobile" : @(1),
+        @"id" : @"set-id",
+        @"internal_name" : @"The Armory Show 2014 Primary Features",
+        @"item_type" : @"FeaturedLink",
+        @"key" : @"primary",
+        @"name" : @"The Armory Show 2014 Primary Features",
+        @"published" : @(1),
     }];
-    
-    networkModel.orderedSets = @[set];
+
+    networkModel.orderedSets = @[ set ];
     fair.networkModel = networkModel;
-    
+
     ARFairViewController *vc = [[ARFairViewController alloc] initWithFair:fair];
     vc.view.frame = [[UIScreen mainScreen] bounds];
     [vc viewDidAppear:NO];

@@ -9,7 +9,8 @@
 #import "ARSwitchBoard.h"
 
 
-@interface Artist () {
+@interface Artist ()
+{
     BOOL _isFollowed;
 }
 @end
@@ -77,16 +78,16 @@
 
 - (void)setFollowState:(BOOL)state success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     [ArtsyAPI setFavoriteStatus:state forArtist:self success:^(id response) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         sself.followed = state;
         [ARSpotlight addToSpotlightIndex:state entity:self];
         if (success) {
             success(response);
         }
     } failure:^(NSError *error) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         sself.followed = !state;
         if (failure) {
             failure(error);
@@ -101,9 +102,9 @@
         return;
     }
 
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
     [ArtsyAPI checkFavoriteStatusForArtist:self success:^(BOOL result) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         sself.followed = result;
         success(result ? ARHeartStatusYes : ARHeartStatusNo);
     } failure:failure];
@@ -144,7 +145,7 @@
     return [ArtsyAPI getRelatedPostsForArtist:self
                                       success:success
                                       failure:^(NSError *error) {
-           success(@[]);
+                                          success(@[]);
                                       }];
 }
 
@@ -153,7 +154,7 @@
     return [ArtsyAPI getRelatedArtistsForArtist:self
                                         success:success
                                         failure:^(NSError *error) {
-            success(@[]);
+                                            success(@[]);
                                         }];
 }
 

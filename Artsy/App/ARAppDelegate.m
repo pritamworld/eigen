@@ -395,12 +395,12 @@ static ARAppDelegate *_sharedInstance = nil;
 - (void)fetchSiteFeatures
 {
     [ArtsyAPI getXappTokenWithCompletion:^(NSString *xappToken, NSDate *expirationDate) {
-       [ArtsyAPI getSiteFeatures:^(NSArray *features) {
-           [ARDefaults setOnboardingDefaults:features];
+        [ArtsyAPI getSiteFeatures:^(NSArray *features) {
+            [ARDefaults setOnboardingDefaults:features];
 
-       } failure:^(NSError *error) {
-           ARErrorLog(@"Couldn't get site features. Error %@", error.localizedDescription);
-       }];
+        } failure:^(NSError *error) {
+            ARErrorLog(@"Couldn't get site features. Error %@", error.localizedDescription);
+        }];
     }];
 }
 
@@ -439,7 +439,7 @@ static ARAppDelegate *_sharedInstance = nil;
                 UINavigationController *navigationController = ARTopMenuViewController.sharedController.rootNavigationController;
                 NSURL *url = [NSURL URLWithString:link.href relativeToURL:[ARRouter baseWebURL]];
                 UIViewController *martsyWarning = [[AREndOfLineInternalMobileWebViewController alloc] initWithURL:url];
-                [navigationController setViewControllers:@[martsyWarning] animated:NO];
+                [navigationController setViewControllers:@[ martsyWarning ] animated:NO];
             }
 
         }];

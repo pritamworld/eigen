@@ -117,16 +117,16 @@ static const CGFloat ARArtworkImageHeightAdjustmentForPhone = -56;
 
 - (void)setUpCallbacks
 {
-    __weak typeof (self) wself = self;
+    __weak typeof(self) wself = self;
 
     void (^completion)(void) = ^{
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself.spinner fadeOutAnimated:ARPerformWorkAsynchronously];
         [sself.stackView removeSubview:sself.spinner];
     };
 
     [self.artwork onArtworkUpdate:^{
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         [sself artworkUpdated];
 
         completion();
@@ -135,7 +135,7 @@ static const CGFloat ARArtworkImageHeightAdjustmentForPhone = -56;
     }];
 
     [self.artwork onFairUpdate:^(Fair *fair) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         if (!sself || !fair) return;
 
         [sself.metadataView updateWithFair:fair];
@@ -143,11 +143,11 @@ static const CGFloat ARArtworkImageHeightAdjustmentForPhone = -56;
     } failure:nil];
 
     [self.artwork onSaleArtworkUpdate:^(SaleArtwork *saleArtwork) {
-        __strong typeof (wself) sself = wself;
+        __strong typeof(wself) sself = wself;
         if (saleArtwork.auctionState & ARAuctionStateUserIsBidder) {
             [ARAnalytics setUserProperty:@"has_placed_bid" toValue:@"true"];
             sself.banner.auctionState = saleArtwork.auctionState;
-            [UIView animateIf:ARPerformWorkAsynchronously duration:ARAnimationDuration :^{
+            [UIView animateIf:ARPerformWorkAsynchronously duration:ARAnimationDuration:^{
                 [sself.banner updateHeightConstraint];
                 [sself.stackView layoutIfNeeded];
             }];

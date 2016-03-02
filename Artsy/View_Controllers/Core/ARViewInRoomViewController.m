@@ -359,9 +359,8 @@ static const CGFloat DistanceToTopOfBenchPortrait = 90;
     }
 
     CGRect frame = {
-        .origin = {
-            floorf((CGRectGetWidth(containerFrame) - scaledWidth) * .5f),
-            floorf(CGRectGetHeight(containerFrame) - [self artworkEyelineLevel] - (scaledHeight * .5f))},
+        .origin = {floorf((CGRectGetWidth(containerFrame) - scaledWidth) * .5f),
+                   floorf(CGRectGetHeight(containerFrame) - [self artworkEyelineLevel] - (scaledHeight * .5f))},
         .size = {scaledWidth, scaledHeight},
     };
 

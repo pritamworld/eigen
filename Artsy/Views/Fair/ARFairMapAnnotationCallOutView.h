@@ -2,6 +2,7 @@
 
 @class ARFairMapAnnotation, Fair, NAMapView;
 
+
 @interface ARFairMapAnnotationCallOutView : UIView
 
 - (id)initOnMapView:(NAMapView *)mapView fair:(Fair *)fair;

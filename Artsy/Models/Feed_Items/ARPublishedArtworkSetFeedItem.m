@@ -4,6 +4,7 @@
 #import "Artwork.h"
 #import "Gene.h"
 
+
 @implementation ARPublishedArtworkSetFeedItem
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey

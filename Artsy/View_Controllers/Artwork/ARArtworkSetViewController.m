@@ -6,6 +6,7 @@
 
 #import "UIDevice-Hardware.h"
 
+
 @interface ARArtworkSetViewController ()
 
 @property (nonatomic, strong) Fair *fair;
@@ -110,7 +111,7 @@
 
     if (![UIDevice isPad]) {
         // TODO Why is this needed at all?
-        self.view.bounds = (CGRect){ CGPointZero, newSize };
+        self.view.bounds = (CGRect){CGPointZero, newSize};
     }
 }
 

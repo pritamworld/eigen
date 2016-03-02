@@ -13,6 +13,7 @@ extern const CGFloat AconstRiPhonePreviewImageWidth;
 
 @class Artwork;
 
+
 @interface ARArtworkPreviewImageView : UIImageView
 
 @property (nonatomic, weak) id<ARArtworkPreviewImageViewDelegate> delegate;
