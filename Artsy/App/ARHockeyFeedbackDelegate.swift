@@ -27,7 +27,8 @@ class ARHockeyFeedbackDelegate: NSObject {
             analyticsLog = BITHockeyAttachment(filename: "analytics_log.txt", hockeyAttachmentData: data, contentType: "text")
         }
 
-        let initialMessage = "Hey there\nI have some feedback:\n\n"
+        let topVC = ARTopMenuViewController.sharedController().rootNavigationController.topViewController!
+        let initialMessage = "Context:\(topVC.dynamicType)\n\n"
 
         // Create an array of optionals, then flatmap them to be only real values
         let items = ([initialMessage, image, analyticsLog] as [AnyObject?]).flatMap{ $0 }

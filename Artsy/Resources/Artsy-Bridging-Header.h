@@ -2,6 +2,8 @@
 //  Use this file to import your target's public headers that you would like to expose to Swift.
 //
 
+#import "ARTopMenuViewController.h"
+
 #import "UIViewController+FullScreenLoading.h"
 #import "ArtsyAPI+Sales.h"
 #import "ArtsyAPI+Pages.h"
