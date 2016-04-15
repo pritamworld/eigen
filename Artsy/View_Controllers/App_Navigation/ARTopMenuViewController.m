@@ -17,6 +17,7 @@
 #import "UIView+HitTestExpansion.h"
 #import <objc/runtime.h>
 #import "UIDevice-Hardware.h"
+#import "Artsy-Swift.h"
 
 #import <JSBadgeView/JSBadgeView.h>
 #import <NPKeyboardLayoutGuide/NPKeyboardLayoutGuide.h>
@@ -119,7 +120,7 @@ static const CGFloat ARMenuButtonDimension = 46;
 
     [tabContainer constrainHeight:@(ARMenuButtonDimension).stringValue];
     [tabContainer alignLeading:@"0" trailing:@"0" toView:self.view];
-    self.tabBottomConstraint = [[tabContainer alignBottomEdgeWithView:self.view predicate:@"0"] lastObject];
+    self.tabBottomConstraint = [tabContainer alignBottomEdgeWithView:self.view predicate:@"0"];
 
     for (ARNavigationTabButton *button in buttons) {
         [tabContainer addSubview:button];
@@ -139,10 +140,10 @@ static const CGFloat ARMenuButtonDimension = 46;
         if (index == 0) {
             [button alignLeadingEdgeWithView:tabContainer predicate:@"0"];
         } else {
-            [constraintsForButtons addObject:[[button constrainLeadingSpaceToView:buttons[index - 1] predicate:@"0"] lastObject] ];
+            [constraintsForButtons addObject:[button constrainLeadingSpaceToView:buttons[index - 1] predicate:@"0"]];
         }
         if (index == buttons.count - 1) {
-            [constraintsForButtons addObject:[[tabContainer alignTrailingEdgeWithView:button predicate:@"0"] lastObject]];
+            [constraintsForButtons addObject:[tabContainer alignTrailingEdgeWithView:button predicate:@"0"]];
         }
     }];
     self.constraintsForButtons = [constraintsForButtons copy];
@@ -322,6 +323,7 @@ static const CGFloat ARMenuButtonDimension = 46;
         dispatch_once(&onceToken, ^{
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appHasBeenInjected:) name:@"INJECTION_BUNDLE_NOTIFICATION" object:nil];
 
+            [self runSwiftDeveloperExtras];
             [self runDeveloperExtras];
         });
     }

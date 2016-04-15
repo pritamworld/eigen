@@ -1,26 +1,3 @@
-GIT
-  remote: https://github.com/cocoapods/cocoapods
-  revision: 2d73d749ba8cc9d2079e7f6b09b3397c3817bdf1
-  branch: mr-fix-resource-bundles
-  specs:
-    cocoapods (1.0.0.beta.6)
-      activesupport (>= 4.0.2)
-      claide (>= 1.0.0.beta.3, < 2.0)
-      cocoapods-core (= 1.0.0.beta.6)
-      cocoapods-deintegrate (>= 1.0.0.beta.1, < 2.0)
-      cocoapods-downloader (>= 1.0.0.beta.2, < 2.0)
-      cocoapods-plugins (>= 1.0.0.beta.1, < 2.0)
-      cocoapods-search (>= 1.0.0.beta.1, < 2.0)
-      cocoapods-stats (>= 1.0.0.beta.3, < 2.0)
-      cocoapods-trunk (>= 1.0.0.beta.2, < 2.0)
-      cocoapods-try (>= 1.0.0.beta.3, < 2.0)
-      colored (~> 1.2)
-      escape (~> 0.0.4)
-      fourflusher (~> 0.3.0)
-      molinillo (~> 0.4.4)
-      nap (~> 1.0)
-      xcodeproj (>= 1.0.0.beta.3, < 2.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -42,20 +19,37 @@ GEM
       fastlane_core (>= 0.29.1, < 1.0.0)
       spaceship (>= 0.22.0, < 1.0.0)
     claide (1.0.0.beta.3)
-    cocoapods-core (1.0.0.beta.6)
+    cocoapods (1.0.0.beta.7)
+      activesupport (>= 4.0.2)
+      claide (>= 1.0.0.beta.3, < 2.0)
+      cocoapods-core (= 1.0.0.beta.7)
+      cocoapods-deintegrate (>= 1.0.0.beta.1, < 2.0)
+      cocoapods-downloader (= 1.0.0.beta.3)
+      cocoapods-plugins (>= 1.0.0.beta.1, < 2.0)
+      cocoapods-search (= 1.0.0.beta.2)
+      cocoapods-stats (= 1.0.0.beta.4)
+      cocoapods-trunk (= 1.0.0.beta.3)
+      cocoapods-try (>= 1.0.0.beta.3, < 2.0)
+      colored (~> 1.2)
+      escape (~> 0.0.4)
+      fourflusher (~> 0.3.0)
+      molinillo (~> 0.4.4)
+      nap (~> 1.0)
+      xcodeproj (= 1.0.0.beta.4)
+    cocoapods-core (1.0.0.beta.7)
       activesupport (>= 4.0.2)
       fuzzy_match (~> 2.0.4)
       nap (~> 1.0)
     cocoapods-deintegrate (1.0.0.beta.1)
-    cocoapods-downloader (1.0.0.beta.2)
+    cocoapods-downloader (1.0.0.beta.3)
     cocoapods-keys (1.6.0)
       dotenv
       osx_keychain
     cocoapods-plugins (1.0.0.beta.1)
       nap
-    cocoapods-search (1.0.0.beta.1)
-    cocoapods-stats (1.0.0.beta.3)
-    cocoapods-trunk (1.0.0.beta.2)
+    cocoapods-search (1.0.0.beta.2)
+    cocoapods-stats (1.0.0.beta.4)
+    cocoapods-trunk (1.0.0.beta.3)
       nap (>= 0.8, < 2.0)
       netrc (= 0.7.8)
     cocoapods-try (1.0.0.beta.3)
@@ -296,7 +290,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
-    xcodeproj (1.0.0.beta.3)
+    xcodeproj (1.0.0.beta.4)
       activesupport (>= 3)
       claide (>= 1.0.0.beta.1, < 2.0)
       colored (~> 1.2)
@@ -309,7 +303,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cocoapods!
+  cocoapods (= 1.0.0.beta.7)
   cocoapods-keys
   danger
   deliver

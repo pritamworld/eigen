@@ -3,6 +3,9 @@ upcoming:
   details: Analytics improvements
 
   dev:
+    - Artwork view hides Contact button for uninquireable works - sarah 
+    - Removed the Ask a Specialist button from artwork view - sarah
+    - Generalized the RefineViewController - sarah
     - Updates for Xcode 7.3. - ash
     - CocoaPods now is v1.0b. - orta
 
@@ -11,10 +14,12 @@ upcoming:
     - Started the Live Auction Bidding Interface - orta
     - Handles bidding in an auction with stubbed API interfaces. - orta
     - Basic metaphysics access for live sale static data. - ash
+    - Lot metadata can toggle between a short artwork blurb and full metadata - orta
 
   notes:
     - Fixes long auction names falling off right edge. - ash
     - Fixes live auction lots being in the wrong order. - ash
+    - Adds support for loading Artsy subdomains internally. - ash
 
 
 releases:

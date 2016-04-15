@@ -10,12 +10,18 @@ class AuctionLotMetadataStackScrollView: ORStackScrollView {
     let viewModel = Signal<LiveAuctionLotViewModelType>()
 
     let aboveFoldStack = TextStack()
-    let toggle = AuctionLotMetadataStackScrollView.toggleSizeButton()
+    private let toggle = AuctionLotMetadataStackScrollView.toggleSizeButton()
+
+    var showAdditionalInformation: (() -> ())?
+    var hideAdditionalInformation: (() -> ())?
 
     var aboveFoldHeightConstraint: NSLayoutConstraint!
 
     init() {
         super.init(stackViewClass: TextStack.self)
+
+        /// Anything addded to `stack` here will be hidden by default
+        guard let stack = stackView as? TextStack else { return }
 
         /// Splits the essential lot metadata and the "lot info" button
         let aboveFoldStackWrapper = UIView()
@@ -36,13 +42,15 @@ class AuctionLotMetadataStackScrollView: ORStackScrollView {
 
         // Want to make the wrapper hold the stack on the left
         aboveFoldStackWrapper.addSubview(aboveFoldStack)
-        aboveFoldStack.alignTop("0", leading: "0", toView: aboveFoldStackWrapper)
+        aboveFoldStack.alignTop("0", leading: "20", toView: aboveFoldStackWrapper)
         aboveFoldStack.alignBottomEdgeWithView(aboveFoldStackWrapper, predicate: "0")
 
         // Then the button on the right
         aboveFoldStackWrapper.addSubview(toggle)
         toggle.alignTopEdgeWithView(aboveFoldStackWrapper, predicate: "0")
-        toggle.alignTrailingEdgeWithView(aboveFoldStackWrapper, predicate: "0")
+        toggle.alignTrailingEdgeWithView(aboveFoldStackWrapper, predicate: "-20")
+
+        toggle.addTarget(self, action: #selector(toggleTapped), forControlEvents: .TouchUpInside)
 
         // Then glue them together with 20px margin
         aboveFoldStack.constrainTrailingSpaceToView(toggle, predicate: "-20")
@@ -51,12 +59,51 @@ class AuctionLotMetadataStackScrollView: ORStackScrollView {
         stackView.addSubview(aboveFoldStackWrapper, withTopMargin: "0", sideMargin: "0")
 
         // set a constraint to force it to be in small mode first
-        aboveFoldHeightConstraint = constrainHeightToView(aboveFoldStackWrapper, predicate: "0").first as! NSLayoutConstraint
+        aboveFoldHeightConstraint = constrainHeightToView(aboveFoldStackWrapper, predicate: "0")
 
-        self.invalidateIntrinsicContentSize()
+        let loremProofOfConcept = stack.addBodyText("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", sideMargin: "40")
+
+        let loremTwo = stack.addBodyText("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", sideMargin: "40")
+
+        backgroundColor = UIColor(white: 1, alpha: 0.85)
+        for label in [name, title, estimate, premium, loremProofOfConcept, loremTwo] {
+            label.backgroundColor = .clearColor()
+        }
     }
 
-    class func toggleSizeButton() -> UIButton {
+    @objc private func toggleTapped(button: UIButton) {
+        if (aboveFoldHeightConstraint.active) {
+            showAdditionalInformation?()
+        } else {
+            hideAdditionalInformation?()
+        }
+    }
+
+    func showFullMetadata(animated: Bool) {
+        scrollEnabled = true
+
+        toggle.setTitle("HIDE INFO", forState: .Normal)
+        toggle.setImage(UIImage(asset: .LiveAuctionsDisclosureTriangleDown), forState: .Normal)
+        aboveFoldHeightConstraint.active = false
+
+        UIView.animateIf(animated, duration: ARAnimationQuickDuration) {
+            self.layoutIfNeeded()
+        }
+    }
+
+    func hideFullMetadata(animated: Bool) {
+        scrollEnabled = false
+
+        toggle.setTitle("LOT INFO", forState: .Normal)
+        toggle.setImage(UIImage(asset: .LiveAuctionsDisclosureTriangleUp), forState: .Normal)
+        aboveFoldHeightConstraint.active = true
+
+        UIView.animateIf(animated, duration: ARAnimationQuickDuration) {
+            self.layoutIfNeeded()
+        }
+    }
+
+    private class func toggleSizeButton() -> UIButton {
         let toggle = UIButton(type: .Custom)
 
         // Adjusts where the text will be placed
@@ -66,9 +113,10 @@ class AuctionLotMetadataStackScrollView: ORStackScrollView {
         toggle.setTitleColor(.blackColor(), forState: .Normal)
 
         // Constrain the image to the left edge
-        toggle.setImage(UIImage(asset: .LiveAuctionsDisclosureTriangleDown), forState: .Normal)
+        toggle.setImage(UIImage(asset: .LiveAuctionsDisclosureTriangleUp), forState: .Normal)
         toggle.imageView?.alignTrailingEdgeWithView(toggle, predicate: "0")
         toggle.imageView?.alignTopEdgeWithView(toggle, predicate: "4")
+        toggle.setContentHuggingPriority(1000, forAxis: .Horizontal)
 
         // Extend its hit range, as it's like ~20px otherwise
         toggle.ar_extendHitTestSizeByWidth(20, andHeight: 40)
