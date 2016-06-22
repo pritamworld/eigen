@@ -10,8 +10,8 @@
 
 #import "ARMacros.h"
 
-#import <ReactiveCocoa/ReactiveCocoa.h>
 #import <ObjectiveSugar/ObjectiveSugar.h>
+#import <MapKit/MapKit.h>
 
 static ARStandardDateFormatter *staticDateFormatter;
 
@@ -220,6 +220,13 @@ static ARStandardDateFormatter *staticDateFormatter;
 - (NSURL *)spotlightThumbnailURL;
 {
     return self.smallPreviewImageURL;
+}
+
+- (MKMapItem *)spotlightMapRepresentation
+{
+    MKMapItem *item = [self.location mapRepresentation];
+    item.name = self.name;
+    return item;
 }
 
 @end

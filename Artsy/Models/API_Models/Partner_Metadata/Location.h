@@ -1,5 +1,6 @@
-#import <CoreLocation/CoreLocation.h>
 #import <Mantle/Mantle.h>
+
+@class CLLocation, MKMapItem;
 
 @interface Location : MTLModel <MTLJSONSerializing>
 
@@ -16,10 +17,15 @@
 @property (nonatomic, copy, readonly) NSNumber *longitude;
 @property (nonatomic, copy, readonly) NSNumber *latitude;
 - (NSDictionary *)coordinatesAsDictionary;
-- (CLLocation *)clLocation;
 
 @property (nonatomic, readonly) BOOL publiclyViewable;
 
 - (NSString *)addressAndCity;
 
+/// For integrating with different parts of the OS
+
+/// Turning the location into a core location version
+- (CLLocation *)clLocation;
+/// Turning location into a map item, filling in as much as possible 
+- (MKMapItem *)mapRepresentation;
 @end

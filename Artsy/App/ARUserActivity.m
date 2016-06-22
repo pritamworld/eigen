@@ -10,7 +10,7 @@
 #import "ARDispatchManager.h"
 
 #import <CoreSpotlight/CoreSpotlight.h>
-
+#import <MapKit/NSUserActivity+MKMapItem.h>
 
 NSString *const ARUserActivityTypeArtwork = @"net.artsy.artsy.artwork";
 NSString *const ARUserActivityTypeArtist = @"net.artsy.artsy.artist";
@@ -57,8 +57,15 @@ NSString *const ARUserActivityTypeSale = @"net.artsy.artsy.sale";
                                                             includeIdentifier:NO
                                                                    completion:^(CSSearchableItemAttributeSet *attributeSet) {
             [activity updateContentAttributeSet:attributeSet];
-                                                                   }];
+       }];
     }
+
+#if __has_include(<MapKit/NSUserActivity+MKMapItem.h>)
+    if ([entity respondsToSelector:@selector(spotlightMapRepresentation)]) {
+        activity.mapItem = [entity spotlightMapRepresentation];
+    }
+#endif
+
 
     return activity;
 }

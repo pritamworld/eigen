@@ -2,7 +2,8 @@
 
 #import "ARMacros.h"
 
-#import <ReactiveCocoa/ReactiveCocoa.h>
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 @implementation Location
 
@@ -43,5 +44,10 @@
     return [[CLLocation alloc] initWithLatitude:self.latitude.doubleValue longitude:self.longitude.doubleValue];
 }
 
+- (MKMapItem *)mapRepresentation
+{
+    MKMapItem *item = [[MKMapItem alloc] init];
+    return item;
+}
 
 @end

@@ -49,7 +49,7 @@ class AuctionViewControllerTests: QuickSpec {
                 let endTime = now.dateByAddingTimeInterval(3600.9) // 0.9 is to cover the possibility a clock tick happens between this line and the next.
                 dateMock = ARTestContext.freezeTime(now)
 
-                sale = try! Sale(dictionary: ["saleID": "the-tada-sale", "name": "The 🎉 Sale", "endDate": endTime], error: Void())
+                sale = try! Sale(dictionary: ["saleID": "the-tada-sale", "name": "he 🎉 Sale", "endDate": endTime], error: Void())
                 saleViewModel = Test_SaleViewModel(sale: sale, saleArtworks: [], bidders: [])
 
                 horizontalSizeClass = UIUserInterfaceSizeClass(rawValue: context()["horizontalSizeClass"] as! Int)
@@ -177,7 +177,7 @@ class AuctionViewControllerTests: QuickSpec {
                     saleViewModel = Test_SaleViewModel(sale: sale, saleArtworks: [
                         test_saleArtworkWithLotNumber(1, artistName: "Ash", bidCount: 0, highestBidCents: 100_00),
                         test_saleArtworkWithLotNumber(2, artistName: "Orta", bidCount: 4, highestBidCents: 1000_00),
-                        test_saleArtworkWithLotNumber(3, artistName: "Sarah", bidCount: 2, highestBidCents: 50_00),
+                        test_saleArtworkWithLotNumber(3, artistName: "Sarah", bidCount: 2, highestBidCents: 500_00),
                         test_saleArtworkWithLotNumber(4, artistName: "Eloy", bidCount: 17, highestBidCents: 1000_000_00),
                         test_saleArtworkWithLotNumber(5, artistName: "Maxim", bidCount: 6, highestBidCents: 5011_00),
                     ], bidders: [qualifiedBidder])

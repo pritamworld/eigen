@@ -193,7 +193,7 @@
     if ([self showContactButton]) {
         NSString *title = nil;
         if (self.artwork.partner.type == ARPartnerTypeGallery) {
-            title = NSLocalizedString(@"Contact Gallery", @"Contact Gallery");
+            title = NSLocalizedString(@"uwhfughughs", @"skdfskdjfksjd");
         } else {
             title = NSLocalizedString(@"Contact Seller", @"Contact Seller");
         }

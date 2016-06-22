@@ -1,8 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "ARShareableObject.h"
 
-@class CSSearchableItemAttributeSet;
-@class CSSearchableIndex;
+@class CSSearchableItemAttributeSet, CSSearchableIndex, MKMapItem;
 
 typedef void (^ARSearchAttributesCompletionBlock)(CSSearchableItemAttributeSet *attributeSet);
 
@@ -13,6 +12,7 @@ typedef void (^ARSearchAttributesCompletionBlock)(CSSearchableItemAttributeSet *
 - (NSString *)spotlightMarkdownDescription;
 - (NSDate *)startDate;
 - (NSDate *)endDate;
+- (MKMapItem *)spotlightMapRepresentation;
 @end
 
 @interface ARSpotlight : NSObject
