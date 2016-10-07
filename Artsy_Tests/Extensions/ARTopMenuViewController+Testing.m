@@ -1,17 +1,27 @@
 
 #import "ARTopMenuViewController+Testing.h"
+#import "ARTopMenuNavigationDataSource.h"
 
+@interface ARTopMenuViewController(TestingPrivateDetails)
+@property (readwrite, nonatomic, strong) ARTopMenuNavigationDataSource *navigationDataSource;
+@end
 
 @implementation ARTopMenuViewController (Testing)
 
-- (instancetype)initWithStubbedNetworking
+- (instancetype)initWithStubbedViewControllers
 {
-    [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/xapp_token" withResponse:@{}];
-    [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/site_hero_units" withResponse:@[ @{ @"heading" : @"something" } ]];
-    [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/sets" withResponse:@{}];
-    [OHHTTPStubs stubJSONResponseAtPath:@"/api/v1/shows/feed" withResponse:@{}];
+    self = [super init];
+    self.navigationDataSource = [[ARStubbedTopMenuNavigationDataSource alloc] init];
+    return self;
+}
 
-    return [super init];
+@end
+
+@implementation ARStubbedTopMenuNavigationDataSource
+
+- (ARNavigationController *)navigationControllerAtIndex:(NSInteger)index
+{
+    return [[ARNavigationController alloc] initWithRootViewController:[[UIViewController alloc] init]];
 }
 
 @end
