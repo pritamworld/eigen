@@ -39,10 +39,439 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "ARAnimatedTickViewSpec">
+               </Test>
+               <Test
+                  Identifier = "ARAnnotatedMapViewSpec">
+               </Test>
+               <Test
+                  Identifier = "ARAppActivityContinuationDelegateSpec">
+               </Test>
+               <Test
+                  Identifier = "ARAppNotificationsDelegateSpec">
+               </Test>
+               <Test
+                  Identifier = "ARAppSearchViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARArtistViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARArtworkActionsViewSpec">
+               </Test>
+               <Test
+                  Identifier = "ARArtworkDetailViewSpec">
+               </Test>
+               <Test
+                  Identifier = "ARArtworkFavoritesNetworkModelSpec">
+               </Test>
+               <Test
+                  Identifier = "ARArtworkInfoViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARArtworkPreviewActionsViewSpec">
+               </Test>
+               <Test
+                  Identifier = "ARArtworkRelatedArtworksViewSpec">
+               </Test>
+               <Test
+                  Identifier = "ARArtworkSetViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARArtworkViewControllerBuyButtonSpec">
+               </Test>
+               <Test
+                  Identifier = "ARArtworkViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARAspectRatioImageViewSpec">
+               </Test>
+               <Test
+                  Identifier = "ARAuctionWebViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARBidButtonSpec">
+               </Test>
+               <Test
+                  Identifier = "ARBrowseCategoriesViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARBrowseFeaturedLinksCollectionViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARBrowseViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARCollapsableTextViewSpec">
+               </Test>
+               <Test
+                  Identifier = "ARCountdownViewSpec">
+               </Test>
+               <Test
+                  Identifier = "ARCreateAccountViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARCustomEigenLabelsSpec">
+               </Test>
+               <Test
+                  Identifier = "ARDefaultsSpec">
+               </Test>
+               <Test
+                  Identifier = "ARDeveloperOptionsSpec">
+               </Test>
+               <Test
+                  Identifier = "AREmbeddedModelPreviewViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "AREmbeddedModelsViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARExternalWebBrowserViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARFairFavoritesNetworkModelSpec">
+               </Test>
+               <Test
+                  Identifier = "ARFairGuideContainerViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARFairGuideViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARFairMapAnnotationCallOutViewSpec">
+               </Test>
+               <Test
+                  Identifier = "ARFairMapAnnotationViewSpec">
+               </Test>
+               <Test
+                  Identifier = "ARFairMapViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARFairNetworkModelSpec">
+               </Test>
+               <Test
+                  Identifier = "ARFairPopupViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARFairPostsViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARFairSearchViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARFairViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARFavoritesViewControllerSpec">
+               </Test>
+               <Test
                   Identifier = "ARFavoritesViewControllerSpec/with_artists">
                </Test>
                <Test
                   Identifier = "ARFavoritesViewControllerSpec/with_no_artists">
+               </Test>
+               <Test
+                  Identifier = "ARFileUtilsTestsSpec">
+               </Test>
+               <Test
+                  Identifier = "ARFollowableButtonSpec">
+               </Test>
+               <Test
+                  Identifier = "ARGeneArtworknetworkModelSpec">
+               </Test>
+               <Test
+                  Identifier = "ARGeneViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARHeartButtonSpec">
+               </Test>
+               <Test
+                  Identifier = "ARHeroUnitViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARHeroUnitsNetworkModelSpec">
+               </Test>
+               <Test
+                  Identifier = "ARImageItemProviderSpec">
+               </Test>
+               <Test
+                  Identifier = "ARInquireForArtworkViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARInternalMobileViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARInternalShareValidatorSpec">
+               </Test>
+               <Test
+                  Identifier = "ARMessageItemProviderSpec">
+               </Test>
+               <Test
+                  Identifier = "ARNavigationButtonSpecSpec">
+               </Test>
+               <Test
+                  Identifier = "ARNavigationButtonsViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARNavigationControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "AROnboardingMoreInfoViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "AROnboardingViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARParallaxHeaderViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARPendingOperationViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARPersonalizeWebViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARPostFeedItemLinkViewSpec">
+               </Test>
+               <Test
+                  Identifier = "ARProfileViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARRouterSpec">
+               </Test>
+               <Test
+                  Identifier = "ARSaleArtworkFlowCollectionViewCellSpec">
+               </Test>
+               <Test
+                  Identifier = "ARSearchFieldButtonSpec">
+               </Test>
+               <Test
+                  Identifier = "ARSearchViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARSerifNavigationViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARSerifStatusMaintainerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARSharingControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARShowNetworkModelSpec">
+               </Test>
+               <Test
+                  Identifier = "ARShowViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARSignUpSplashViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARSwitchBoardSpec">
+               </Test>
+               <Test
+                  Identifier = "ARSwitchboardEchoSpec">
+               </Test>
+               <Test
+                  Identifier = "ARSystemTimeTestsSpec">
+               </Test>
+               <Test
+                  Identifier = "ARTabViewSpec">
+               </Test>
+               <Test
+                  Identifier = "ARTextViewSpec">
+               </Test>
+               <Test
+                  Identifier = "ARThemeSpec">
+               </Test>
+               <Test
+                  Identifier = "ARTiledImageDataSourceWithImageSpec">
+               </Test>
+               <Test
+                  Identifier = "ARTopMenuNavigationDataSourceSpec">
+               </Test>
+               <Test
+                  Identifier = "ARTopMenuViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARURLItemProviderSpec">
+               </Test>
+               <Test
+                  Identifier = "ARUserActivitySpec">
+               </Test>
+               <Test
+                  Identifier = "ARValueTransformerSpecSpec">
+               </Test>
+               <Test
+                  Identifier = "ARWebViewCacheHostSpec">
+               </Test>
+               <Test
+                  Identifier = "ARWorksForYouNetworkModelSpec">
+               </Test>
+               <Test
+                  Identifier = "ARWorksForYouReloadingHostViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ARWorksForYouViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "ArtsyAPIArtworksSpec">
+               </Test>
+               <Test
+                  Identifier = "ArtsyAPIErrorHandlersSpec">
+               </Test>
+               <Test
+                  Identifier = "ArtsyAPIPrivateSpec">
+               </Test>
+               <Test
+                  Identifier = "ArtsyAPISystemTimeSpec">
+               </Test>
+               <Test
+                  Identifier = "ArtworkSpec">
+               </Test>
+               <Test
+                  Identifier = "AuctionBiddersNetworkModelSpec">
+               </Test>
+               <Test
+                  Identifier = "AuctionInformationViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "AuctionLotMetadataStackScrollViewTests">
+               </Test>
+               <Test
+                  Identifier = "AuctionNetworkModelSpec">
+               </Test>
+               <Test
+                  Identifier = "AuctionSaleArtworksNetworkModelSpec">
+               </Test>
+               <Test
+                  Identifier = "AuctionSaleNetworkModelSpec">
+               </Test>
+               <Test
+                  Identifier = "AuctionTitleViewSpec">
+               </Test>
+               <Test
+                  Identifier = "AuctionViewControllerTests">
+               </Test>
+               <Test
+                  Identifier = "FairSpec">
+               </Test>
+               <Test
+                  Identifier = "ImageSpec">
+               </Test>
+               <Test
+                  Identifier = "LiveAuctionBidButtonTests">
+               </Test>
+               <Test
+                  Identifier = "LiveAuctionBidHistoryViewControllerTests">
+               </Test>
+               <Test
+                  Identifier = "LiveAuctionBiddingViewModelTests">
+               </Test>
+               <Test
+                  Identifier = "LiveAuctionFancyLotCollectionViewLayoutTests">
+               </Test>
+               <Test
+                  Identifier = "LiveAuctionLoadingViewSpec">
+               </Test>
+               <Test
+                  Identifier = "LiveAuctionLotBidHistoryGestureControllerTests">
+               </Test>
+               <Test
+                  Identifier = "LiveAuctionLotListStickyCellCollectionViewLayoutTests">
+               </Test>
+               <Test
+                  Identifier = "LiveAuctionLotListViewControllerTests">
+               </Test>
+               <Test
+                  Identifier = "LiveAuctionLotSetViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "LiveAuctionLotViewControllerTests">
+               </Test>
+               <Test
+                  Identifier = "LiveAuctionLotViewModelSpec">
+               </Test>
+               <Test
+                  Identifier = "LiveAuctionPlaceMaxBidViewControllerSpecs">
+               </Test>
+               <Test
+                  Identifier = "LiveAuctionSocketCommunicatorSpec">
+               </Test>
+               <Test
+                  Identifier = "LiveAuctionStateManagerSpec">
+               </Test>
+               <Test
+                  Identifier = "LiveAuctionStateReconcilerSpec">
+               </Test>
+               <Test
+                  Identifier = "LiveAuctionStaticDataFetcherSpec">
+               </Test>
+               <Test
+                  Identifier = "LiveAuctionViewControllerTests">
+               </Test>
+               <Test
+                  Identifier = "LiveSalesPersonSpecs">
+               </Test>
+               <Test
+                  Identifier = "MapFeatureSpec">
+               </Test>
+               <Test
+                  Identifier = "NSDateRangeSpec">
+               </Test>
+               <Test
+                  Identifier = "NavigationButtonTests">
+               </Test>
+               <Test
+                  Identifier = "ORStackViewArtsyCategoriesSpec">
+               </Test>
+               <Test
+                  Identifier = "OrderedSetSpec">
+               </Test>
+               <Test
+                  Identifier = "PartnerSpec">
+               </Test>
+               <Test
+                  Identifier = "ProfileSpec">
+               </Test>
+               <Test
+                  Identifier = "SaleArtworkSpec">
+               </Test>
+               <Test
+                  Identifier = "SaleArtworkViewModelTests">
+               </Test>
+               <Test
+                  Identifier = "SaleSpec">
+               </Test>
+               <Test
+                  Identifier = "SaleViewModelTests">
+               </Test>
+               <Test
+                  Identifier = "SiteHeroUnitSpec">
+               </Test>
+               <Test
+                  Identifier = "SystemTimeSpec">
+               </Test>
+               <Test
+                  Identifier = "TextStackTests">
+               </Test>
+               <Test
+                  Identifier = "UIApplicationStateEnumSpec">
+               </Test>
+               <Test
+                  Identifier = "UINavigationController_InnermostTopViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "UIViewController_TopMenuViewControllerSpec">
+               </Test>
+               <Test
+                  Identifier = "UserSpec">
+               </Test>
+               <Test
+                  Identifier = "ZARUserManagerSpec">
+               </Test>
+               <Test
+                  Identifier = "ZZAppAnalyticsSpec">
                </Test>
             </SkippedTests>
          </TestableReference>
