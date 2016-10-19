@@ -2,6 +2,7 @@
 
 #import "ARDispatchManager.h"
 #import "ARNavigationController.h"
+#import "ARMenuAwareViewController.h"
 
 #import <ObjectiveSugar/ObjectiveSugar.h>
 
@@ -166,9 +167,14 @@ static BOOL ARTabViewDirectionRight = YES;
     nextViewInitialFrame.origin.x = direction * CGRectGetWidth(self.superview.bounds);
     oldViewEndFrame.origin.x = -direction * CGRectGetWidth(self.superview.bounds);
 
-    __block UIViewController *oldViewController = self.currentNavigationController;
+    __block UINavigationController *oldViewController = self.currentNavigationController;
     _previousViewIndex = self.currentViewIndex;
     _currentViewIndex = index;
+
+    // Ensure there is only one scrollview that has `scrollsToTop`
+    if ([oldViewController.topViewController conformsToProtocol:@protocol(ARMenuAwareViewController)]) {
+        [(id)oldViewController.topViewController menuAwareScrollView].scrollsToTop = NO;
+    }
 
     // Get the next View Controller, add to self
     _currentNavigationController = [self navigationControllerForIndex:index];
@@ -203,6 +209,12 @@ static BOOL ARTabViewDirectionRight = YES;
             [self.currentNavigationController beginAppearanceTransition:YES animated:NO];
             [self addSubview:self.currentNavigationController.view];
             [self.currentNavigationController endAppearanceTransition];
+
+            // Ensure there is only one scrollview that has `scrollsToTop`
+            if ([self.currentNavigationController.topViewController conformsToProtocol:@protocol(ARMenuAwareViewController)]) {
+                [(id)self.currentNavigationController.topViewController menuAwareScrollView].scrollsToTop = YES;
+            }
+
 
             animationBlock();
             completionBlock(YES);
