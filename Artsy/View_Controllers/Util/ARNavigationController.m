@@ -109,16 +109,7 @@ static void *ARNavigationControllerMenuAwareScrollViewContext = &ARNavigationCon
 {
     [super viewDidLoad];
 
-    _statusBarView = [[UIView alloc] init];
-    _statusBarView.backgroundColor = UIColor.blackColor;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
-
-    [self.view addSubview:_statusBarView];
-
-    _statusBarVerticalConstraint = [_statusBarView constrainHeight:@"20"];
-    [_statusBarView constrainWidthToView:self.view predicate:@"0"];
-    [_statusBarView alignTopEdgeWithView:self.view predicate:@"0"];
-    [_statusBarView alignLeadingEdgeWithView:self.view predicate:@"0"];
 
     _backButton = [[ARMenuButton alloc] init];
     [_backButton ar_extendHitTestSizeByWidth:10 andHeight:10];
@@ -127,7 +118,7 @@ static void *ARNavigationControllerMenuAwareScrollViewContext = &ARNavigationCon
     _backButton.adjustsImageWhenDisabled = NO;
 
     [self.view addSubview:_backButton];
-    [_backButton constrainTopSpaceToView:_statusBarView predicate:@"12"];
+    [_backButton alignTopEdgeWithView:self.view predicate:@"20"];
     [_backButton alignLeadingEdgeWithView:self.view predicate:@"12"];
     _backButton.accessibilityIdentifier = @"Back";
     _backButton.alpha = 0;
@@ -187,7 +178,6 @@ static void *ARNavigationControllerMenuAwareScrollViewContext = &ARNavigationCon
     if (self.interactiveTransitionHandler == nil) {
         [self showBackButton:[self shouldShowBackButtonForViewController:viewController] animated:animated];
         [self showStatusBar:!viewController.prefersStatusBarHidden animated:animated];
-        [self showStatusBarBackground:[self shouldShowStatusBarBackgroundForViewController:viewController] animated:animated isHome:isHome];
 
         BOOL hideToolbar = [self shouldHideToolbarMenuForViewController:viewController];
         [[ARTopMenuViewController sharedController] hideToolbar:hideToolbar animated:animated];
@@ -207,7 +197,6 @@ static void *ARNavigationControllerMenuAwareScrollViewContext = &ARNavigationCon
     BOOL isHome = [viewController isKindOfClass:ARHomeComponentViewController.class];
 
     [self showBackButton:[self shouldShowBackButtonForViewController:viewController] animated:NO];
-    [self showStatusBarBackground:[self shouldShowStatusBarBackgroundForViewController:viewController] animated:NO isHome:isHome];
 
     BOOL hideToolbar = [self shouldHideToolbarMenuForViewController:viewController];
     [[ARTopMenuViewController sharedController] hideToolbar:hideToolbar animated:NO];
@@ -309,28 +298,10 @@ ChangeButtonVisibility(UIButton *button, BOOL visible, BOOL animated)
 - (void)showStatusBar:(BOOL)visible animated:(BOOL)animated
 {
     if (animated) {
-        [[UIApplication sharedApplication] setStatusBarHidden:!visible withAnimation:UIStatusBarAnimationSlide];
+        [[UIApplication sharedApplication] setStatusBarHidden:!visible withAnimation:UIStatusBarAnimationFade];
     } else {
         [[UIApplication sharedApplication] setStatusBarHidden:!visible withAnimation:UIStatusBarAnimationNone];
     }
-
-    [UIView animateIf:animated duration:ARAnimationDuration:^{
-        self.statusBarVerticalConstraint.constant = visible ? 20 : 0;
-
-        if (animated) [self.view layoutIfNeeded];
-    }];
-}
-
-- (void)showStatusBarBackground:(BOOL)visible animated:(BOOL)animated isHome:(BOOL)isHome
-{
-    CGFloat visibleAlpha = isHome ? 0.98 : 1;
-    UIStatusBarStyle statusBarStyle = isHome ? UIStatusBarStyleDefault : UIStatusBarStyleLightContent;
-    [[UIApplication sharedApplication] setStatusBarStyle:statusBarStyle];
-
-    [UIView animateIf:animated duration:ARAnimationDuration:^{
-        self.statusBarView.backgroundColor = isHome ? UIColor.whiteColor : UIColor.blackColor;
-        self.statusBarView.alpha = visible ? visibleAlpha : 0;
-    }];
 }
 
 static BOOL
@@ -354,11 +325,6 @@ ShouldHideItem(UIViewController *viewController, SEL itemSelector, ...)
 - (BOOL)shouldShowBackButtonForViewController:(UIViewController *)viewController
 {
     return !ShouldHideItem(viewController, @selector(hidesBackButton), @selector(hidesNavigationButtons), NULL) && self.viewControllers.count > 1;
-}
-
-- (BOOL)shouldShowStatusBarBackgroundForViewController:(UIViewController *)viewController
-{
-    return !ShouldHideItem(viewController, @selector(hidesStatusBarBackground), NULL);
 }
 
 - (BOOL)shouldHideToolbarMenuForViewController:(UIViewController *)viewController
