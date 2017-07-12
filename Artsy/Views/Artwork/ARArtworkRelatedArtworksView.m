@@ -5,9 +5,11 @@
 #import "AREmbeddedModelsViewController.h"
 #import "ORStackView+ArtsyViews.h"
 #import "ARArtworkSetViewController.h"
+#import "ARSaleArtworkItemFlowModule.h"
 #import "PartnerShow.h"
 #import "ARSwitchBoard+Eigen.h"
 #import "ARLogger.h"
+#import "Artsy-Swift.h"
 
 #import "UIDevice-Hardware.h"
 
@@ -34,8 +36,8 @@
 @implementation ARArtworkRelatedArtworksContentView
 
 - (instancetype)initWithTag:(ARRelatedArtworksSubviewOrder)tag
-                     module:(ARArtworkMasonryModule *)module
-                   artworks:(NSArray *)artworks
+                     module:(ARModelCollectionViewModule *)module
+                      items:(NSArray *)items
                     heading:(NSString *)heading;
 {
     if ((self = [super init])) {
@@ -44,7 +46,7 @@
         _artworksVC = [[AREmbeddedModelsViewController alloc] init];
         _artworksVC.constrainHeightAutomatically = YES;
         _artworksVC.activeModule = module;
-        [_artworksVC appendItems:artworks];
+        [_artworksVC appendItems:items];
         [self addSubview:_artworksVC.view withTopMargin:@"0" sideMargin:@"0"];
         _separator = [self addGenericSeparatorWithSideMargin:@"40"];
         _separator.hidden = YES;
@@ -155,7 +157,7 @@
 
     [self addRelatedArtworkRequest:[self.artwork getRelatedFairArtworks:fair success:^(NSArray *artworks) {
         __strong typeof (wself) sself = wself;
-        [sself addSectionWithTag:ARRelatedArtworksSameFair artworks:artworks heading:@"Other works in fair"];
+        [sself addSectionWithTag:ARRelatedArtworksSameFair items:artworks heading:@"Other works in fair"];
     }]];
 }
 
@@ -169,9 +171,11 @@
 - (void)addSectionsForAuction:(Sale *)auction;
 {
     __weak typeof(self) wself = self;
-    [self addRelatedArtworkRequest:[auction getArtworks:^(NSArray *artworks) {
+    [self addRelatedArtworkRequest:[auction getSaleArtworks:^(NSArray<SaleArtwork *> *saleArtworks) {
         __strong typeof (wself) sself = wself;
-        [sself addSectionWithTag:ARRelatedArtworksSameAuction artworks:artworks heading:@"Other works in auction"];
+        [sself addSectionWithTag:ARRelatedArtworksSameAuction items:[saleArtworks map:^id(id object) {
+            return [[SaleArtworkViewModel alloc] initWithSaleArtwork:object];
+        }] heading:@"Other works in auction"];
     }]];
 }
 
@@ -180,7 +184,7 @@
     __weak typeof(self) wself = self;
     [self getArtworksInShow:show atPage:1 success:^(NSArray *artworks) {
         __strong typeof (wself) sself = wself;
-        ARArtworkRelatedArtworksContentView *view = [self addSectionWithTag:ARRelatedArtworksSameShow artworks:artworks heading:@"Other works in show"];
+        ARArtworkRelatedArtworksContentView *view = [self addSectionWithTag:ARRelatedArtworksSameShow items:artworks heading:@"Other works in show"];
         [sself addArtworksInShow:show atPage:2 toView:view];
     }];
 }
@@ -211,7 +215,7 @@
     [self addRelatedArtworkRequest:[self.artwork.artist getArtworksAtPage:1 andParams:nil success:^(NSArray *artworks) {
         __strong typeof (wself) sself = wself;
         [sself addSectionWithTag:ARRelatedArtworksArtistArtworks
-                       artworks:artworks
+                           items:artworks
                         heading:[NSString stringWithFormat:@"Other works by %@", sself.artwork.artist.name]];
     }]];
 }
@@ -221,19 +225,25 @@
     __weak typeof(self) wself = self;
     [self addRelatedArtworkRequest:[self.artwork getRelatedArtworks:^(NSArray *artworks) {
         __strong typeof (wself) sself = wself;
-        [sself addSectionWithTag:ARRelatedArtworks artworks:artworks heading:@"Related artworks"];
+        [sself addSectionWithTag:ARRelatedArtworks items:artworks heading:@"Related artworks"];
     }]];
 }
 
 - (ARArtworkRelatedArtworksContentView *)addSectionWithTag:(ARRelatedArtworksSubviewOrder)tag
-                                                  artworks:(NSArray *)artworks
+                                                     items:(NSArray *)items
                                                    heading:(NSString *)heading;
 {
-    artworks = [artworks reject:^BOOL(Artwork *artwork) {
-        return [artwork.artworkID isEqualToString:self.artwork.artworkID];
+    items = [items reject:^BOOL(id item) {
+        if ([item respondsToSelector:@selector(artworkID)]) {
+            return [[item artworkID] isEqualToString:self.artwork.artworkID];
+        } else if ([item respondsToSelector:@selector(artwork)]) {
+            return [[[item artwork] artworkID] isEqualToString:self.artwork.artworkID];
+        } else {
+            return false;
+        }
     }];
 
-    if (artworks.count == 0) {
+    if (items.count == 0) {
         return nil;
     }
 
@@ -242,14 +252,24 @@
         [self invalidateIntrinsicContentSize];
     }
 
-    ARArtworkMasonryModule *module = [ARArtworkMasonryModule masonryModuleWithLayout:[self masonryLayoutForSize:self.parentViewController.view.frame.size]
-                                                                            andStyle:AREmbeddedArtworkPresentationStyleArtworkMetadata];
-    module.layoutProvider = self;
+    ARArtworkRelatedArtworksContentView *section;
+    if (tag == ARRelatedArtworksSameAuction) {
+        ARModelCollectionViewModule *module = [[ARSaleArtworkItemMasonryModule alloc] initWithTraitCollection:self.superview.traitCollection width:self.frame.size.width];
+        module.moduleLayout = [self masonryLayoutForSize:self.parentViewController.view.frame.size];
+        section = [[ARArtworkRelatedArtworksContentView alloc] initWithTag:tag
+                                                                    module:module
+                                                                     items:items
+                                                                   heading:heading];
+    } else {
+        ARArtworkMasonryModule *module = [ARArtworkMasonryModule masonryModuleWithLayout:[self masonryLayoutForSize:self.parentViewController.view.frame.size]
+                                                        andStyle:AREmbeddedArtworkPresentationStyleArtworkMetadata];
 
-    ARArtworkRelatedArtworksContentView *section = [[ARArtworkRelatedArtworksContentView alloc] initWithTag:tag
-                                                                                                     module:module
-                                                                                                   artworks:artworks
-                                                                                                    heading:heading];
+        [module setLayoutProvider:self];
+        section = [[ARArtworkRelatedArtworksContentView alloc] initWithTag:tag
+                                                                    module:module
+                                                                     items:items
+                                                                   heading:heading];
+    }
 
     section.artworksVC.delegate = self;
 

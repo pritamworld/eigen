@@ -1,7 +1,7 @@
 #import <Mantle/Mantle.h>
 #import "ARSpotlight.h"
 
-@class BuyersPremium, Profile;
+@class BuyersPremium, Profile, SaleArtwork;
 @class AFHTTPRequestOperation;
 
 typedef enum: NSUInteger {
@@ -37,6 +37,6 @@ typedef enum: NSUInteger {
 - (BOOL)isCurrentlyActive;
 - (BOOL)hasBuyersPremium;
 
-- (AFHTTPRequestOperation *)getArtworks:(void (^)(NSArray *artworks))success;
+- (AFHTTPRequestOperation *)getSaleArtworks:(void (^)(NSArray<SaleArtwork *> *saleArtworks))success;
 
 @end

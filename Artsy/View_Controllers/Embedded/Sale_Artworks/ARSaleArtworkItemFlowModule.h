@@ -1,5 +1,6 @@
 #import "ARModelCollectionViewModule.h"
 #import "ARSaleArtworkItemWidthDependentModule.h"
+#import "ARSaleArtworkItemFlowModule.h"
 
 
 @interface ARSaleArtworkItemFlowModule : ARModelCollectionViewModule <ARSaleArtworkItemWidthDependentModule>

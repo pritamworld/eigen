@@ -14,11 +14,11 @@
 }
 
 + (AFHTTPRequestOperation *)getArtworksForSale:(NSString *)saleID
-                                       success:(void (^)(NSArray *))success
+                                       success:(void (^)(NSArray<SaleArtwork *> *))success
                                        failure:(void (^)(NSError *))failure
 {
     NSURLRequest *request = [ARRouter artworksForSaleRequest:saleID];
-    return [self getRequest:request parseIntoAnArrayOfClass:[Artwork class] withKey:@"artwork" success:success failure:failure];
+    return [self getRequest:request parseIntoAnArrayOfClass:[SaleArtwork class] success:success failure:failure];
 }
 
 + (void)getSaleWithID:(NSString *)saleID

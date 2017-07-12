@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
                     failure:(void (^)(NSError *error))failure;
 
 + (AFHTTPRequestOperation *)getArtworksForSale:(NSString *)saleID
-                                       success:(void (^)(NSArray *artworks))success
+                                       success:(void (^)(NSArray<SaleArtwork *> *saleArtworks))success
                                        failure:(void (^)(NSError *error))failure;
 
 + (void)getSaleWithID:(NSString *)saleID

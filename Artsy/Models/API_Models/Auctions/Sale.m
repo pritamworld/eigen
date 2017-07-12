@@ -133,7 +133,7 @@
     return self.buyersPremium != nil;
 }
 
-- (AFHTTPRequestOperation *)getArtworks:(void (^)(NSArray *artworks))success;
+- (AFHTTPRequestOperation *)getSaleArtworks:(void (^)(NSArray<SaleArtwork *> *saleArtworks))success;
 {
     return [ArtsyAPI getArtworksForSale:self.saleID success:success failure:^(NSError *_) { success(@[]);
     }];
